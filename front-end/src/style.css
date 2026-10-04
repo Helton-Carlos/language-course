@@ -1,7 +1,27 @@
 @import "tailwindcss";
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors uppercase cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+  }
+
+  .btn-disabled {
+    @apply cursor-not-allowed opacity-50 bg-gray-300 text-gray-500 hover:bg-gray-300;
+  }
 }
