@@ -6,12 +6,15 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    component: Index
+    component: Index,
+    meta: {
+      title: 'Escolha o idioma que você quer aprender'
+    }
   },
   {
     path: '/init',
     name: 'init',
-    component: () => import('@/view/Init.vue')
+    component: () => import('@/view/Init.vue'),
   }
 ];
 

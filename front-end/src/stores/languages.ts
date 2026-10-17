@@ -1,13 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { useApi } from '@/composables/useApi';
-
-export interface Language {
-  code: string;
-  name: string;
-  name_pt: string;
-  prefix: string;
-}
+import type { Language } from '@/types/language'
 
 export const languagesStore = defineStore('languages', () => {
   const api = useApi();
