@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import type { ECCard } from '@/components/ECCard/Type';
 
-const { width = '250px' } = defineProps<ECCard>();
+const { width = '250px', clickable = false } = defineProps<ECCard>();
 
 defineSlots<{
   header?(): unknown;
@@ -10,13 +10,33 @@ defineSlots<{
   footer?(): unknown;
 }>();
 
+const emit = defineEmits<{
+  (e: 'onClick'): void;
+}>();
+
 const cardWidth = computed(() =>
   typeof width === 'number' ? `${width}px` : width,
 );
+
+const cardClasses = computed(() => [
+  'bg-white rounded-lg border border-tertiary/15 shadow-sm',
+  {
+    'cursor-pointer transition duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-tertiary/30 focus-visible:outline-2 focus-visible:outline-offset-2':
+      clickable,
+  },
+]);
 </script>
 
 <template>
-  <article :style="{ width: cardWidth }" class="bg-white rounded-lg border border-tertiary/15 shadow-sm">
+  <div
+    :style="{ width: cardWidth }"
+    :class="cardClasses"
+    :role="clickable ? 'button' : undefined"
+    :tabindex="clickable ? 0 : undefined"
+    @click="emit('onClick')"
+    @keydown.enter.self="clickable && emit('onClick')"
+    @keydown.space.self.prevent="clickable && emit('onClick')"
+  >
     <header v-if="$slots.header" class="border-b border-tertiary/15 px-4 py-3 font-semibold text-tertiary">
       <slot name="header" />
     </header>
@@ -28,5 +48,5 @@ const cardWidth = computed(() =>
     <footer v-if="$slots.footer" class="border-t border-tertiary/15 px-4 py-3">
       <slot name="footer" />
     </footer>
-  </article>
+  </div>
 </template>

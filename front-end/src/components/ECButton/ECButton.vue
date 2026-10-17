@@ -26,7 +26,12 @@ const buttonClasses = computed(() => [
 </script>
 
 <template>
-  <button :type="type" :class="buttonClasses" :disabled="disabled" @click="emit('onClick')">
+  <button
+    :type="type"
+    :class="buttonClasses"
+    :disabled="disabled"
+    @click="emit('onClick')"
+  >
     {{ title }}
   </button>
 </template>

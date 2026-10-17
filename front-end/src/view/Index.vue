@@ -15,13 +15,17 @@ function goInit() {
   router.push({ name: 'init' })
 }
 
+function goLanguage(id?: string) {
+  if (!id) return
+}
+
 onMounted(store.fetchLanguages)
 </script>
 
 <template>
   <div class="flex flex-wrap justify-center gap-4">
     <div v-for="language in languages" :key="language.code">
-      <ECCard>
+      <ECCard clickable @onClick="goLanguage(language?.id)">
         <template #body>
           <div class="flex flex-col items-center gap-3">
             <img :src="`https://flagcdn.com/${language.prefix.toLowerCase()}.svg`" :alt="`Bandeira: ${language.name_pt}`" class="h-5 w-8 rounded-sm object-cover" />
