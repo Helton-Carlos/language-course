@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from back_end.utils.languages import LANGUAGES
+from utils.languages import LANGUAGES
 
 app = FastAPI(title="Language Course API")
 
