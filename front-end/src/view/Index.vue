@@ -1,10 +1,17 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-import ECButton from '../components/ECButton/ECButton.vue';
+import { onMounted, ref } from 'vue';
+import { languagesStore } from '@/stores/languages.ts'
+import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
+
+import ECButton from '@/components/ECButton/ECButton.vue';
 
 const name = ref<string>('bem vindo');
 const router = useRouter();
+const store = languagesStore()
+const { languages } = storeToRefs(store)
+
+onMounted(store.fetchLanguages)
 
 function goInit() {
   router.push({ name: 'init' })
@@ -16,5 +23,7 @@ function goInit() {
     {{ name }}
   </h1>
 
-  <ECButton :title="name" @onClick="goInit" />
+  <p>{{ languages }}</p>
+
+  <ECButton title="next" @onClick="goInit" />
 </template>

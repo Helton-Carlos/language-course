@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { useApi } from '@/composables/useApi';
 
 export interface Language {
   code: string;
@@ -7,31 +8,22 @@ export interface Language {
   prefix: string;
 }
 
-const API_URL = import.meta.env.VITE_API;
-
 export const languagesStore = defineStore('languages', () => {
+  const api = useApi();
   const languages = ref<Language[]>([]);
-  const loading = ref<boolean>(false);
-  const error = ref<string | null>(null);
 
   async function fetchLanguages(): Promise<void> {
-    loading.value = true;
-    error.value = null;
-
     try {
-      const response = await fetch(`${API_URL}/languages`);
-
-      if (!response.ok) {
-        throw new Error(`Erro ${response.status} ao buscar idiomas`);
-      }
-
-      languages.value = (await response.json()) as Language[];
+      languages.value = await api.get<Language[]>('/languages');
     } catch (e) {
-      error.value = e instanceof Error ? e.message : 'Erro desconhecido';
-    } finally {
-      loading.value = false;
-    }
+      console.error(e)
+     }
   }
 
-  return { languages, loading, error, fetchLanguages };
+  return {
+    languages,
+    loading: api.loading,
+    error: api.error,
+    fetchLanguages,
+  };
 });
