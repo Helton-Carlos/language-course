@@ -28,9 +28,10 @@ onMounted(store.fetchLanguages)
     <ECCard>
       <template #body>
         <div class="flex items-center gap-3">
-          <img :src="`https://flagcdn.com/${language.prefix.toLowerCase()}.svg`" :alt="`Bandeira: ${language.name}`" class="h-5 w-8 rounded-sm object-cover" />
+          <img :src="`https://flagcdn.com/${language.prefix.toLowerCase()}.svg`" :alt="`Bandeira: ${language.name_pt}`" class="h-5 w-8 rounded-sm object-cover" />
 
-          <span>{{ language.name }}</span>
+          <span>{{ language.name }}</span> |
+          <span class="text-quaternary capitalize">{{ language.name_pt }}</span>
         </div>
       </template>
     </ECCard>
