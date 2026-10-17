@@ -2,12 +2,12 @@
 import { computed } from 'vue';
 import type { ECButton, ECButtonColor } from '@/components/ECButton/Type';
 
-const props = withDefaults(defineProps<ECButton>(), {
-  title: 'Título padrão',
-  color: 'primary',
-  type: 'button',
-  disabled: false,
-});
+const {
+  title = 'Título padrão',
+  color = 'primary',
+  type = 'button',
+  disabled = false,
+} = defineProps<ECButton>();
 
 const emit = defineEmits<{
   (e: 'onClick'): void;
@@ -20,8 +20,8 @@ const colorClasses: Record<ECButtonColor, string> = {
 
 const buttonClasses = computed(() => [
   'btn',
-  colorClasses[props.color ?? 'primary'],
-  { 'btn-disabled': props.disabled },
+  colorClasses[color],
+  { 'btn-disabled': disabled },
 ]);
 </script>
 

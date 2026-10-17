@@ -2,9 +2,7 @@
 import { computed } from 'vue';
 import type { ECCard } from '@/components/ECCard/Type';
 
-const props = withDefaults(defineProps<ECCard>(), {
-  width: '250px',
-});
+const { width = '250px' } = defineProps<ECCard>();
 
 defineSlots<{
   header?(): unknown;
@@ -13,7 +11,7 @@ defineSlots<{
 }>();
 
 const cardWidth = computed(() =>
-  typeof props.width === 'number' ? `${props.width}px` : props.width,
+  typeof width === 'number' ? `${width}px` : width,
 );
 </script>
 
