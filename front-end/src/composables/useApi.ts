@@ -22,8 +22,6 @@ async function request<T>(
     body: hasBody ? JSON.stringify(body) : undefined,
   });
 
-  console.log("apiUrl")
-  console.log(response)
   if (!response.ok) {
     throw new Error(`Erro ${response.status} em ${method} ${path}`);
   }

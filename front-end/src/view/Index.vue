@@ -5,17 +5,18 @@ import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 
 import ECButton from '@/components/ECButton/ECButton.vue';
+import ECCard from '@/components/ECCard/ECCard.vue';
 
 const name = ref<string>('bem vindo');
 const router = useRouter();
 const store = languagesStore()
 const { languages } = storeToRefs(store)
 
-onMounted(store.fetchLanguages)
-
 function goInit() {
   router.push({ name: 'init' })
 }
+
+onMounted(store.fetchLanguages)
 </script>
 
 <template>
@@ -23,7 +24,17 @@ function goInit() {
     {{ name }}
   </h1>
 
-  <p>{{ languages }}</p>
+  <div v-for="language in languages" :key="language.code">
+    <ECCard>
+      <template #body>
+        <div class="flex items-center gap-3">
+          <img :src="`https://flagcdn.com/${language.prefix.toLowerCase()}.svg`" :alt="`Bandeira: ${language.name}`" class="h-5 w-8 rounded-sm object-cover" />
+
+          <span>{{ language.name }}</span>
+        </div>
+      </template>
+    </ECCard>
+  </div>
 
   <ECButton title="next" @onClick="goInit" />
 </template>
