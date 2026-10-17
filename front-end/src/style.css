@@ -1,4 +1,15 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #f9cf45;
+  --color-secondary: #991c1c;
+  --color-tertiary: #232323;
+  --color-quaternary: #4b4b4b;
+  --color-quinary: #65b042;
+
+  --color-primary-hover: color-mix(in oklab, #f9cf45, black 12%);
+  --color-secondary-hover: color-mix(in oklab, #991c1c, black 20%);
+}
 
 @layer base {
   * {
@@ -14,11 +25,11 @@
   }
 
   .btn-primary {
-    @apply bg-blue-600 text-white hover:bg-blue-700;
+    @apply bg-primary text-tertiary hover:bg-primary-hover;
   }
 
   .btn-secondary {
-    @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+    @apply bg-secondary text-white hover:bg-secondary-hover;
   }
 
   .btn-disabled {
