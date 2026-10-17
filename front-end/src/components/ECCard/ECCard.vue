@@ -18,7 +18,7 @@ const cardWidth = computed(() =>
 </script>
 
 <template>
-  <article :style="{ width: cardWidth }" class="flex flex-col overflow-hidden rounded-lg border border-tertiary/15 bg-white shadow-sm">
+  <article :style="{ width: cardWidth }" class="bg-white rounded-lg border border-tertiary/15 shadow-sm">
     <header v-if="$slots.header" class="border-b border-tertiary/15 px-4 py-3 font-semibold text-tertiary">
       <slot name="header" />
     </header>
