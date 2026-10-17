@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { ECButton, ECButtonColor } from './Type';
+import type { ECButton, ECButtonColor } from '@/components/ECButton/Type';
 
 const props = withDefaults(defineProps<ECButton>(), {
   title: 'Título padrão',
@@ -26,12 +26,7 @@ const buttonClasses = computed(() => [
 </script>
 
 <template>
-  <button
-    :type="type"
-    :class="buttonClasses"
-    :disabled="disabled"
-    @click="emit('onClick')"
-  >
+  <button :type="type" :class="buttonClasses" :disabled="disabled" @click="emit('onClick')">
     {{ title }}
   </button>
 </template>

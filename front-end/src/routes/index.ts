@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
-import Index from '../view/Index.vue';
+import Index from '@/view/Index.vue';
 
 const routes = [
   {
@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/init',
     name: 'init',
-    component: () => import('../view/Init.vue')
+    component: () => import('@/view/Init.vue')
   }
 ];
 
