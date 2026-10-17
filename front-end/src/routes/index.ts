@@ -12,7 +12,7 @@ const routes = [
     }
   },
   {
-    path: '/init',
+    path: '/init/:id',
     name: 'init',
     component: () => import('@/view/Init.vue'),
   }

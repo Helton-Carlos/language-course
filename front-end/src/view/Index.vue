@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { onMounted } from 'vue';
 import { languagesStore } from '@/stores/languages.ts'
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
@@ -17,9 +16,9 @@ function goInit() {
 
 function goLanguage(id?: string) {
   if (!id) return
-}
 
-onMounted(store.fetchLanguages)
+  router.push({ name: 'init', params: { id } })
+}
 </script>
 
 <template>

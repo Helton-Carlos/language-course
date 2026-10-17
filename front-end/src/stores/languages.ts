@@ -15,6 +15,8 @@ export const languagesStore = defineStore('languages', () => {
      }
   }
 
+  fetchLanguages();
+
   return {
     languages,
     loading: api.loading,
