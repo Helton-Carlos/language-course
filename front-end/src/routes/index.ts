@@ -1,10 +1,21 @@
-import { createMemoryHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter } from 'vue-router';
 
-import Init from '../view/Init.vue';
+import Index from '../view/Index.vue';
 
-const routes = [{ path: '/', component: Init }];
+const routes = [
+  {
+    path: '/',
+    name: 'index',
+    component: Index
+  },
+  {
+    path: '/init',
+    name: 'init',
+    component: () => import('../view/Init.vue')
+  }
+];
 
 export const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 });

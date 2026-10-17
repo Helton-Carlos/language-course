@@ -9,5 +9,6 @@ const name = ref<string>('init');
   <h1 class="text-3xl font-bold underline">
     {{ name }}
   </h1>
+
   <ECButton :title="name" />
 </template>
