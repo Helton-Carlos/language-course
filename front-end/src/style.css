@@ -22,6 +22,10 @@
   body {
     background-color: var(--color-gray);
   }
+
+  .container {
+    @apply w-[80%] items-center mx-auto;
+  }
 }
 
 @layer components {

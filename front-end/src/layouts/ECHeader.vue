@@ -3,7 +3,7 @@
 
 <template>
   <header class="bg-primary py-8">
-    <div class="w-[80%] flex justify-between items-center mx-auto">
+    <div class="container flex justify-between">
       <router-link to="/">
         <img src="/logo.svg">
       </router-link>
