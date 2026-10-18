@@ -1,7 +1,6 @@
-export type ECButtonColor = 'primary' | 'secondary';
+export type ECButtonColor = 'primary' | 'secondary' | 'border';
 
 export interface ECButton {
-  title?: string;
   color?: ECButtonColor;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;

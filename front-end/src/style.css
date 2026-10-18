@@ -2,11 +2,11 @@
 
 @theme {
   --color-primary: #f9cf45;
-  --color-secondary: #991c1c;
+  --color-secondary: #422e04;
   --color-tertiary: #232323;
   --color-quaternary: #4b4b4b;
   --color-quinary: #65b042;
-  --color-gray: #b5b5b5;
+  --color-gray: #ebebeb;
 
   --color-primary-hover: color-mix(in oklab, #f9cf45, black 12%);
   --color-secondary-hover: color-mix(in oklab, #991c1c, black 20%);
@@ -26,7 +26,7 @@
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-colors uppercase cursor-pointer;
+    @apply px-8 py-2 rounded-md font-medium transition-colors uppercase cursor-pointer;
   }
 
   .btn-primary {
@@ -35,6 +35,10 @@
 
   .btn-secondary {
     @apply bg-secondary text-white hover:bg-secondary-hover;
+  }
+
+  .btn-border {
+    @apply bg-transparent text-secondary border-3 border-secondary hover:underline;
   }
 
   .btn-disabled {

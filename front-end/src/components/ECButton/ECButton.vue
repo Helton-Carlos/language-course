@@ -3,7 +3,6 @@ import { computed } from 'vue';
 import type { ECButton, ECButtonColor } from '@/components/ECButton/Type';
 
 const {
-  title = 'Título padrão',
   color = 'primary',
   type = 'button',
   disabled = false,
@@ -16,6 +15,7 @@ const emit = defineEmits<{
 const colorClasses: Record<ECButtonColor, string> = {
   primary: 'btn-primary',
   secondary: 'btn-secondary',
+  border: 'btn-border',
 };
 
 const buttonClasses = computed(() => [
@@ -26,12 +26,7 @@ const buttonClasses = computed(() => [
 </script>
 
 <template>
-  <button
-    :type="type"
-    :class="buttonClasses"
-    :disabled="disabled"
-    @click="emit('onClick')"
-  >
-    {{ title }}
+  <button :type="type" :class="buttonClasses" :disabled="disabled" @click="emit('onClick')">
+    <slot />
   </button>
 </template>
