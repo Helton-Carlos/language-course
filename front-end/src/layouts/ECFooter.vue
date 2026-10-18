@@ -5,8 +5,8 @@ function scrollToTop() {
 </script>
 
 <template>
-  <footer class="bg-black py-16">
-    <div class="container flex justify-between">
+  <footer class="bg-black py-8 lg:py-16">
+    <div class="container flex flex-col gap-6 text-center md:flex-row md:justify-between md:text-left">
       <p class="text-white">
         Explore um novo idioma
         Pequenos passos, grandes conquistas.
