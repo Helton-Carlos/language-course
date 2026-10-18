@@ -40,8 +40,8 @@ function goLanguage(id?: string) {
   </div>
 
   <div class="flex justify-center gap-8 my-8">
-    <ECButton title="next" @onClick="goInit" />
+    <ECButton title="Sobre nós" @onClick="goInit" />
 
-    <ECButton title="next" @onClick="goInit" />
+    <ECButton color="secondary" title="Preciso de ajuda" @onClick="goInit" />
   </div>
 </template>
