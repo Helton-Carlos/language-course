@@ -11,17 +11,17 @@
       <nav>
         <ul class="hidden md:flex md:items-center md:gap-4">
           <li>
-            <router-link class="btn btn-primary" to="/config">
+            <router-link class="btn btn-primary" to="/documentacao">
               Início
             </router-link>
           </li>
           <li>
-            <router-link class="btn btn-primary" to="/config">
+            <router-link class="btn btn-primary" to="/documentacao">
               Idioma
             </router-link>
           </li>
           <li>
-            <router-link class="btn btn-primary" to="/config">
+            <router-link class="btn btn-primary" to="/documentacao">
               Sobre
             </router-link>
           </li>
@@ -29,8 +29,8 @@
       </nav>
 
       <div class="flex gap-4">
-        <router-link class="btn btn-border" to="/config">
-          Configuração
+        <router-link class="btn btn-border" to="/documentacao">
+          Documentação
         </router-link>
 
         <router-link class="btn btn-secondary" to="/login">

@@ -12,6 +12,14 @@ const routes = [
     }
   },
   {
+    path: '/documentacao',
+    name: 'documentacao',
+    component: () => import('@/view/Documentacao.vue'),
+    meta: {
+      title: 'Documentação'
+    }
+  },
+  {
     path: '/init/:id',
     name: 'init',
     component: () => import('@/view/Init.vue'),

@@ -38,7 +38,7 @@ function goLanguage(id?: string) {
 
       <div class="flex flex-wrap gap-4 my-6 lg:gap-8 lg:my-8">
         <ECButton color="border" @onClick="goInit">
-          Configuração
+          Documentação
         </ECButton>
 
         <ECButton color="secondary" @onClick="goLanguage">
@@ -91,7 +91,7 @@ function goLanguage(id?: string) {
 
         <div class="flex flex-wrap gap-4 my-6 lg:gap-8 lg:my-8">
           <ECButton color="border" @onClick="goInit">
-            Configuração
+            Documentação
           </ECButton>
 
           <ECButton color="secondary" @onClick="goLanguage">
