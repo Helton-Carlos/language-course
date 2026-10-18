@@ -15,7 +15,15 @@ const routes = [
     path: '/init/:id',
     name: 'init',
     component: () => import('@/view/Init.vue'),
-  }
+  },
+   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/view/Login.vue'),
+    meta: {
+      title: 'Login'
+    }
+  },
 ];
 
 export const router = createRouter({
