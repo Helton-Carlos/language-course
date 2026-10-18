@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 
 import ECButton from '@/components/ECButton/ECButton.vue';
+import ECFooter from '@/layouts/ECFooter.vue'
 
 const router = useRouter();
 const store = languagesStore()
@@ -99,6 +100,7 @@ function goLanguage(id?: string) {
         </div>
       </div>
     </div>
-
   </div>
+
+  <ECFooter />
 </template>
