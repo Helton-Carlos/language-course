@@ -1,18 +1,11 @@
 <script lang="ts" setup>
 import { languagesStore } from '@/stores/languages.ts'
 import { storeToRefs } from 'pinia';
-import { useRouter } from 'vue-router';
 
-import ECButton from '@/components/ECButton/ECButton.vue';
 import ECFooter from '@/layouts/ECFooter.vue'
 
-const router = useRouter();
 const store = languagesStore()
 const { languages } = storeToRefs(store)
-
-function goInit() {
-  router.push({ name: 'init' })
-}
 </script>
 
 <template>
