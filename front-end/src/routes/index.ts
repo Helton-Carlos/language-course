@@ -20,6 +20,14 @@ const routes = [
     }
   },
   {
+    path: '/criar-conta',
+    name: 'criar-conta',
+    component: () => import('@/view/CreateAccount.vue'),
+    meta: {
+      title: 'Criar Conta'
+    }
+  },
+  {
     path: '/init/:id',
     name: 'init',
     component: () => import('@/view/Init.vue'),
