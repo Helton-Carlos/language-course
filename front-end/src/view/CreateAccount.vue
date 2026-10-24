@@ -52,6 +52,19 @@ const form = reactive<accountForm>({
         Salvar
       </ECButton>
 
+      <div class="flex items-center gap-4 text-quaternary">
+        <span class="h-px flex-1 bg-black" />
+        <span>ou</span>
+        <span class="h-px flex-1 bg-black" />
+      </div>
+
+      <ECButton color="border">
+        <span class="flex items-center justify-center gap-3">
+          <img src="/google-logo.svg" />
+          Cadastrar com Google
+        </span>
+      </ECButton>
+
       <router-link class="btn btn-border text-center" to="/login">
         Voltar
       </router-link>
