@@ -13,12 +13,6 @@ const { languages } = storeToRefs(store)
 function goInit() {
   router.push({ name: 'init' })
 }
-
-function goLanguage(id?: string) {
-  if (!id) return
-
-  router.push({ name: 'init', params: { id } })
-}
 </script>
 
 <template>
@@ -37,13 +31,13 @@ function goLanguage(id?: string) {
       </div>
 
       <div class="flex flex-wrap gap-4 my-6 lg:gap-8 lg:my-8">
-        <ECButton color="border" @onClick="goInit">
+        <router-link class="btn btn-border" to="/documentacao">
           Documentação
-        </ECButton>
-
-        <ECButton color="secondary" @onClick="goLanguage">
+        </router-link>
+       
+        <router-link class="btn btn-secondary" to="/login">
           Login
-        </ECButton>
+        </router-link>
       </div>
 
       <div class="bg-gray-300 w-full flex flex-wrap justify-center gap-4 py-4 px-4 rounded-2xl lg:w-150 lg:justify-start lg:gap-8 lg:px-8">
@@ -90,13 +84,13 @@ function goLanguage(id?: string) {
           Com foco nas necessidades dos brasileiros, o Language Course pretende aproximar o ensino de idiomas da realidade de quem fala português, tornando a jornada de aprendizado mais familiar e motivadora.</p>
 
         <div class="flex flex-wrap gap-4 my-6 lg:gap-8 lg:my-8">
-          <ECButton color="border" @onClick="goInit">
+          <router-link class="btn btn-border" to="/documentacao">
             Documentação
-          </ECButton>
+          </router-link>
 
-          <ECButton color="secondary" @onClick="goLanguage">
+          <router-link class="btn btn-secondary" to="/login">
             Login
-          </ECButton>
+          </router-link>
         </div>
       </div>
     </div>
