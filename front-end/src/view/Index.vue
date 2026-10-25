@@ -9,7 +9,7 @@ const { languages } = storeToRefs(store)
 </script>
 
 <template>
-  <div class="container flex flex-col gap-8 my-8 lg:flex-row lg:justify-between lg:my-16">
+  <main class="container flex flex-col gap-8 my-8 lg:flex-row lg:justify-between lg:my-16">
     <div>
       <div class="lg:w-205">
         <h3 class="text-4xl lg:text-6xl">
@@ -41,15 +41,15 @@ const { languages } = storeToRefs(store)
     </div>
 
     <img src="/main-image.svg" alt="imagens de pessoas com livro" class="w-full max-w-md mx-auto lg:w-auto lg:max-w-none lg:mx-0" />
-  </div>
+  </main>
 
-  <div class="container">
+  <section class="container">
     <h3 class="text-3xl font-bold">
       FAÇA SUA ESCOLHA
     </h3>
 
     <div class="grid grid-cols-2 grid-rows-3 my-8 lg:grid-cols-3 lg:grid-rows-1">
-      <div v-for="language in languages" :key="language.code" class="group relative cursor-pointer">
+      <div v-for="language in languages" :key="language.code" class="group relative">
         <img :src="`/${language.code}.png`" :alt="`Idioma: ${language.name_pt}`" class="w-full" />
 
         <div class="absolute inset-0 flex items-center justify-center bg-primary text-tertiary text-2xl font-bold capitalize opacity-0 transition-opacity group-hover:opacity-100 lg:text-[60px]">
@@ -57,9 +57,9 @@ const { languages } = storeToRefs(store)
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="container my-8 lg:my-16">
+  <section class="container my-8 lg:my-16">
     <h3 class="text-3xl font-bold">
       SOBRE
     </h3>
@@ -87,7 +87,7 @@ const { languages } = storeToRefs(store)
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <ECFooter />
 </template>

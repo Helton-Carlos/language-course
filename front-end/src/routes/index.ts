@@ -7,25 +7,21 @@ const routes = [
     path: '/',
     name: 'index',
     component: Index,
-    meta: {
-      title: 'Escolha o idioma que você quer aprender'
-    }
   },
   {
     path: '/documentacao',
     name: 'documentacao',
     component: () => import('@/view/Documentacao.vue'),
-    meta: {
-      title: 'Documentação'
-    }
   },
   {
     path: '/criar-conta',
     name: 'criar-conta',
     component: () => import('@/view/CreateAccount.vue'),
-    meta: {
-      title: 'Criar Conta'
-    }
+  },
+  {
+    path: '/idiomas',
+    name: 'idiomas',
+    component: () => import('@/view/Languages.vue'),
   },
   {
     path: '/init/:id',

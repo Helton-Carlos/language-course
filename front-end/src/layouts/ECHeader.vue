@@ -16,7 +16,7 @@
             </router-link>
           </li>
           <li>
-            <router-link class="btn btn-primary" to="/documentacao">
+            <router-link class="btn btn-primary" to="/idiomas">
               Idioma
             </router-link>
           </li>

@@ -81,7 +81,7 @@ const tips: string[] = [
 
 <template>
   <div class="container my-8 flex flex-col gap-8 lg:my-16">
-    <header>
+    <div>
       <h1 class="text-4xl font-bold lg:text-6xl">
         Como aprender um idioma
       </h1>
@@ -89,7 +89,7 @@ const tips: string[] = [
         O Language Course ajuda você a aprender novos idiomas de forma simples e prática.
         Veja abaixo como começar e como manter o ritmo.
       </p>
-    </header>
+    </div>
 
     <section class="flex flex-col gap-4">
       <h2 class="text-3xl font-bold">
