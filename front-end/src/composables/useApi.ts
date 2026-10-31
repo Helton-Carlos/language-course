@@ -4,7 +4,7 @@ const apiUrl = import.meta.env.VITE_API as string;
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-async function request<T>(
+export async function request<T>(
   method: Method,
   path: string,
   body?: unknown,

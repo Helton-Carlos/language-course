@@ -2,14 +2,12 @@
 import { computed, ref } from 'vue'
 import ECButton from '@/components/ECButton/ECButton.vue';
 import { useRoute, useRouter } from 'vue-router';
-import { languagesStore } from '@/stores/languages.ts'
-import { storeToRefs } from 'pinia';
+import { useLanguages } from '@/composables/useLanguages'
 import { LEVELS } from '@/utils/levels'
 
 const route = useRoute()
 const router = useRouter()
-const store = languagesStore()
-const { languages } = storeToRefs(store)
+const { languages } = useLanguages()
 
 const selectedLevel = ref<(typeof LEVELS)[number]>('B2')
 

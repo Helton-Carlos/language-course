@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-import { languagesStore } from '@/stores/languages.ts'
-import { storeToRefs } from 'pinia';
+import { useLanguages } from '@/composables/useLanguages'
 
 import ECFooter from '@/layouts/ECFooter.vue'
 
-const store = languagesStore()
-const { languages } = storeToRefs(store)
+const { languages } = useLanguages()
 </script>
 
 <template>

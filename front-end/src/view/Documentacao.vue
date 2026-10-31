@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
-import { languagesStore } from '@/stores/languages.ts';
+import { useLanguages } from '@/composables/useLanguages';
 
 import ECButton from '@/components/ECButton/ECButton.vue';
 
@@ -11,8 +10,7 @@ interface DocStep {
 }
 
 const router = useRouter();
-const store = languagesStore();
-const { languages } = storeToRefs(store);
+const { languages } = useLanguages();
 
 function goHome() {
   router.push({ name: 'index' });
