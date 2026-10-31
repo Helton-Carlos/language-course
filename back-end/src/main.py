@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from core.config import get_settings
 from core.database import check_connection, dispose_engine
 from core.exceptions import register_exception_handlers
+from routes.auth_routes import auth_routes
 from routes.languages_routes import languages_routes
 from routes.users_routes import users_routes
 
@@ -31,5 +32,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth_routes, prefix=settings.api_prefix)
 app.include_router(languages_routes, prefix=settings.api_prefix)
 app.include_router(users_routes, prefix=settings.api_prefix)
