@@ -48,7 +48,7 @@ function goBack() {
       <div role="group" aria-labelledby="level-label">
         <span id="level-label" class="text-2xl">Level:</span>
 
-        <div class="mt-2 flex flex-wrap gap-4">
+        <div class="my-4 flex flex-wrap gap-4">
           <button
             v-for="level in LEVELS"
             :key="level"
@@ -65,6 +65,10 @@ function goBack() {
             {{ level }}
           </button>
         </div>
+
+        <ECButton color="border" @on-click="goBack">
+          Avançar
+        </ECButton>
       </div>
 
       <p class="mt-8 text-2xl">
