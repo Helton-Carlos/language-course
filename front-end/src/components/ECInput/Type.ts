@@ -28,4 +28,7 @@ export interface ECInput {
   placeholder?: string;
   type?: ECInputType;
   disabled?: boolean;
+  required?: boolean;
+  autocomplete?: string;
+  error?: string;
 }

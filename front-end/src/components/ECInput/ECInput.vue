@@ -7,6 +7,9 @@ const {
   placeholder,
   type = 'text',
   disabled = false,
+  required = false,
+  autocomplete,
+  error,
 } = defineProps<ECInput>();
 
 const model = defineModel<string>();
@@ -24,7 +27,21 @@ const model = defineModel<string>();
       :type="type"
       :placeholder="placeholder"
       :disabled="disabled"
-      class="w-full rounded-md border-2 border-secondary/30 bg-white px-4 py-2 text-tertiary placeholder:text-quaternary/60 outline-none transition-colors focus:border-secondary focus:ring-4 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+      :required="required"
+      :autocomplete="autocomplete"
+      :aria-invalid="error ? true : undefined"
+      :aria-describedby="error ? `${id}-error` : undefined"
+      class="w-full rounded-md border-2 bg-white px-4 py-2 text-tertiary placeholder:text-quaternary/60 outline-none transition-colors focus:ring-4 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+      :class="error ? 'border-red-700' : 'border-secondary/30 focus:border-secondary'"
     />
+
+    <p
+      v-if="error"
+      :id="`${id}-error`"
+      class="text-sm text-red-700"
+      role="alert"
+    >
+      {{ error }}
+    </p>
   </div>
 </template>
