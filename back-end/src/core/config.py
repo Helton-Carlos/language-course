@@ -59,3 +59,23 @@ class DatabaseSettings(BaseSettings):
 @lru_cache
 def get_database_settings() -> DatabaseSettings:
     return DatabaseSettings()  # type: ignore[call-arg]
+
+
+class AuthSettings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_prefix="AUTH_",
+        env_file=BACK_END_DIR / ".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
+
+    secret_key: SecretStr
+    algorithm: str = "HS256"
+    access_token_minutes: int = 60
+    cookie_name: str = "access_token"
+    cookie_secure: bool = False
+
+
+@lru_cache
+def get_auth_settings() -> AuthSettings:
+    return AuthSettings()  # type: ignore[call-arg]

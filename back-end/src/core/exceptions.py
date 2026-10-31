@@ -21,6 +21,15 @@ class ConflictError(AppError):
     detail = "Conflito com um recurso existente"
 
 
+class UnauthorizedError(AppError):
+    status_code = 401
+    detail = "Não autenticado"
+
+
+class InvalidCredentialsError(UnauthorizedError):
+    detail = "E-mail ou senha inválidos"
+
+
 class LanguageNotFoundError(NotFoundError):
     detail = "Idioma não encontrado"
 
