@@ -1,9 +1,21 @@
-from fastapi import APIRouter
+from typing import Annotated
 
-from utils.languages import LANGUAGES
+from fastapi import APIRouter, Depends
 
-languages_routes = APIRouter(tags=['Languages'])
+from repositories.language_repository import LanguageRepository
+from schemas.language import LanguageOut
+from services.language_service import LanguageService
 
-@languages_routes.get("/languages")
-async def get_languages() -> list[dict[str, str | list[str]]]:
-    return LANGUAGES
+languages_routes = APIRouter(tags=["Languages"])
+
+
+def get_language_service() -> LanguageService:
+    return LanguageService(LanguageRepository())
+
+
+LanguageServiceDep = Annotated[LanguageService, Depends(get_language_service)]
+
+
+@languages_routes.get("/languages", response_model=list[LanguageOut])
+async def get_languages(service: LanguageServiceDep) -> list[LanguageOut]:
+    return service.list_languages()

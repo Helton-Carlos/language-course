@@ -1,10 +1,10 @@
-USERS: list[dict[str, str | list[str]]] = [
+USERS: list[dict[str, str]] = [
     {
         "id": "1",
         "name": "user",
         "last_name": "test",
         "email": "user@gmail.com",
-        "role": "adm",
+        "role": "admin",
         "password": "12345",
     },
 ]
