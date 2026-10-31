@@ -1,5 +1,5 @@
 export interface Language {
-  id?: string;
+  id: string;
   code: string;
   name: string;
   name_pt: string;
