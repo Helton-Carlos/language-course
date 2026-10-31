@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from core.config import get_settings
 from core.database import check_connection, dispose_engine
+from core.exceptions import register_exception_handlers
 from routes.languages_routes import languages_routes
 from routes.users_routes import users_routes
 
@@ -20,6 +21,8 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(title=settings.app_title, lifespan=lifespan)
+
+register_exception_handlers(app)
 
 app.add_middleware(
     CORSMiddleware,

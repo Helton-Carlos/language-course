@@ -1,6 +1,16 @@
-LANGUAGES: list[dict[str, str | list[str]]] = [
+from collections.abc import Sequence
+
+import sqlalchemy as sa
+from alembic import op
+from sqlalchemy.dialects import postgresql
+
+revision: str = "b2e4d6f8a0c2"
+down_revision: str | None = "a1f3c5d7e9b1"
+branch_labels: str | Sequence[str] | None = None
+depends_on: str | Sequence[str] | None = None
+
+LANGUAGES = [
     {
-        "id": "1",
         "code": "en-US",
         "name": "English",
         "name_pt": "inglês",
@@ -9,7 +19,6 @@ LANGUAGES: list[dict[str, str | list[str]]] = [
         "countries": ["Estados Unidos", "Reino Unido", "Canadá", "Austrália", "Nova Zelândia", "Irlanda"],
     },
     {
-        "id": "2",
         "code": "es-ES",
         "name": "Español",
         "name_pt": "espanhol",
@@ -18,7 +27,6 @@ LANGUAGES: list[dict[str, str | list[str]]] = [
         "countries": ["Espanha", "México", "Argentina", "Colômbia", "Chile", "Peru"],
     },
     {
-        "id": "3",
         "code": "fr-FR",
         "name": "Français",
         "name_pt": "francês",
@@ -27,7 +35,6 @@ LANGUAGES: list[dict[str, str | list[str]]] = [
         "countries": ["França", "Canadá", "Bélgica", "Suíça", "Senegal", "Costa do Marfim"],
     },
     {
-        "id": "4",
         "code": "de-DE",
         "name": "Deutsch",
         "name_pt": "alemão",
@@ -36,7 +43,6 @@ LANGUAGES: list[dict[str, str | list[str]]] = [
         "countries": ["Alemanha", "Áustria", "Suíça", "Liechtenstein", "Luxemburgo"],
     },
     {
-        "id": "5",
         "code": "zh-CN",
         "name": "中文",
         "name_pt": "chinês",
@@ -45,7 +51,6 @@ LANGUAGES: list[dict[str, str | list[str]]] = [
         "countries": ["China", "Taiwan", "Singapura"],
     },
     {
-        "id": "6",
         "code": "ja-JP",
         "name": "日本語",
         "name_pt": "japonês",
@@ -54,3 +59,22 @@ LANGUAGES: list[dict[str, str | list[str]]] = [
         "countries": ["Japão"],
     },
 ]
+
+languages_table = sa.table(
+    "languages",
+    sa.column("code", sa.String),
+    sa.column("name", sa.String),
+    sa.column("name_pt", sa.String),
+    sa.column("prefix", sa.String),
+    sa.column("description", sa.Text),
+    sa.column("countries", postgresql.ARRAY(sa.String)),
+)
+
+
+def upgrade() -> None:
+    op.bulk_insert(languages_table, LANGUAGES)
+
+
+def downgrade() -> None:
+    codes = [language["code"] for language in LANGUAGES]
+    op.execute(languages_table.delete().where(languages_table.c.code.in_(codes)))
