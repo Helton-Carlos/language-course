@@ -5,5 +5,5 @@ from utils.languages import LANGUAGES
 languages_routes = APIRouter(tags=['Languages'])
 
 @languages_routes.get("/languages")
-async def get_languages() -> list[dict[str, str]]:
+async def get_languages() -> list[dict[str, str | list[str]]]:
     return LANGUAGES

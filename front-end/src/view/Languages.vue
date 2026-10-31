@@ -1,37 +1,55 @@
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
 import { languagesStore } from '@/stores/languages.ts'
 import { storeToRefs } from 'pinia';
 
-const router = useRouter()
 const store = languagesStore()
 const { languages } = storeToRefs(store)
 
-function getLanguage(id?: string) {
-  if (!id) return
-  router.push({ name: 'init', params: { id } })
-}
 </script>
 
 <template>
   <div class="container">
     <h3 class="text-3xl font-bold mt-16">
-      FAÇA SUA ESCOLHA
+      IDIOMAS
     </h3>
 
-    <div class="grid grid-cols-2 grid-rows-3 my-8 lg:grid-cols-3 lg:grid-rows-1">
-      <div
+    <div class="grid gap-6 my-8 md:grid-cols-2 lg:grid-cols-3">
+      <article
         v-for="language in languages"
         :key="language.code"
-        class="group relative cursor-pointer"
-        @click="getLanguage(language.id)"
+        class="rounded-lg bg-white p-6 shadow-sm"
       >
-        <img :src="`/${language.code}.png`" :alt="`Idioma: ${language.name_pt}`" class="w-full" />
+        <div class="flex items-center gap-3">
+          <img
+            :src="`https://flagcdn.com/${language.prefix.toLowerCase()}.svg`"
+            :alt="`Bandeira: ${language.name_pt}`"
+            class="h-6 w-9 rounded-sm object-cover"
+          />
 
-        <div class="absolute inset-0 flex items-center justify-center bg-primary text-tertiary text-2xl font-bold capitalize opacity-0 transition-opacity group-hover:opacity-100 lg:text-[60px]">
-          {{ language.name_pt }}
+          <h4 class="text-2xl font-bold capitalize">
+            {{ language.name_pt }}
+            <span class="text-base font-normal text-quaternary">({{ language.name }})</span>
+          </h4>
         </div>
-      </div>
+
+        <p class="mt-4 text-quaternary">
+          {{ language.description }}
+        </p>
+
+        <h5 class="mt-4 font-bold">
+          Países que usam
+        </h5>
+
+        <ul class="mt-2 flex flex-wrap gap-2">
+          <li
+            v-for="country in language.countries"
+            :key="country"
+            class="rounded-full bg-primary px-3 py-1 text-sm text-tertiary"
+          >
+            {{ country }}
+          </li>
+        </ul>
+      </article>
     </div>
   </div>
 </template>

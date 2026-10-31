@@ -4,4 +4,6 @@ export interface Language {
   name: string;
   name_pt: string;
   prefix: string;
+  description: string;
+  countries: string[];
 }
