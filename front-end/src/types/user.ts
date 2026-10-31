@@ -16,6 +16,10 @@ export interface CreateUserPayload {
   password: string;
 }
 
+export interface RegisterPayload extends CreateUserPayload {
+  password_confirm: string;
+}
+
 export interface LoginPayload {
   email: string;
   password: string;
