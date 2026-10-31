@@ -24,6 +24,32 @@ const routes = [
     component: () => import('@/view/Languages.vue'),
   },
   {
+    path: '/dashboard',
+    component: () => import('@/view/Dashboard.vue'),
+    children: [
+      {
+        path: '',
+        name: 'dashboard',
+        component: () => import('@/view/DashboardHome.vue'),
+      },
+      {
+        path: 'idiomas',
+        name: 'dashboard-idiomas',
+        component: () => import('@/view/Languages.vue'),
+      },
+      {
+        path: 'idiomas/:id',
+        name: 'dashboard-idioma',
+        component: () => import('@/view/Init.vue'),
+      },
+      {
+        path: 'documentacao',
+        name: 'dashboard-documentacao',
+        component: () => import('@/view/Documentacao.vue'),
+      },
+    ],
+  },
+  {
     path: '/init/:id',
     name: 'init',
     component: () => import('@/view/Init.vue'),

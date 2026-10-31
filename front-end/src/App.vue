@@ -5,7 +5,11 @@ import ECHeader from '@/layouts/ECHeader.vue';
 </script>
 
 <template>
-  <ECHeader />
+  <div class="grid min-h-screen grid-rows-[auto_1fr]">
+    <ECHeader />
 
-  <RouterView />
+    <div>
+      <RouterView />
+    </div>
+  </div>
 </template>
