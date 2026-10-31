@@ -1,13 +1,25 @@
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.config import get_settings
+from core.database import check_connection, dispose_engine
 from routes.languages_routes import languages_routes
 from routes.users_routes import users_routes
 
 settings = get_settings()
 
-app = FastAPI(title=settings.app_title)
+
+@asynccontextmanager
+async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+    await check_connection()
+    yield
+    await dispose_engine()
+
+
+app = FastAPI(title=settings.app_title, lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

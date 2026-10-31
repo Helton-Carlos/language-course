@@ -1,8 +1,16 @@
 import os
 from dataclasses import dataclass, field
 from functools import lru_cache
+from pathlib import Path
+
+from pydantic import SecretStr
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from sqlalchemy.engine import URL
+
+BACK_END_DIR = Path(__file__).resolve().parents[2]
 
 DEFAULT_CORS_ORIGINS = "http://localhost:3001,http://127.0.0.1:3001"
+
 
 def _split(value: str) -> list[str]:
     return [item.strip() for item in value.split(",") if item.strip()]
@@ -20,3 +28,34 @@ class Settings:
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
+
+
+class DatabaseSettings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_prefix="DB_",
+        env_file=BACK_END_DIR / ".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
+
+    host: str = "localhost"
+    port: int = 5432
+    user: str = "postgres"
+    password: SecretStr
+    name: str = "language_data"
+
+    @property
+    def url(self) -> URL:
+        return URL.create(
+            drivername="postgresql+asyncpg",
+            username=self.user,
+            password=self.password.get_secret_value(),
+            host=self.host,
+            port=self.port,
+            database=self.name,
+        )
+
+
+@lru_cache
+def get_database_settings() -> DatabaseSettings:
+    return DatabaseSettings()  # type: ignore[call-arg]
