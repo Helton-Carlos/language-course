@@ -29,6 +29,14 @@ class LanguageCodeAlreadyExistsError(ConflictError):
     detail = "Já existe um idioma com esse código"
 
 
+class UserNotFoundError(NotFoundError):
+    detail = "Usuário não encontrado"
+
+
+class UserEmailAlreadyExistsError(ConflictError):
+    detail = "Já existe um usuário com esse e-mail"
+
+
 def register_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(AppError)
     async def handle_app_error(_: Request, exc: AppError) -> JSONResponse:
