@@ -5,6 +5,8 @@ import ECButton from '@/components/ECButton/ECButton.vue';
 import ECInput from '@/components/ECInput/ECInput.vue';
 import { useRegister } from '@/composables/useAuth';
 import { useFormErrors } from '@/composables/useFormErrors';
+import { toast } from '@/composables/useToast';
+import { MESSAGES } from '@/utils/message';
 
 import type { RegisterForm } from '@/types/accountForm'
 
@@ -20,20 +22,20 @@ const form = reactive<RegisterForm>({
 });
 
 const { mutate: register, isPending } = useRegister();
-const { errors, formError, clear, setFromApi } = useFormErrors();
+const { errors, clear, setFromApi } = useFormErrors();
 
 function validate(): boolean {
   const found: Record<string, string> = {};
 
-  if (!form.name.trim()) found.name = 'Informe seu nome.';
-  if (!form.email.trim()) found.email = 'Informe seu e-mail.';
+  if (!form.name.trim()) found.name = MESSAGES.validation.nameRequired;
+  if (!form.email.trim()) found.email = MESSAGES.validation.emailRequired;
 
   if (form.password.length < MIN_PASSWORD_LENGTH) {
-    found.password = `A senha deve ter pelo menos ${MIN_PASSWORD_LENGTH} caracteres.`;
+    found.password = MESSAGES.validation.passwordMin(MIN_PASSWORD_LENGTH);
   }
 
   if (form.password !== form.password_confirm) {
-    found.password_confirm = 'As senhas não conferem.';
+    found.password_confirm = MESSAGES.validation.passwordMismatch;
   }
 
   errors.value = found;
@@ -47,7 +49,10 @@ function onSubmit() {
   register(
     { ...form, name: form.name.trim(), email: form.email.trim() },
     {
-      onSuccess: () => router.push({ name: 'login', query: { registered: '1' } }),
+      onSuccess: () => {
+        toast.info(MESSAGES.reminder.useRegisteredCredentials);
+        router.push({ name: 'login' });
+      },
       onError: setFromApi,
     },
   );
@@ -104,12 +109,8 @@ function onSubmit() {
         :error="errors.password_confirm"
       />
 
-      <p v-if="formError" class="text-red-700" role="alert">
-        {{ formError }}
-      </p>
-
       <ECButton type="submit" color="secondary" :disabled="isPending">
-        {{ isPending ? 'Salvando...' : 'Salvar' }}
+        {{ isPending ? MESSAGES.pending.register : 'Salvar' }}
       </ECButton>
 
       <div class="flex items-center gap-4 text-quaternary">

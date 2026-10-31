@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import ECHeader from '@/layouts/ECHeader.vue';
+import ECToaster from '@/components/ECToast/ECToaster.vue';
 
 </script>
 
@@ -12,4 +13,6 @@ import ECHeader from '@/layouts/ECHeader.vue';
       <RouterView />
     </div>
   </div>
+
+  <ECToaster />
 </template>

@@ -1,4 +1,5 @@
 import { computed, ref } from 'vue';
+import { MESSAGES } from '@/utils/message';
 
 const apiUrl = import.meta.env.VITE_API as string;
 
@@ -35,11 +36,11 @@ async function toApiError(response: Response, fallback: string): Promise<ApiErro
 
     for (const item of detail as { loc?: unknown[]; msg?: string }[]) {
       const field = (item.loc ?? []).slice(1).join('.') || '_form';
-      const message = (item.msg ?? 'Valor inválido').replace(/^Value error, /, '');
+      const message = (item.msg ?? MESSAGES.error.invalidValue).replace(/^Value error, /, '');
       fieldErrors[field] ??= message;
     }
 
-    return new ApiError(response.status, 'Verifique os dados informados.', fieldErrors);
+    return new ApiError(response.status, MESSAGES.error.invalidData, fieldErrors);
   }
 
   return new ApiError(response.status, fallback);
@@ -51,10 +52,10 @@ export function getErrorMessage(error: unknown): string {
   }
 
   if (error instanceof TypeError) {
-    return 'Não foi possível conectar ao servidor.';
+    return MESSAGES.error.network;
   }
 
-  return 'Erro inesperado. Tente novamente.';
+  return MESSAGES.error.unexpected;
 }
 
 export async function request<T>(
@@ -77,7 +78,7 @@ export async function request<T>(
   });
 
   if (!response.ok) {
-    throw await toApiError(response, `Erro ${response.status} em ${method} ${path}`);
+    throw await toApiError(response, MESSAGES.error.request(response.status, method, path));
   }
 
   if (response.status === 204) {

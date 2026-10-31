@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import ECCard from '@/components/ECCard/ECCard.vue';
 import { useLanguages } from '@/composables/useLanguages';
 import { LEVELS } from '@/utils/levels';
+import { MESSAGES } from '@/utils/message';
 
 interface InfoCard {
   key: string;
@@ -62,11 +63,11 @@ const infoCards = computed<InfoCard[]>(() => {
     </p>
 
     <p v-if="isPending" class="mt-6">
-      Carregando idiomas...
+      {{ MESSAGES.pending.languagesLoad }}
     </p>
 
     <p v-else-if="isError" class="mt-6 text-red-700" role="alert">
-      Não foi possível carregar os idiomas.
+      {{ MESSAGES.error.languagesLoad }}
     </p>
 
     <template v-else>

@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { computed, reactive } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import ECButton from '@/components/ECButton/ECButton.vue';
 import ECInput from '@/components/ECInput/ECInput.vue';
 import { useLogin } from '@/composables/useAuth';
 import { useFormErrors } from '@/composables/useFormErrors';
+import { MESSAGES } from '@/utils/message';
 
 import type { LoginForm } from '@/types/accountForm'
 
-const route = useRoute();
 const router = useRouter();
 
 const form = reactive<LoginForm>({
@@ -17,9 +17,7 @@ const form = reactive<LoginForm>({
 });
 
 const { mutate: login, isPending } = useLogin();
-const { formError, clear, setFromApi } = useFormErrors();
-
-const justRegistered = computed(() => route.query.registered === '1');
+const { errors, clear, setFromApi } = useFormErrors();
 
 function onSubmit() {
   clear();
@@ -33,6 +31,7 @@ function onSubmit() {
   );
 }
 </script>
+
 <template>
   <div class="container flex justify-center my-8 lg:my-16">
     <form
@@ -40,10 +39,6 @@ function onSubmit() {
       novalidate
       @submit.prevent="onSubmit"
     >
-      <p v-if="justRegistered" class="rounded-md bg-quinary/15 px-4 py-2 text-tertiary" role="status">
-        Conta criada com sucesso. Faça login para continuar.
-      </p>
-
       <ECInput
         id="email"
         v-model="form.email"
@@ -52,6 +47,7 @@ function onSubmit() {
         placeholder="seuemail@exemplo.com"
         autocomplete="email"
         required
+        :error="errors.email"
       />
 
       <ECInput
@@ -62,14 +58,11 @@ function onSubmit() {
         placeholder="Digite sua senha"
         autocomplete="current-password"
         required
+        :error="errors.password"
       />
 
-      <p v-if="formError" class="text-red-700" role="alert">
-        {{ formError }}
-      </p>
-
       <ECButton type="submit" color="secondary" :disabled="isPending || !form.email || !form.password">
-        {{ isPending ? 'Entrando...' : 'Entrar' }}
+        {{ isPending ? MESSAGES.pending.login : 'Entrar' }}
       </ECButton>
 
       <router-link class="btn btn-border text-center" to="/criar-conta">
