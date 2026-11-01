@@ -1,8 +1,19 @@
-import { createWebHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter, type RouteRecordRaw } from 'vue-router';
 
 import Index from '@/view/Index.vue';
+import { currentUserQuery, hasCompleteProfile } from '@/composables/useCurrentUser';
+import { queryClient } from '@/plugins/queryClient';
 
-const routes = [
+declare module 'vue-router' {
+  interface RouteMeta {
+    title?: string;
+    requiresAuth?: boolean;
+    requiresProfile?: boolean;
+    guestOnly?: boolean;
+  }
+}
+
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'index',
@@ -17,6 +28,7 @@ const routes = [
     path: '/criar-conta',
     name: 'criar-conta',
     component: () => import('@/view/CreateAccount.vue'),
+    meta: { guestOnly: true },
   },
   {
     path: '/idiomas',
@@ -24,8 +36,27 @@ const routes = [
     component: () => import('@/view/Languages.vue'),
   },
   {
+    path: '/escolher-idioma',
+    name: 'escolher-idioma',
+    component: () => import('@/view/ChooseLanguage.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/escolher-idioma/:id/nivel',
+    name: 'escolher-nivel',
+    component: () => import('@/view/Init.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/escolher-idioma/:id/teste',
+    name: 'teste-nivel',
+    component: () => import('@/view/PlacementTest.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
     path: '/dashboard',
     component: () => import('@/view/Dashboard.vue'),
+    meta: { requiresAuth: true, requiresProfile: true },
     children: [
       {
         path: '',
@@ -38,11 +69,6 @@ const routes = [
         component: () => import('@/view/Languages.vue'),
       },
       {
-        path: 'idiomas/:id',
-        name: 'dashboard-idioma',
-        component: () => import('@/view/Init.vue'),
-      },
-      {
         path: 'documentacao',
         name: 'dashboard-documentacao',
         component: () => import('@/view/Documentacao.vue'),
@@ -50,21 +76,33 @@ const routes = [
     ],
   },
   {
-    path: '/init/:id',
-    name: 'init',
-    component: () => import('@/view/Init.vue'),
-  },
-   {
     path: '/login',
     name: 'login',
     component: () => import('@/view/Login.vue'),
     meta: {
-      title: 'Login'
-    }
+      title: 'Login',
+      guestOnly: true,
+    },
   },
 ];
 
 export const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach(async (to) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const requiresProfile = to.matched.some((record) => record.meta.requiresProfile);
+  const guestOnly = to.matched.some((record) => record.meta.guestOnly);
+
+  if (!requiresAuth && !guestOnly) return true;
+
+  const user = await queryClient.fetchQuery(currentUserQuery).catch(() => null);
+
+  if (requiresAuth && !user) return { name: 'login' };
+  if (guestOnly && user) return { name: 'dashboard' };
+  if (requiresProfile && user && !hasCompleteProfile(user)) return { name: 'escolher-idioma' };
+
+  return true;
 });

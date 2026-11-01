@@ -1,24 +1,11 @@
-from typing import Annotated
-
-from fastapi import APIRouter, Depends, Request, Response, status
+from fastapi import APIRouter, Response, status
 
 from core.config import get_auth_settings
-from core.database import SessionDep
-from repositories.user_repository import UserRepository
+from routes.dependencies import AuthServiceDep, CurrentUserDep
 from schemas.auth import LoginRequest, RegisterRequest
 from schemas.user import UserOut
-from services.auth_service import AuthService
-from services.user_service import UserService
 
 auth_routes = APIRouter(prefix="/auth", tags=["Auth"])
-
-
-def get_auth_service(session: SessionDep) -> AuthService:
-    repository = UserRepository(session)
-    return AuthService(UserService(repository), repository)
-
-
-AuthServiceDep = Annotated[AuthService, Depends(get_auth_service)]
 
 
 @auth_routes.post("/register", response_model=UserOut, status_code=status.HTTP_201_CREATED)
@@ -55,6 +42,5 @@ async def logout(response: Response) -> None:
 
 
 @auth_routes.get("/me", response_model=UserOut)
-async def me(request: Request, service: AuthServiceDep) -> UserOut:
-    token = request.cookies.get(get_auth_settings().cookie_name)
-    return await service.get_current_user(token)
+async def me(current_user: CurrentUserDep) -> UserOut:
+    return current_user

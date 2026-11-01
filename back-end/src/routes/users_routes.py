@@ -4,8 +4,11 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Response, status
 
 from core.database import SessionDep
+from repositories.language_repository import LanguageRepository
 from repositories.user_repository import UserRepository
-from schemas.user import UserCreate, UserOut, UserUpdate
+from routes.dependencies import CurrentUserDep
+from schemas.user import ProfileUpdate, UserCreate, UserOut, UserUpdate
+from services.profile_service import ProfileService
 from services.user_service import UserService
 
 users_routes = APIRouter(tags=["Users"])
@@ -16,6 +19,22 @@ def get_user_service(session: SessionDep) -> UserService:
 
 
 UserServiceDep = Annotated[UserService, Depends(get_user_service)]
+
+
+def get_profile_service(session: SessionDep) -> ProfileService:
+    return ProfileService(UserRepository(session), LanguageRepository(session))
+
+
+ProfileServiceDep = Annotated[ProfileService, Depends(get_profile_service)]
+
+
+@users_routes.put("/users/me/profile", response_model=UserOut)
+async def update_my_profile(
+    data: ProfileUpdate,
+    current_user: CurrentUserDep,
+    service: ProfileServiceDep,
+) -> UserOut:
+    return await service.update_profile(current_user.id, data)
 
 
 @users_routes.get("/users", response_model=list[UserOut])
