@@ -5,6 +5,7 @@ export const MESSAGES = {
     invalidData: 'Verifique os dados informados.',
     invalidValue: 'Valor inválido',
     languagesLoad: 'Não foi possível carregar os idiomas.',
+    placementLoad: 'Não foi possível carregar o teste.',
     request: (status: number, method: string, path: string) =>
       `Erro ${status} em ${method} ${path}`,
   },
@@ -19,12 +20,16 @@ export const MESSAGES = {
   success: {
     login: 'Login realizado com sucesso.',
     register: 'Conta criada com sucesso. Faça login para continuar.',
+    profile: 'Idioma e nível salvos.',
+    logout: 'Você saiu da conta.',
   },
 
   pending: {
     login: 'Entrando...',
     register: 'Criando sua conta...',
+    profile: 'Salvando idioma e nível...',
     languagesLoad: 'Carregando idiomas...',
+    placementLoad: 'Carregando perguntas...',
   },
 
   reminder: {
