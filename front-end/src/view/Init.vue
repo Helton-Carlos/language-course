@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import { computed, ref } from 'vue'
 import ECButton from '@/components/ECButton/ECButton.vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -20,10 +21,6 @@ const language = computed(() => {
   return languages.value.find((item) => item.id === id)
 })
 
-function goBack() {
-  router.push({ name: 'escolher-idioma' })
-}
-
 function goToTest() {
   router.push({ name: 'teste-nivel', params: { id: String(route.params.id) } })
 }
@@ -39,7 +36,7 @@ function confirmLevel() {
 </script>
 
 <template>
-  <div class="container mt-16 grid gap-10 lg:grid-cols-2">
+  <div class="grid gap-10 lg:grid-cols-2">
     <div>
       <h2 class="text-4xl lg:text-5xl">
         Otima escolha o
@@ -90,9 +87,7 @@ function confirmLevel() {
       </p>
 
       <div class="mt-2 flex gap-4">
-        <ECButton color="border" @on-click="goBack">
-          Voltar
-        </ECButton>
+        <ECBackButton variant="button" :to="{ name: 'escolher-idioma' }" />
 
         <ECButton color="secondary" @on-click="goToTest">
           Teste

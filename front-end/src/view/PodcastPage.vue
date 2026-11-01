@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import { computed } from 'vue';
 import { useCurrentUser } from '@/composables/useCurrentUser';
 import { usePodcasts } from '@/composables/useContent';
@@ -11,9 +12,7 @@ const { data: episodes, isPending, isError } = usePodcasts(languageId);
 
 <template>
   <section>
-    <router-link class="text-quaternary underline" :to="{ name: 'dashboard' }">
-      Voltar ao dashboard
-    </router-link>
+    <ECBackButton :to="{ name: 'dashboard' }" />
 
     <h1 class="mt-4 text-3xl font-bold">
       Podcast

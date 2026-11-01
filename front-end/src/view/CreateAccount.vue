@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import ECButton from '@/components/ECButton/ECButton.vue';
@@ -126,9 +127,7 @@ function onSubmit() {
         </span>
       </ECButton>
 
-      <router-link class="btn btn-border text-center" to="/login">
-        Voltar
-      </router-link>
+      <ECBackButton variant="button" to="/login" />
     </form>
   </div>
 </template>

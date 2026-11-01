@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCurrentUser } from '@/composables/useCurrentUser';
@@ -12,9 +13,7 @@ const theme = computed(() => BOOK_THEMES.find((item) => item.key === route.param
 
 <template>
   <section v-if="theme">
-    <router-link class="text-quaternary underline" :to="{ name: 'dashboard-livros' }">
-      Voltar aos temas
-    </router-link>
+    <ECBackButton :to="{ name: 'dashboard-livros' }" />
 
     <h1 class="mt-4 text-3xl font-bold">
       Livros: {{ theme.label }}

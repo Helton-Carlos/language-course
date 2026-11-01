@@ -1,13 +1,12 @@
 <script lang="ts" setup>
+import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
 import { BOOK_THEMES } from '@/utils/bookThemes';
 </script>
 
 <template>
   <section>
-    <router-link class="text-quaternary underline" :to="{ name: 'dashboard' }">
-      Voltar ao dashboard
-    </router-link>
+    <ECBackButton :to="{ name: 'dashboard' }" />
 
     <h1 class="mt-4 text-3xl font-bold">
       Ler um livro

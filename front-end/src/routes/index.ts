@@ -16,6 +16,8 @@ declare module 'vue-router' {
   }
 }
 
+const PROFILE_REQUIRED = { requiresProfile: true } as const;
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -39,69 +41,73 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/view/Languages.vue'),
   },
   {
-    path: '/escolher-idioma',
-    name: 'escolher-idioma',
-    component: () => import('@/view/ChooseLanguage.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/escolher-idioma/:id/nivel',
-    name: 'escolher-nivel',
-    component: () => import('@/view/Init.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/escolher-idioma/:id/teste',
-    name: 'teste-nivel',
-    component: () => import('@/view/PlacementTest.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
     path: '/dashboard',
     component: () => import('@/view/Dashboard.vue'),
-    meta: { requiresAuth: true, requiresProfile: true },
+    meta: { requiresAuth: true },
     children: [
+      {
+        path: 'escolher-idioma',
+        name: 'escolher-idioma',
+        component: () => import('@/view/ChooseLanguage.vue'),
+      },
+      {
+        path: 'escolher-idioma/:id/nivel',
+        name: 'escolher-nivel',
+        component: () => import('@/view/Init.vue'),
+      },
+      {
+        path: 'escolher-idioma/:id/teste',
+        name: 'teste-nivel',
+        component: () => import('@/view/PlacementTest.vue'),
+      },
       {
         path: '',
         name: 'dashboard',
         component: () => import('@/view/DashboardHome.vue'),
+        meta: PROFILE_REQUIRED,
       },
       {
         path: 'idiomas',
         name: 'dashboard-idiomas',
         component: () => import('@/view/Languages.vue'),
+        meta: PROFILE_REQUIRED,
       },
       {
         path: 'documentacao',
         name: 'dashboard-documentacao',
         component: () => import('@/view/Documentacao.vue'),
+        meta: PROFILE_REQUIRED,
       },
       ...SKILLS.map((skill): RouteRecordRaw => ({
         path: skill.path,
         name: skill.routeName,
         component: () => import('@/view/SkillPage.vue'),
-        meta: { skill: skill.key },
+        meta: { ...PROFILE_REQUIRED, skill: skill.key },
       })),
       {
         path: 'livros',
         name: 'dashboard-livros',
         component: () => import('@/view/BooksPage.vue'),
+        meta: PROFILE_REQUIRED,
       },
       {
         path: 'livros/:tema',
         name: 'dashboard-livros-tema',
         component: () => import('@/view/BookThemePage.vue'),
+        meta: PROFILE_REQUIRED,
         beforeEnter: (to) => isBookTheme(to.params.tema) || { name: 'dashboard-livros' },
       },
       {
         path: 'podcast',
         name: 'dashboard-podcast',
         component: () => import('@/view/PodcastPage.vue'),
+        meta: PROFILE_REQUIRED,
       },
       {
         path: 'frases',
         name: 'dashboard-frases',
         component: () => import('@/view/PhrasesPage.vue'),
+        meta: PROFILE_REQUIRED,
       },
     ],
   },

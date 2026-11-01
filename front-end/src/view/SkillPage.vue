@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCurrentUser } from '@/composables/useCurrentUser';
@@ -12,9 +13,7 @@ const skill = computed(() => SKILLS.find((item) => item.key === route.meta.skill
 
 <template>
   <section v-if="skill">
-    <router-link class="text-quaternary underline" :to="{ name: 'dashboard' }">
-      Voltar ao dashboard
-    </router-link>
+    <ECBackButton :to="{ name: 'dashboard' }" />
 
     <div class="mt-4 flex items-center gap-4">
       <svg

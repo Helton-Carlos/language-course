@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import { computed, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import ECButton from '@/components/ECButton/ECButton.vue';
@@ -86,13 +87,8 @@ function restart() {
 </script>
 
 <template>
-  <div class="container my-8 max-w-3xl lg:my-16">
-    <router-link
-      class="text-quaternary underline"
-      :to="{ name: 'escolher-nivel', params: { id: languageId } }"
-    >
-      Voltar
-    </router-link>
+  <div class="max-w-3xl">
+    <ECBackButton :to="{ name: 'escolher-nivel', params: { id: languageId } }" />
 
     <h1 class="mt-4 text-3xl font-bold lg:text-4xl">
       Teste de nível<template v-if="language">: <span class="capitalize">{{ language.name_pt }}</span></template>
