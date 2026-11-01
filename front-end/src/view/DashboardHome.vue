@@ -18,27 +18,14 @@ const { languages, isPending, isError } = useLanguages();
     </h1>
 
     <p v-if="user" class="mt-2 text-quaternary">
-      Bem-vindo de volta, {{ user.name }}.
+      Bem-vindo de volta, <strong>{{ user.name }}</strong>.
     </p>
 
     <ul v-if="user" class="mt-6 grid gap-4 sm:grid-cols-3">
       <li>
         <ECCard width="100%">
           <template #body>
-            <p class="text-sm">
-              Nome
-            </p>
-            <p class="mt-1 text-2xl font-bold text-tertiary">
-              {{ user.name }}<template v-if="user.last_name"> {{ user.last_name }}</template>
-            </p>
-          </template>
-        </ECCard>
-      </li>
-
-      <li>
-        <ECCard width="100%">
-          <template #body>
-            <p class="text-sm">
+            <p>
               Idioma
             </p>
             <p class="mt-1 flex items-center gap-3 text-2xl font-bold capitalize text-tertiary">
@@ -57,7 +44,7 @@ const { languages, isPending, isError } = useLanguages();
       <li>
         <ECCard width="100%">
           <template #body>
-            <p class="text-sm">
+            <p>
               Nível
             </p>
             <p class="mt-1 text-2xl font-bold text-tertiary">
@@ -126,7 +113,7 @@ const { languages, isPending, isError } = useLanguages();
             <p class="font-bold capitalize">
               {{ language.name_pt }}
             </p>
-            <p class="text-sm text-quaternary">
+            <p class="text-quaternary">
               {{ language.countries.length }} {{ language.countries.length === 1 ? 'país' : 'países' }}
             </p>
           </div>

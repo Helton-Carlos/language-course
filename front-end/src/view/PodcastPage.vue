@@ -11,7 +11,7 @@ const { data: episodes, isPending, isError } = usePodcasts(languageId);
 
 <template>
   <section>
-    <router-link class="text-sm text-quaternary underline" :to="{ name: 'dashboard' }">
+    <router-link class="text-quaternary underline" :to="{ name: 'dashboard' }">
       Voltar ao dashboard
     </router-link>
 
@@ -48,7 +48,7 @@ const { data: episodes, isPending, isError } = usePodcasts(languageId);
             />
           </div>
 
-          <figcaption class="p-4 text-sm font-medium text-tertiary">
+          <figcaption class="p-4 font-medium text-tertiary">
             {{ episode.title }}
           </figcaption>
         </figure>

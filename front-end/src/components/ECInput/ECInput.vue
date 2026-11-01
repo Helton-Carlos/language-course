@@ -38,7 +38,7 @@ const model = defineModel<string>();
     <p
       v-if="error"
       :id="`${id}-error`"
-      class="text-sm text-red-700"
+      class="text-red-700"
       role="alert"
     >
       {{ error }}

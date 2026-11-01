@@ -12,7 +12,7 @@ const skill = computed(() => SKILLS.find((item) => item.key === route.meta.skill
 
 <template>
   <section v-if="skill">
-    <router-link class="text-sm text-quaternary underline" :to="{ name: 'dashboard' }">
+    <router-link class="text-quaternary underline" :to="{ name: 'dashboard' }">
       Voltar ao dashboard
     </router-link>
 
@@ -35,7 +35,7 @@ const skill = computed(() => SKILLS.find((item) => item.key === route.meta.skill
       {{ skill.description }}
     </p>
 
-    <p v-if="user?.language && user.level" class="mt-6 text-sm">
+    <p v-if="user?.language && user.level" class="mt-6">
       Praticando
       <strong class="capitalize">{{ user.language.name_pt }}</strong>
       no nível
@@ -46,7 +46,7 @@ const skill = computed(() => SKILLS.find((item) => item.key === route.meta.skill
       <p class="font-medium text-tertiary">
         Em breve
       </p>
-      <p class="mt-1 text-sm text-quaternary">
+      <p class="mt-1 text-quaternary">
         Os exercícios desta habilidade ainda estão sendo preparados.
       </p>
     </div>

@@ -5,7 +5,7 @@ import { BOOK_THEMES } from '@/utils/bookThemes';
 
 <template>
   <section>
-    <router-link class="text-sm text-quaternary underline" :to="{ name: 'dashboard' }">
+    <router-link class="text-quaternary underline" :to="{ name: 'dashboard' }">
       Voltar ao dashboard
     </router-link>
 

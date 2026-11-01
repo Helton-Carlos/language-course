@@ -23,7 +23,7 @@ defineProps<ECFeatureCard>();
       {{ title }}
     </span>
 
-    <span class="text-sm text-quaternary">
+    <span class="text-quaternary">
       {{ description }}
     </span>
   </router-link>

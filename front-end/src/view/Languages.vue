@@ -42,7 +42,7 @@ const { languages } = useLanguages()
           <li
             v-for="country in language.countries"
             :key="country"
-            class="rounded-full bg-primary px-3 py-1 text-sm text-tertiary"
+            class="rounded-full bg-primary px-3 py-1 text-tertiary"
           >
             {{ country }}
           </li>

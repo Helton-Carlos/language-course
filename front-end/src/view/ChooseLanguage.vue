@@ -56,17 +56,17 @@ function choose(id: string) {
                       <h2 class="text-2xl font-bold capitalize text-tertiary">
                         {{ language.name_pt }}
                       </h2>
-                      <p class="text-sm">
+                      <p>
                         {{ language.name }}
                       </p>
                     </div>
                   </div>
 
-                  <p class="mt-4 text-sm">
+                  <p class="mt-4">
                     {{ language.description }}
                   </p>
 
-                  <p class="mt-auto pt-4 text-sm font-medium text-tertiary">
+                  <p class="mt-auto pt-4 font-medium text-tertiary">
                     Falado em: {{ language.countries.join(', ') }}
                   </p>
                 </div>

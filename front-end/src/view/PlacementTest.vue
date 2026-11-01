@@ -88,7 +88,7 @@ function restart() {
 <template>
   <div class="container my-8 max-w-3xl lg:my-16">
     <router-link
-      class="text-sm text-quaternary underline"
+      class="text-quaternary underline"
       :to="{ name: 'escolher-nivel', params: { id: languageId } }"
     >
       Voltar
@@ -127,7 +127,7 @@ function restart() {
     </section>
 
     <form v-else class="mt-8" @submit.prevent="onSubmit">
-      <div class="flex items-center justify-between text-sm text-quaternary">
+      <div class="flex items-center justify-between text-quaternary">
         <span>Etapa {{ step }} de {{ LEVELS.length }}</span>
       </div>
 

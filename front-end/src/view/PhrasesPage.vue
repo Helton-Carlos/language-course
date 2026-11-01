@@ -21,7 +21,7 @@ function byKind(kind: PhraseKind) {
 
 <template>
   <section>
-    <router-link class="text-sm text-quaternary underline" :to="{ name: 'dashboard' }">
+    <router-link class="text-quaternary underline" :to="{ name: 'dashboard' }">
       Voltar ao dashboard
     </router-link>
 
@@ -58,7 +58,7 @@ function byKind(kind: PhraseKind) {
             <p class="text-lg font-bold text-tertiary">
               {{ phrase.text }}
             </p>
-            <p class="mt-1 text-sm text-quaternary">
+            <p class="mt-1 text-quaternary">
               {{ phrase.translation }}
             </p>
           </li>

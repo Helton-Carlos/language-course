@@ -12,7 +12,7 @@ const theme = computed(() => BOOK_THEMES.find((item) => item.key === route.param
 
 <template>
   <section v-if="theme">
-    <router-link class="text-sm text-quaternary underline" :to="{ name: 'dashboard-livros' }">
+    <router-link class="text-quaternary underline" :to="{ name: 'dashboard-livros' }">
       Voltar aos temas
     </router-link>
 
@@ -24,7 +24,7 @@ const theme = computed(() => BOOK_THEMES.find((item) => item.key === route.param
       {{ theme.description }}
     </p>
 
-    <p v-if="user?.language && user.level" class="mt-6 text-sm">
+    <p v-if="user?.language && user.level" class="mt-6">
       Lendo em
       <strong class="capitalize">{{ user.language.name_pt }}</strong>
       no nível
@@ -35,7 +35,7 @@ const theme = computed(() => BOOK_THEMES.find((item) => item.key === route.param
       <p class="font-medium text-tertiary">
         Em breve
       </p>
-      <p class="mt-1 text-sm text-quaternary">
+      <p class="mt-1 text-quaternary">
         Os livros deste tema ainda estão sendo selecionados.
       </p>
     </div>

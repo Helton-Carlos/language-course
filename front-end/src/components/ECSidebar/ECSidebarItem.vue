@@ -23,7 +23,7 @@ const open = ref<boolean>(true);
           :href="href"
           :aria-current="(item.exact ? isExactActive : isActive) ? 'page' : undefined"
           :class="[
-            'flex flex-1 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+            'flex flex-1 items-center gap-3 rounded-lg px-3 py-2 font-medium transition-colors',
             (item.exact ? isExactActive : isActive)
               ? 'bg-primary text-tertiary'
               : 'text-quaternary hover:bg-gray',
@@ -43,7 +43,7 @@ const open = ref<boolean>(true);
       <button
         v-else
         type="button"
-        class="flex flex-1 cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm font-bold text-tertiary hover:bg-gray"
+        class="flex flex-1 cursor-pointer items-center justify-between rounded-lg px-3 py-2 font-bold text-tertiary hover:bg-gray"
         :aria-expanded="open"
         @click="open = !open"
       >
