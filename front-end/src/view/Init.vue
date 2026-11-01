@@ -3,13 +3,16 @@ import { computed, ref } from 'vue'
 import ECButton from '@/components/ECButton/ECButton.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useLanguages } from '@/composables/useLanguages'
-import { LEVELS } from '@/utils/levels'
+import { useSaveProfile } from '@/composables/useProfile'
+import { LEVELS, isLevel, type Level } from '@/utils/levels'
 
 const route = useRoute()
 const router = useRouter()
 const { languages } = useLanguages()
+const { mutate: saveProfile, isPending: isSaving } = useSaveProfile()
 
-const selectedLevel = ref<(typeof LEVELS)[number]>('B2')
+const queryLevel = route.query.level
+const selectedLevel = ref<Level>(isLevel(queryLevel) ? queryLevel : LEVELS[0])
 
 const language = computed(() => {
   const id = String(route.params.id)
@@ -18,7 +21,20 @@ const language = computed(() => {
 })
 
 function goBack() {
-  router.push({ name: 'idiomas' })
+  router.push({ name: 'escolher-idioma' })
+}
+
+function goToTest() {
+  router.push({ name: 'teste-nivel', params: { id: String(route.params.id) } })
+}
+
+function confirmLevel() {
+  if (!language.value) return
+
+  saveProfile(
+    { language_id: language.value.id, level: selectedLevel.value },
+    { onSuccess: () => router.push({ name: 'dashboard' }) },
+  )
 }
 </script>
 
@@ -64,7 +80,7 @@ function goBack() {
           </button>
         </div>
 
-        <ECButton color="border" @on-click="goBack">
+        <ECButton color="border" :disabled="!language || isSaving" @on-click="confirmLevel">
           Avançar
         </ECButton>
       </div>
@@ -78,7 +94,7 @@ function goBack() {
           Voltar
         </ECButton>
 
-        <ECButton color="secondary">
+        <ECButton color="secondary" @on-click="goToTest">
           Teste
         </ECButton>
       </div>
