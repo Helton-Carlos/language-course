@@ -14,6 +14,7 @@ const open = ref<boolean>(true);
   <li>
     <div class="flex items-center gap-1">
       <router-link
+        v-if="item.to"
         v-slot="{ href, navigate, isActive, isExactActive }"
         :to="item.to"
         custom
@@ -22,7 +23,7 @@ const open = ref<boolean>(true);
           :href="href"
           :aria-current="(item.exact ? isExactActive : isActive) ? 'page' : undefined"
           :class="[
-            'flex flex-1 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium capitalize transition-colors',
+            'flex flex-1 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
             (item.exact ? isExactActive : isActive)
               ? 'bg-primary text-tertiary'
               : 'text-quaternary hover:bg-gray',
@@ -40,7 +41,27 @@ const open = ref<boolean>(true);
       </router-link>
 
       <button
-        v-if="item.children?.length"
+        v-else
+        type="button"
+        class="flex flex-1 cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm font-bold text-tertiary hover:bg-gray"
+        :aria-expanded="open"
+        @click="open = !open"
+      >
+        {{ item.label }}
+
+        <svg
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="h-4 w-4 transition-transform"
+          :class="{ '-rotate-90': !open }"
+          aria-hidden="true"
+        >
+          <path d="M5.5 7.5 10 12l4.5-4.5-1.4-1.4L10 9.2 6.9 6.1 5.5 7.5Z" />
+        </svg>
+      </button>
+
+      <button
+        v-if="item.to && item.children?.length"
         type="button"
         class="cursor-pointer rounded-lg p-2 text-quaternary hover:bg-gray"
         :aria-expanded="open"
