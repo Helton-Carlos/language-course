@@ -1,0 +1,43 @@
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import { useCurrentUser } from '@/composables/useCurrentUser';
+import { BOOK_THEMES } from '@/utils/bookThemes';
+
+const route = useRoute();
+const { data: user } = useCurrentUser();
+
+const theme = computed(() => BOOK_THEMES.find((item) => item.key === route.params.tema));
+</script>
+
+<template>
+  <section v-if="theme">
+    <router-link class="text-sm text-quaternary underline" :to="{ name: 'dashboard-livros' }">
+      Voltar aos temas
+    </router-link>
+
+    <h1 class="mt-4 text-3xl font-bold">
+      Livros: {{ theme.label }}
+    </h1>
+
+    <p class="mt-2 text-quaternary">
+      {{ theme.description }}
+    </p>
+
+    <p v-if="user?.language && user.level" class="mt-6 text-sm">
+      Lendo em
+      <strong class="capitalize">{{ user.language.name_pt }}</strong>
+      no nível
+      <strong>{{ user.level }}</strong>.
+    </p>
+
+    <div class="mt-6 rounded-2xl bg-white p-6 shadow-sm">
+      <p class="font-medium text-tertiary">
+        Em breve
+      </p>
+      <p class="mt-1 text-sm text-quaternary">
+        Os livros deste tema ainda estão sendo selecionados.
+      </p>
+    </div>
+  </section>
+</template>

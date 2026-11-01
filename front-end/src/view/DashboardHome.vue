@@ -1,8 +1,11 @@
 <script lang="ts" setup>
 import ECCard from '@/components/ECCard/ECCard.vue';
+import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
 import { useCurrentUser } from '@/composables/useCurrentUser';
 import { useLanguages } from '@/composables/useLanguages';
 import { MESSAGES } from '@/utils/message';
+import { CONTENTS } from '@/utils/contents';
+import { SKILLS } from '@/utils/skills';
 
 const { data: user } = useCurrentUser();
 const { languages, isPending, isError } = useLanguages();
@@ -62,6 +65,36 @@ const { languages, isPending, isError } = useLanguages();
             </p>
           </template>
         </ECCard>
+      </li>
+    </ul>
+
+    <h2 class="mt-10 text-xl font-bold">
+      Como você quer praticar?
+    </h2>
+
+    <ul class="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <li v-for="skill in SKILLS" :key="skill.key">
+        <ECFeatureCard
+          :to="{ name: skill.routeName }"
+          :title="skill.label"
+          :description="skill.description"
+          :icon="skill.icon"
+        />
+      </li>
+    </ul>
+
+    <h2 class="mt-10 text-xl font-bold">
+      Explore conteúdos
+    </h2>
+
+    <ul class="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <li v-for="content in CONTENTS" :key="content.key">
+        <ECFeatureCard
+          :to="{ name: content.routeName }"
+          :title="content.label"
+          :description="content.description"
+          :icon="content.icon"
+        />
       </li>
     </ul>
 

@@ -1,6 +1,8 @@
 import { createWebHistory, createRouter, type RouteRecordRaw } from 'vue-router';
 
 import Index from '@/view/Index.vue';
+import { isBookTheme } from '@/utils/bookThemes';
+import { SKILLS, type SkillKey } from '@/utils/skills';
 import { currentUserQuery, hasCompleteProfile } from '@/composables/useCurrentUser';
 import { queryClient } from '@/plugins/queryClient';
 
@@ -10,6 +12,7 @@ declare module 'vue-router' {
     requiresAuth?: boolean;
     requiresProfile?: boolean;
     guestOnly?: boolean;
+    skill?: SkillKey;
   }
 }
 
@@ -72,6 +75,33 @@ const routes: RouteRecordRaw[] = [
         path: 'documentacao',
         name: 'dashboard-documentacao',
         component: () => import('@/view/Documentacao.vue'),
+      },
+      ...SKILLS.map((skill): RouteRecordRaw => ({
+        path: skill.path,
+        name: skill.routeName,
+        component: () => import('@/view/SkillPage.vue'),
+        meta: { skill: skill.key },
+      })),
+      {
+        path: 'livros',
+        name: 'dashboard-livros',
+        component: () => import('@/view/BooksPage.vue'),
+      },
+      {
+        path: 'livros/:tema',
+        name: 'dashboard-livros-tema',
+        component: () => import('@/view/BookThemePage.vue'),
+        beforeEnter: (to) => isBookTheme(to.params.tema) || { name: 'dashboard-livros' },
+      },
+      {
+        path: 'podcast',
+        name: 'dashboard-podcast',
+        component: () => import('@/view/PodcastPage.vue'),
+      },
+      {
+        path: 'frases',
+        name: 'dashboard-frases',
+        component: () => import('@/view/PhrasesPage.vue'),
       },
     ],
   },
