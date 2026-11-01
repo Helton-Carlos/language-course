@@ -4,6 +4,8 @@ from uuid import UUID
 from pydantic import AfterValidator, EmailStr, Field
 
 from schemas.base import APIModel
+from schemas.language import LanguageOut
+from schemas.level import Level
 
 Role = Literal["admin", "user"]
 
@@ -25,9 +27,17 @@ class UserUpdate(APIModel):
     email: Email | None = None
 
 
+class ProfileUpdate(APIModel):
+    language_id: UUID
+    level: Level
+
+
 class UserOut(APIModel):
     id: UUID
     name: str
     last_name: str | None = None
     email: str
     role: Role
+    language_id: UUID | None = None
+    language: LanguageOut | None = None
+    level: Level | None = None
