@@ -30,6 +30,15 @@ class InvalidCredentialsError(UnauthorizedError):
     detail = "E-mail ou senha inválidos"
 
 
+class InvalidPlacementAnswersError(AppError):
+    status_code = 422
+    detail = "Respostas inválidas para este nível"
+
+
+class PlacementTestUnavailableError(NotFoundError):
+    detail = "Teste de nível indisponível para este idioma e nível"
+
+
 class LanguageNotFoundError(NotFoundError):
     detail = "Idioma não encontrado"
 
