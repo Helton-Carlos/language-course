@@ -30,6 +30,11 @@ class InvalidCredentialsError(UnauthorizedError):
     detail = "E-mail ou senha inválidos"
 
 
+class WrongPasswordError(AppError):
+    status_code = 403
+    detail = "Senha incorreta"
+
+
 class InvalidPlacementAnswersError(AppError):
     status_code = 422
     detail = "Respostas inválidas para este nível"

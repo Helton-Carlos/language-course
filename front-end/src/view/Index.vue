@@ -46,7 +46,7 @@ import ECFooter from '@/layouts/ECFooter.vue'
 
   <section class="container">
     <h3 class="text-3xl font-bold">
-      LISTA DE PAÍSES QUE USAM INGLÊS
+      PAÍSES QUE USAM INGLÊS
     </h3>
 
     <div class="grid grid-cols-2 my-8 lg:grid-cols-3">

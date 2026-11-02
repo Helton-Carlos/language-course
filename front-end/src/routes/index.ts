@@ -93,6 +93,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/view/PhrasesPage.vue'),
         meta: PROFILE_REQUIRED,
       },
+      {
+        path: 'cancelar-conta',
+        name: 'dashboard-cancelar-conta',
+        component: () => import('@/view/CancelAccount.vue'),
+      },
     ],
   },
   {

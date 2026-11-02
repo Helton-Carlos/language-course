@@ -1,4 +1,6 @@
-from core.exceptions import InvalidCredentialsError, UnauthorizedError
+from uuid import UUID
+
+from core.exceptions import InvalidCredentialsError, UnauthorizedError, WrongPasswordError
 from core.security import (
     DUMMY_HASH,
     create_access_token,
@@ -54,3 +56,13 @@ class AuthService:
         if user is None:
             raise UnauthorizedError()
         return user
+
+    async def delete_account(self, user_id: UUID, password: str) -> None:
+        user = await self._user_repository.get(user_id)
+        if user is None:
+            raise UnauthorizedError()
+
+        if not await verify_password(password, user.password_hash):
+            raise WrongPasswordError()
+
+        await self._user_repository.delete(user)

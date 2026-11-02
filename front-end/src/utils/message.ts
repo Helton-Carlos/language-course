@@ -24,6 +24,7 @@ export const MESSAGES = {
     register: 'Conta criada com sucesso. Faça login para continuar.',
     profile: 'Idioma e nível salvos.',
     logout: 'Você saiu da conta.',
+    accountDeleted: 'Sua conta foi cancelada.',
   },
 
   pending: {
@@ -32,6 +33,7 @@ export const MESSAGES = {
     profile: 'Salvando idioma e nível...',
     languagesLoad: 'Carregando idiomas...',
     placementLoad: 'Carregando perguntas...',
+    accountDelete: 'Cancelando conta...',
     podcastsLoad: 'Carregando podcasts...',
     phrasesLoad: 'Carregando frases...',
   },

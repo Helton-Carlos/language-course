@@ -19,3 +19,7 @@ class RegisterRequest(UserCreate):
 class LoginRequest(APIModel):
     email: Email
     password: Annotated[str, Field(min_length=1, max_length=128)]
+
+
+class AccountDeleteRequest(APIModel):
+    password: Annotated[str, Field(min_length=1, max_length=128)]

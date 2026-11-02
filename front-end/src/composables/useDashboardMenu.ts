@@ -4,12 +4,21 @@ import { CONTENTS } from '@/utils/contents';
 import { SKILLS } from '@/utils/skills';
 import type { ECSidebarItem } from '@/components/ECSidebar/Type';
 
+const cancelAccountItem: ECSidebarItem = {
+  key: 'cancel-account',
+  label: 'Cancelar conta',
+  to: { name: 'dashboard-cancelar-conta' },
+};
+
 export function useDashboardMenu() {
   const { data: user } = useCurrentUser();
 
   return computed<ECSidebarItem[]>(() => {
     if (user.value && !hasCompleteProfile(user.value)) {
-      return [{ key: 'level', label: 'Definir nível', to: { name: 'dashboard-nivel' } }];
+      return [
+        { key: 'level', label: 'Definir nível', to: { name: 'dashboard-nivel' } },
+        cancelAccountItem,
+      ];
     }
 
     return [
@@ -42,6 +51,7 @@ export function useDashboardMenu() {
         label: 'Documentação',
         to: { name: 'dashboard-documentacao' },
       },
+      cancelAccountItem,
     ];
   });
 }
