@@ -37,18 +37,17 @@ function confirmLevel() {
   <div class="grid gap-10 lg:grid-cols-2">
     <div>
       <h2 class="text-4xl lg:text-5xl">
-        Ótima escolha o
+        O Inglês é a chave para
         <span class="relative inline-block">
-          <span class="uppercase font-bold">{{ english?.name_pt }}</span>,
           <img
             src="/icon-risk.svg"
             alt="risco ilustrativo"
             class="pointer-events-none absolute bottom-full left-full w-[1.1em] translate-y-[0.15em]"
           >
         </span>
-        <br>é utilizado em diversos países
-        <br>ao redor do mundo.
-      </h2>
+        <br>conectar você com novas
+        <br>oportunidades no mundo.
+      </h2> 
 
       <p class="my-4 text-2xl">
         Agora queremos saber seu nível
@@ -93,7 +92,7 @@ function confirmLevel() {
       </div>
     </div>
 
-    <figure class="w-full max-w-sm justify-self-end rounded-lg bg-[#d9d9d9] p-5">
+    <figure class="w-full h-75 max-w-sm justify-self-end rounded-lg bg-[#d9d9d9] p-5">
       <img
         :src="`https://flagcdn.com/${english?.prefix?.toLowerCase()}.svg`"
         :alt="`Bandeira: ${english?.name_pt}`"
