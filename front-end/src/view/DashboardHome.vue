@@ -2,13 +2,10 @@
 import ECCard from '@/components/ECCard/ECCard.vue';
 import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
 import { useCurrentUser } from '@/composables/useCurrentUser';
-import { useLanguages } from '@/composables/useLanguages';
-import { MESSAGES } from '@/utils/message';
 import { CONTENTS } from '@/utils/contents';
 import { SKILLS } from '@/utils/skills';
 
 const { data: user } = useCurrentUser();
-const { languages, isPending, isError } = useLanguages();
 </script>
 
 <template>
@@ -21,7 +18,7 @@ const { languages, isPending, isError } = useLanguages();
       Bem-vindo de volta, <strong>{{ user.name }}</strong>.
     </p>
 
-    <ul v-if="user" class="mt-6 grid gap-4 sm:grid-cols-3">
+    <ul v-if="user" class="mt-6 grid gap-4 sm:grid-cols-2">
       <li>
         <ECCard width="100%">
           <template #body>
@@ -82,42 +79,6 @@ const { languages, isPending, isError } = useLanguages();
           :description="content.description"
           :icon="content.icon"
         />
-      </li>
-    </ul>
-
-    <h2 class="mt-10 text-xl font-bold">
-      Trocar de idioma
-    </h2>
-
-    <p v-if="isPending" class="mt-4">
-      {{ MESSAGES.pending.languagesLoad }}
-    </p>
-
-    <p v-else-if="isError" class="mt-4 text-red-700" role="alert">
-      {{ MESSAGES.error.languagesLoad }}
-    </p>
-
-    <ul v-else class="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-      <li v-for="language in languages" :key="language.code">
-        <router-link
-          :to="{ name: 'escolher-nivel', params: { id: language.id } }"
-          class="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-        >
-          <img
-            :src="`https://flagcdn.com/${language.prefix.toLowerCase()}.svg`"
-            :alt="`Bandeira: ${language.name_pt}`"
-            class="h-8 w-12 rounded-sm object-cover"
-          >
-
-          <div>
-            <p class="font-bold capitalize">
-              {{ language.name_pt }}
-            </p>
-            <p class="text-quaternary">
-              {{ language.countries.length }} {{ language.countries.length === 1 ? 'país' : 'países' }}
-            </p>
-          </div>
-        </router-link>
       </li>
     </ul>
   </section>

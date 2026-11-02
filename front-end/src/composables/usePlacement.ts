@@ -14,6 +14,7 @@ export function usePlacementQuestions(languageId: Ref<string>, level: Ref<Level>
         undefined,
         { signal },
       ),
+    enabled: computed(() => !!languageId.value),
     gcTime: 0,
     staleTime: Infinity,
     retry: false,

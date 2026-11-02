@@ -35,16 +35,22 @@ class AuthService:
 
         return UserOut.model_validate(user), create_access_token(user.id)
 
-    async def get_current_user(self, token: str | None) -> UserOut:
+    async def find_current_user(self, token: str | None) -> UserOut | None:
         if not token:
-            raise UnauthorizedError()
+            return None
 
         user_id = decode_access_token(token)
         if user_id is None:
-            raise UnauthorizedError()
+            return None
 
         user = await self._user_repository.get(user_id)
         if user is None:
-            raise UnauthorizedError()
+            return None
 
         return UserOut.model_validate(user)
+
+    async def get_current_user(self, token: str | None) -> UserOut:
+        user = await self.find_current_user(token)
+        if user is None:
+            raise UnauthorizedError()
+        return user

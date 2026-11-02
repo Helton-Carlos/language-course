@@ -11,6 +11,8 @@ BACK_END_DIR = Path(__file__).resolve().parents[2]
 
 DEFAULT_CORS_ORIGINS = "http://localhost:3001,http://127.0.0.1:3001"
 
+APP_LANGUAGE_CODE = "en-US"
+
 
 def _split(value: str) -> list[str]:
     return [item.strip() for item in value.split(",") if item.strip()]

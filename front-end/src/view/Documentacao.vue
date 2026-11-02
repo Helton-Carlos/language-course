@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import { useLanguages } from '@/composables/useLanguages';
 
 import ECButton from '@/components/ECButton/ECButton.vue';
 
@@ -10,16 +9,15 @@ interface DocStep {
 }
 
 const router = useRouter();
-const { languages } = useLanguages();
 
-function goHome() {
-  router.push({ name: 'index' });
+function goStart() {
+  router.push({ name: 'login' });
 }
 
 const steps: DocStep[] = [
   {
-    title: 'Escolha o idioma',
-    description: 'Na página inicial, veja os idiomas disponíveis e clique no que você quer aprender.',
+    title: 'Faça o teste de nível',
+    description: 'Marque o seu nível ou responda ao teste. Assim o conteúdo começa no ponto certo para você.',
   },
   {
     title: 'Defina um objetivo',
@@ -70,8 +68,8 @@ const routine: DocStep[] = [
 
 const tips: string[] = [
   'Não tenha medo de errar. Todo mundo que aprende um idioma comete erros no começo.',
-  'Compare o novo idioma com o português para entender semelhanças e diferenças.',
-  'Cerque-se do idioma: mude o idioma do celular, assista séries e siga perfis na língua que você estuda.',
+  'Compare o inglês com o português para entender semelhanças e diferenças.',
+  'Cerque-se do idioma: mude o idioma do celular, assista séries e siga perfis em inglês.',
   'Defina metas pequenas, como aprender 5 palavras por dia, e comemore cada conquista.',
   'Seja constante. Faltar um dia não é problema, o importante é voltar no dia seguinte.',
 ];
@@ -81,10 +79,10 @@ const tips: string[] = [
   <div class="container my-8 flex flex-col gap-8 lg:my-16">
     <div>
       <h1 class="text-4xl font-bold lg:text-6xl">
-        Como aprender um idioma
+        Como aprender inglês
       </h1>
       <p class="my-4 text-xl lg:text-2xl">
-        O Language Course ajuda você a aprender novos idiomas de forma simples e prática.
+        O Language Course ajuda você a aprender inglês de forma simples e prática.
         Veja abaixo como começar e como manter o ritmo.
       </p>
     </div>
@@ -108,26 +106,6 @@ const tips: string[] = [
           </p>
         </li>
       </ol>
-    </section>
-
-    <section class="flex flex-col gap-4">
-      <h2 class="text-3xl font-bold">
-        Idiomas disponíveis
-      </h2>
-      <ul class="flex flex-wrap gap-4 rounded-2xl bg-white p-4 shadow-sm">
-        <li
-          v-for="language in languages"
-          :key="language.code"
-          class="flex items-center gap-3"
-        >
-          <img
-            :src="`https://flagcdn.com/${language.prefix.toLowerCase()}.svg`"
-            :alt="`Bandeira: ${language.name_pt}`"
-            class="h-5 w-8 rounded-sm object-cover"
-          />
-          <span class="capitalize">{{ language.name_pt }}</span>
-        </li>
-      </ul>
     </section>
 
     <section class="flex flex-col gap-4">
@@ -183,8 +161,8 @@ const tips: string[] = [
     </section>
 
     <div class="flex">
-      <ECButton color="secondary" @onClick="goHome">
-        Escolher meu idioma
+      <ECButton color="secondary" @on-click="goStart">
+        Começar agora
       </ECButton>
     </div>
   </div>

@@ -1,37 +1,35 @@
 <script lang="ts" setup>
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
-import { computed, ref } from 'vue'
-import ECButton from '@/components/ECButton/ECButton.vue';
+import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useLanguages } from '@/composables/useLanguages'
-import { useSaveProfile } from '@/composables/useProfile'
-import { LEVELS, isLevel, type Level } from '@/utils/levels'
+import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECButton from '@/components/ECButton/ECButton.vue';
+import { hasCompleteProfile, useCurrentUser } from '@/composables/useCurrentUser';
+import { useEnglish } from '@/composables/useEnglish';
+import { useSaveProfile } from '@/composables/useProfile';
+import { LEVELS, isLevel, type Level } from '@/utils/levels';
 
-const route = useRoute()
-const router = useRouter()
-const { languages } = useLanguages()
-const { mutate: saveProfile, isPending: isSaving } = useSaveProfile()
+const route = useRoute();
+const router = useRouter();
+const { data: user } = useCurrentUser();
+const { english } = useEnglish();
+const { mutate: saveProfile, isPending: isSaving } = useSaveProfile();
 
-const queryLevel = route.query.level
-const selectedLevel = ref<Level>(isLevel(queryLevel) ? queryLevel : LEVELS[0])
+const queryLevel = route.query.level;
+const selectedLevel = ref<Level>(isLevel(queryLevel) ? queryLevel : LEVELS[0]);
 
-const language = computed(() => {
-  const id = String(route.params.id)
-
-  return languages.value.find((item) => item.id === id)
-})
+const backTo = computed(() =>
+  user.value && hasCompleteProfile(user.value) ? { name: 'dashboard' } : { name: 'index' },
+);
 
 function goToTest() {
-  router.push({ name: 'teste-nivel', params: { id: String(route.params.id) } })
+  router.push({ name: 'dashboard-teste-nivel' });
 }
 
 function confirmLevel() {
-  if (!language.value) return
-
   saveProfile(
-    { language_id: language.value.id, level: selectedLevel.value },
+    { level: selectedLevel.value },
     { onSuccess: () => router.push({ name: 'dashboard' }) },
-  )
+  );
 }
 </script>
 
@@ -39,17 +37,17 @@ function confirmLevel() {
   <div class="grid gap-10 lg:grid-cols-2">
     <div>
       <h2 class="text-4xl lg:text-5xl">
-        Otima escolha o
+        Ótima escolha o
         <span class="relative inline-block">
-          <span class="uppercase font-bold">{{ language?.name_pt }}</span>,
+          <span class="uppercase font-bold">{{ english?.name_pt }}</span>,
           <img
             src="/icon-risk.svg"
             alt="risco ilustrativo"
             class="pointer-events-none absolute bottom-full left-full w-[1.1em] translate-y-[0.15em]"
           >
         </span>
-        <br>é utilizado em diversos paises
-        <br>na américa do sul.
+        <br>é utilizado em diversos países
+        <br>ao redor do mundo.
       </h2>
 
       <p class="my-4 text-2xl">
@@ -77,7 +75,7 @@ function confirmLevel() {
           </button>
         </div>
 
-        <ECButton color="border" :disabled="!language || isSaving" @on-click="confirmLevel">
+        <ECButton color="border" :disabled="isSaving" @on-click="confirmLevel">
           Avançar
         </ECButton>
       </div>
@@ -87,7 +85,7 @@ function confirmLevel() {
       </p>
 
       <div class="mt-2 flex gap-4">
-        <ECBackButton variant="button" :to="{ name: 'escolher-idioma' }" />
+        <ECBackButton variant="button" :to="backTo" />
 
         <ECButton color="secondary" @on-click="goToTest">
           Teste
@@ -97,13 +95,13 @@ function confirmLevel() {
 
     <figure class="w-full max-w-sm justify-self-end rounded-lg bg-[#d9d9d9] p-5">
       <img
-        :src="`https://flagcdn.com/${language?.prefix?.toLowerCase()}.svg`"
-        :alt="`Bandeira: ${language?.name_pt}`"
+        :src="`https://flagcdn.com/${english?.prefix?.toLowerCase()}.svg`"
+        :alt="`Bandeira: ${english?.name_pt}`"
         class="aspect-3/2 w-full object-cover"
       />
 
       <figcaption class="mt-3 text-xs">
-        {{ language?.name_pt }}, {{ language?.prefix }}
+        {{ english?.name_pt }}, {{ english?.prefix }}
       </figcaption>
     </figure>
   </div>

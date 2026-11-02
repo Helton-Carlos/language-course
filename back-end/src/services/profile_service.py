@@ -1,5 +1,6 @@
 from uuid import UUID
 
+from core.config import APP_LANGUAGE_CODE
 from core.exceptions import LanguageNotFoundError, UserNotFoundError
 from repositories.language_repository import LanguageRepository
 from repositories.user_repository import UserRepository
@@ -16,7 +17,8 @@ class ProfileService:
         self._language_repository = language_repository
 
     async def update_profile(self, user_id: UUID, data: ProfileUpdate) -> UserOut:
-        if await self._language_repository.get(data.language_id) is None:
+        language = await self._language_repository.get_by_code(APP_LANGUAGE_CODE)
+        if language is None:
             raise LanguageNotFoundError()
 
         user = await self._user_repository.get(user_id)
@@ -25,6 +27,6 @@ class ProfileService:
 
         user = await self._user_repository.update(
             user,
-            {"language_id": data.language_id, "level": data.level},
+            {"language_id": language.id, "level": data.level},
         )
         return UserOut.model_validate(user)

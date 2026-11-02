@@ -36,40 +36,24 @@ const routes: RouteRecordRaw[] = [
     meta: { guestOnly: true },
   },
   {
-    path: '/idiomas',
-    name: 'idiomas',
-    component: () => import('@/view/Languages.vue'),
-  },
-  {
     path: '/dashboard',
     component: () => import('@/view/Dashboard.vue'),
     meta: { requiresAuth: true },
     children: [
       {
-        path: 'escolher-idioma',
-        name: 'escolher-idioma',
-        component: () => import('@/view/ChooseLanguage.vue'),
-      },
-      {
-        path: 'escolher-idioma/:id/nivel',
-        name: 'escolher-nivel',
+        path: 'nivel',
+        name: 'dashboard-nivel',
         component: () => import('@/view/Init.vue'),
       },
       {
-        path: 'escolher-idioma/:id/teste',
-        name: 'teste-nivel',
+        path: 'nivel/teste',
+        name: 'dashboard-teste-nivel',
         component: () => import('@/view/PlacementTest.vue'),
       },
       {
         path: '',
         name: 'dashboard',
         component: () => import('@/view/DashboardHome.vue'),
-        meta: PROFILE_REQUIRED,
-      },
-      {
-        path: 'idiomas',
-        name: 'dashboard-idiomas',
-        component: () => import('@/view/Languages.vue'),
         meta: PROFILE_REQUIRED,
       },
       {
@@ -132,13 +116,13 @@ router.beforeEach(async (to) => {
   const requiresProfile = to.matched.some((record) => record.meta.requiresProfile);
   const guestOnly = to.matched.some((record) => record.meta.guestOnly);
 
-  if (!requiresAuth && !guestOnly) return true;
+  if (!requiresAuth && !requiresProfile && !guestOnly) return true;
 
   const user = await queryClient.fetchQuery(currentUserQuery).catch(() => null);
 
   if (requiresAuth && !user) return { name: 'login' };
   if (guestOnly && user) return { name: 'dashboard' };
-  if (requiresProfile && user && !hasCompleteProfile(user)) return { name: 'escolher-idioma' };
+  if (requiresProfile && user && !hasCompleteProfile(user)) return { name: 'dashboard-nivel' };
 
   return true;
 });

@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Response, status
+from fastapi import APIRouter, Request, Response, status
 
 from core.config import get_auth_settings
-from routes.dependencies import AuthServiceDep, CurrentUserDep
+from routes.dependencies import AuthServiceDep
 from schemas.auth import LoginRequest, RegisterRequest
 from schemas.user import UserOut
 
@@ -41,6 +41,7 @@ async def logout(response: Response) -> None:
     )
 
 
-@auth_routes.get("/me", response_model=UserOut)
-async def me(current_user: CurrentUserDep) -> UserOut:
-    return current_user
+@auth_routes.get("/me", response_model=UserOut | None)
+async def me(request: Request, service: AuthServiceDep) -> UserOut | None:
+    token = request.cookies.get(get_auth_settings().cookie_name)
+    return await service.find_current_user(token)

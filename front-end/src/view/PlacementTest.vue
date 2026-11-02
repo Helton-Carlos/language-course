@@ -1,20 +1,18 @@
 <script lang="ts" setup>
 import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import { computed, reactive, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import ECButton from '@/components/ECButton/ECButton.vue';
-import { useLanguages } from '@/composables/useLanguages';
+import { useEnglish } from '@/composables/useEnglish';
 import { usePlacementQuestions, useSubmitPlacement } from '@/composables/usePlacement';
 import { useSaveProfile } from '@/composables/useProfile';
 import { LEVELS, type Level } from '@/utils/levels';
 import { MESSAGES } from '@/utils/message';
 
-const route = useRoute();
 const router = useRouter();
 
-const languageId = computed(() => String(route.params.id));
-const { languages } = useLanguages();
-const language = computed(() => languages.value.find((item) => item.id === languageId.value));
+const { english } = useEnglish();
+const languageId = computed(() => english.value?.id ?? '');
 
 const level = ref<Level>(LEVELS[0]);
 const finalLevel = ref<Level | null>(null);
@@ -66,15 +64,14 @@ function confirm() {
   if (!finalLevel.value) return;
 
   saveProfile(
-    { language_id: languageId.value, level: finalLevel.value },
+    { level: finalLevel.value },
     { onSuccess: () => router.push({ name: 'dashboard' }) },
   );
 }
 
 function chooseAnotherLevel() {
   router.push({
-    name: 'escolher-nivel',
-    params: { id: languageId.value },
+    name: 'dashboard-nivel',
     query: finalLevel.value ? { level: finalLevel.value } : {},
   });
 }
@@ -88,10 +85,10 @@ function restart() {
 
 <template>
   <div class="max-w-3xl">
-    <ECBackButton :to="{ name: 'escolher-nivel', params: { id: languageId } }" />
+    <ECBackButton :to="{ name: 'dashboard-nivel' }" />
 
     <h1 class="mt-4 text-3xl font-bold lg:text-4xl">
-      Teste de nível<template v-if="language">: <span class="capitalize">{{ language.name_pt }}</span></template>
+      Teste de nível<template v-if="english">: <span class="capitalize">{{ english.name_pt }}</span></template>
     </h1>
 
     <section v-if="finalLevel" class="mt-8 rounded-2xl bg-white p-6 shadow-sm lg:p-8" aria-live="polite">

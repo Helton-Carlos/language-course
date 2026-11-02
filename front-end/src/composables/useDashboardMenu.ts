@@ -1,34 +1,16 @@
 import { computed } from 'vue';
 import { hasCompleteProfile, useCurrentUser } from '@/composables/useCurrentUser';
-import { useLanguages } from '@/composables/useLanguages';
 import { CONTENTS } from '@/utils/contents';
 import { SKILLS } from '@/utils/skills';
 import type { ECSidebarItem } from '@/components/ECSidebar/Type';
 
-function capitalize(text: string): string {
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
 export function useDashboardMenu() {
-  const { languages } = useLanguages();
   const { data: user } = useCurrentUser();
 
-  const profileComplete = computed(() => !user.value || hasCompleteProfile(user.value));
-
-  const languagesItem = computed<ECSidebarItem>(() => ({
-    key: 'languages',
-    label: 'Idiomas',
-    to: { name: profileComplete.value ? 'dashboard-idiomas' : 'escolher-idioma' },
-    children: languages.value.map((language) => ({
-      key: `language-${language.id}`,
-      label: capitalize(language.name_pt),
-      to: { name: 'escolher-nivel', params: { id: language.id } },
-      icon: `https://flagcdn.com/${language.prefix.toLowerCase()}.svg`,
-    })),
-  }));
-
   return computed<ECSidebarItem[]>(() => {
-    if (!profileComplete.value) return [languagesItem.value];
+    if (user.value && !hasCompleteProfile(user.value)) {
+      return [{ key: 'level', label: 'Definir nível', to: { name: 'dashboard-nivel' } }];
+    }
 
     return [
       {
@@ -60,7 +42,6 @@ export function useDashboardMenu() {
         label: 'Documentação',
         to: { name: 'dashboard-documentacao' },
       },
-      languagesItem.value,
     ];
   });
 }

@@ -32,6 +32,5 @@ export interface LoginPayload {
 }
 
 export interface ProfilePayload {
-  language_id: string;
   level: Level;
 }

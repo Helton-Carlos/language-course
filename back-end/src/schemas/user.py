@@ -28,7 +28,6 @@ class UserUpdate(APIModel):
 
 
 class ProfileUpdate(APIModel):
-    language_id: UUID
     level: Level
 
 
