@@ -61,7 +61,7 @@ import ECFooter from '@/layouts/ECFooter.vue'
           class="aspect-3/2 w-full object-cover"
         />
 
-        <div class="absolute inset-0 flex items-center justify-center bg-primary p-4 text-center text-tertiary text-2xl font-bold opacity-0 transition-opacity group-hover:opacity-100 lg:text-4xl">
+        <div class="absolute inset-0 flex items-center justify-center bg-primary p-4 text-center text-tertiary text-2x uppercase font-bold opacity-0 transition-opacity group-hover:opacity-100 lg:text-4xl">
           {{ country.name }}
         </div>
       </div>
