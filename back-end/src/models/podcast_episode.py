@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import CheckConstraint, ForeignKey, Index, SmallInteger, String, Uuid, func
+from sqlalchemy import CheckConstraint, Index, SmallInteger, String, Uuid, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from models.base import Base
@@ -19,10 +19,7 @@ class PodcastEpisode(Base):
         default=uuid.uuid4,
         server_default=func.gen_random_uuid(),
     )
-    language_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid,
-        ForeignKey("languages.id", ondelete="CASCADE"),
-    )
+    language_id: Mapped[uuid.UUID] = mapped_column(Uuid)
     title: Mapped[str] = mapped_column(String(200))
     youtube_id: Mapped[str] = mapped_column(String(11))
     position: Mapped[int] = mapped_column(SmallInteger, server_default="0")

@@ -48,10 +48,6 @@ class LanguageNotFoundError(NotFoundError):
     detail = "Idioma não encontrado"
 
 
-class LanguageCodeAlreadyExistsError(ConflictError):
-    detail = "Já existe um idioma com esse código"
-
-
 class UserNotFoundError(NotFoundError):
     detail = "Usuário não encontrado"
 

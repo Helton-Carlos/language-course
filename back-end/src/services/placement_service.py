@@ -1,12 +1,8 @@
 import random
 from uuid import UUID
 
-from core.exceptions import (
-    InvalidPlacementAnswersError,
-    LanguageNotFoundError,
-    PlacementTestUnavailableError,
-)
-from repositories.language_repository import LanguageRepository
+from core.english import ensure_english
+from core.exceptions import InvalidPlacementAnswersError, PlacementTestUnavailableError
 from repositories.placement_repository import PlacementRepository
 from schemas.level import LEVELS, Level
 from schemas.placement import (
@@ -22,16 +18,11 @@ PASS_DENOMINATOR = 3
 
 
 class PlacementService:
-    def __init__(
-        self,
-        placement_repository: PlacementRepository,
-        language_repository: LanguageRepository,
-    ) -> None:
+    def __init__(self, placement_repository: PlacementRepository) -> None:
         self._placement_repository = placement_repository
-        self._language_repository = language_repository
 
     async def get_test(self, language_id: UUID, level: Level) -> PlacementTestOut:
-        await self._ensure_language(language_id)
+        ensure_english(language_id)
 
         questions = list(await self._placement_repository.list_by_level(language_id, level))
         if not questions:
@@ -57,7 +48,7 @@ class PlacementService:
         level: Level,
         submission: PlacementSubmission,
     ) -> PlacementResultOut:
-        await self._ensure_language(language_id)
+        ensure_english(language_id)
 
         questions = await self._placement_repository.list_by_level(language_id, level)
         if not questions:
@@ -99,10 +90,6 @@ class PlacementService:
             next_level=next_level,
             result_level=result_level,
         )
-
-    async def _ensure_language(self, language_id: UUID) -> None:
-        if await self._language_repository.get(language_id) is None:
-            raise LanguageNotFoundError()
 
     @staticmethod
     def _shuffled_options(options: list[str]) -> list[PlacementOptionOut]:

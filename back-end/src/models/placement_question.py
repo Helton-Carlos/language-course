@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import CheckConstraint, ForeignKey, Index, SmallInteger, String, Text, Uuid, func
+from sqlalchemy import CheckConstraint, Index, SmallInteger, String, Text, Uuid, func
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -22,10 +22,7 @@ class PlacementQuestion(Base):
         default=uuid.uuid4,
         server_default=func.gen_random_uuid(),
     )
-    language_id: Mapped[uuid.UUID] = mapped_column(
-        Uuid,
-        ForeignKey("languages.id", ondelete="CASCADE"),
-    )
+    language_id: Mapped[uuid.UUID] = mapped_column(Uuid)
     level: Mapped[str] = mapped_column(String(2))
     prompt: Mapped[str] = mapped_column(Text)
     options: Mapped[list[str]] = mapped_column(ARRAY(Text))

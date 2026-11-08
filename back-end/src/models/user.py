@@ -1,10 +1,10 @@
 import uuid
 
-from sqlalchemy import CheckConstraint, ForeignKey, String, Uuid, func
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import CheckConstraint, String, Uuid, func
+from sqlalchemy.orm import Mapped, mapped_column
 
+from core.english import ENGLISH, ENGLISH_ID
 from models.base import Base
-from models.language import Language
 
 
 class User(Base):
@@ -28,10 +28,9 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True)
     role: Mapped[str] = mapped_column(String(20), server_default="user")
     password_hash: Mapped[str] = mapped_column(String(255))
-    language_id: Mapped[uuid.UUID | None] = mapped_column(
-        Uuid,
-        ForeignKey("languages.id", ondelete="SET NULL"),
-    )
+    language_id: Mapped[uuid.UUID | None] = mapped_column(Uuid)
     level: Mapped[str | None] = mapped_column(String(2))
 
-    language: Mapped[Language | None] = relationship(lazy="joined")
+    @property
+    def language(self) -> dict | None:
+        return ENGLISH if self.language_id == ENGLISH_ID else None

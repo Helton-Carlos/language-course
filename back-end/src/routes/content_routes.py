@@ -5,7 +5,6 @@ from fastapi import APIRouter, Depends
 
 from core.database import SessionDep
 from repositories.content_repository import ContentRepository
-from repositories.language_repository import LanguageRepository
 from routes.dependencies import CurrentUserDep
 from schemas.content import PhraseOut, PodcastEpisodeOut
 from services.content_service import ContentService
@@ -14,7 +13,7 @@ content_routes = APIRouter(tags=["Content"])
 
 
 def get_content_service(session: SessionDep) -> ContentService:
-    return ContentService(ContentRepository(session), LanguageRepository(session))
+    return ContentService(ContentRepository(session))
 
 
 ContentServiceDep = Annotated[ContentService, Depends(get_content_service)]

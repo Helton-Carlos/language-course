@@ -4,7 +4,6 @@ from uuid import UUID
 from fastapi import APIRouter, Depends
 
 from core.database import SessionDep
-from repositories.language_repository import LanguageRepository
 from repositories.placement_repository import PlacementRepository
 from routes.dependencies import CurrentUserDep
 from schemas.level import Level
@@ -15,7 +14,7 @@ placement_routes = APIRouter(tags=["Placement"])
 
 
 def get_placement_service(session: SessionDep) -> PlacementService:
-    return PlacementService(PlacementRepository(session), LanguageRepository(session))
+    return PlacementService(PlacementRepository(session))
 
 
 PlacementServiceDep = Annotated[PlacementService, Depends(get_placement_service)]
