@@ -62,12 +62,30 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/view/Documentacao.vue'),
         meta: PROFILE_REQUIRED,
       },
-      ...SKILLS.map((skill): RouteRecordRaw => ({
+      ...SKILLS.filter((skill) => skill.key !== 'ler').map((skill): RouteRecordRaw => ({
         path: skill.path,
         name: skill.routeName,
         component: () => import('@/view/SkillPage.vue'),
         meta: { ...PROFILE_REQUIRED, skill: skill.key },
       })),
+      {
+        path: 'ler',
+        name: 'dashboard-ler',
+        component: () => import('@/view/ReadingThemesPage.vue'),
+        meta: PROFILE_REQUIRED,
+      },
+      {
+        path: 'ler/:tema',
+        name: 'dashboard-ler-tema',
+        component: () => import('@/view/ReadingSituationsPage.vue'),
+        meta: PROFILE_REQUIRED,
+      },
+      {
+        path: 'ler/:tema/:situacao',
+        name: 'dashboard-ler-texto',
+        component: () => import('@/view/ReadingTextPage.vue'),
+        meta: PROFILE_REQUIRED,
+      },
       {
         path: 'livros',
         name: 'dashboard-livros',

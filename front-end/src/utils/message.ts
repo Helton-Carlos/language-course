@@ -6,6 +6,7 @@ export const MESSAGES = {
     invalidValue: 'Valor inválido',
     languagesLoad: 'Não foi possível carregar os idiomas.',
     placementLoad: 'Não foi possível carregar o teste.',
+    readingLoad: 'Não foi possível carregar os textos.',
     podcastsLoad: 'Não foi possível carregar os podcasts.',
     phrasesLoad: 'Não foi possível carregar as frases.',
     request: (status: number, method: string, path: string) =>
@@ -33,6 +34,7 @@ export const MESSAGES = {
     profile: 'Salvando idioma e nível...',
     languagesLoad: 'Carregando idiomas...',
     placementLoad: 'Carregando perguntas...',
+    readingLoad: 'Carregando textos...',
     accountDelete: 'Cancelando conta...',
     podcastsLoad: 'Carregando podcasts...',
     phrasesLoad: 'Carregando frases...',
