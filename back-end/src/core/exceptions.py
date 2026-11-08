@@ -44,6 +44,10 @@ class PlacementTestUnavailableError(NotFoundError):
     detail = "Teste de nível indisponível para este idioma e nível"
 
 
+class ReadingTextNotFoundError(NotFoundError):
+    detail = "Texto de leitura não encontrado"
+
+
 class LanguageNotFoundError(NotFoundError):
     detail = "Idioma não encontrado"
 
