@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 import ECHeader from '@/layouts/ECHeader.vue';
 import ECToaster from '@/components/ECToast/ECToaster.vue';
 
+const route = useRoute();
 </script>
 
 <template>
@@ -10,7 +11,11 @@ import ECToaster from '@/components/ECToast/ECToaster.vue';
     <ECHeader />
 
     <div>
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <Transition name="route">
+          <component :is="Component" :key="route.matched[0]?.path ?? route.path" />
+        </Transition>
+      </RouterView>
     </div>
   </div>
 

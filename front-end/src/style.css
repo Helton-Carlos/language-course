@@ -55,3 +55,18 @@
     @apply cursor-not-allowed opacity-50 bg-gray-300 text-gray-500 hover:bg-gray-300;
   }
 }
+
+.route-enter-active {
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.route-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-enter-active {
+    transition: none;
+  }
+}

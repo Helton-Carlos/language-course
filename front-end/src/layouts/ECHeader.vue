@@ -21,21 +21,6 @@ function signOut() {
         <img src="/logo.svg">
       </router-link>
 
-      <nav v-if="!user">
-        <ul class="hidden md:flex md:items-center md:gap-4">
-          <li>
-            <router-link class="btn btn-primary" to="/documentacao">
-              Início
-            </router-link>
-          </li>
-          <li>
-            <router-link class="btn btn-primary" to="/documentacao">
-              Sobre
-            </router-link>
-          </li>
-        </ul>
-      </nav>
-
       <div class="flex gap-4">
         <router-link v-if="!user" class="btn btn-border" to="/documentacao">
           Documentação

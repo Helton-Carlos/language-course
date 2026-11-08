@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 import ECSidebar from '@/components/ECSidebar/ECSidebar.vue';
 import ECFooter from '@/layouts/ECFooter.vue';
 import { useDashboardMenu } from '@/composables/useDashboardMenu';
 
+const route = useRoute();
 const menu = useDashboardMenu();
 </script>
 
@@ -14,7 +15,11 @@ const menu = useDashboardMenu();
         <ECSidebar title="Menu" :items="menu" />
 
         <main class="min-w-0 self-start">
-          <RouterView />
+          <RouterView v-slot="{ Component }">
+            <Transition name="route">
+              <component :is="Component" :key="route.path" />
+            </Transition>
+          </RouterView>
         </main>
       </div>
     </div>
