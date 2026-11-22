@@ -61,8 +61,7 @@ class PlacementService:
             raise InvalidPlacementAnswersError()
 
         correct = sum(
-            1 for question_id, index in answers.items()
-            if by_id[question_id].correct_index == index
+            1 for question_id, index in answers.items() if by_id[question_id].correct_index == index
         )
         total = len(by_id)
         passed = correct * PASS_DENOMINATOR >= total * PASS_NUMERATOR

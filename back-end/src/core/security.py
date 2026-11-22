@@ -40,5 +40,5 @@ def decode_access_token(token: str) -> UUID | None:
             options={"require": ["exp", "sub"]},
         )
         return UUID(payload["sub"])
-    except (jwt.PyJWTError, ValueError, TypeError):
+    except jwt.PyJWTError, ValueError, TypeError:
         return None

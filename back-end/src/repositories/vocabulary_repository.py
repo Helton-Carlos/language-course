@@ -78,7 +78,9 @@ class VocabularyRepository:
         await self._session.delete(item)
         await self._session.commit()
 
-    async def list_due(self, user_id: UUID, moment: datetime, limit: int) -> Sequence[VocabularyItem]:
+    async def list_due(
+        self, user_id: UUID, moment: datetime, limit: int
+    ) -> Sequence[VocabularyItem]:
         result = await self._session.scalars(
             select(VocabularyItem)
             .where(

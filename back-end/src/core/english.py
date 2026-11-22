@@ -11,7 +11,14 @@ ENGLISH = {
     "name_pt": "inglês",
     "prefix": "US",
     "description": "Idioma mais usado nos negócios, na ciência, no turismo e na internet. É a principal língua de comunicação entre pessoas de países diferentes.",
-    "countries": ["Estados Unidos", "Reino Unido", "Canadá", "Austrália", "Nova Zelândia", "Irlanda"],
+    "countries": [
+        "Estados Unidos",
+        "Reino Unido",
+        "Canadá",
+        "Austrália",
+        "Nova Zelândia",
+        "Irlanda",
+    ],
 }
 
 

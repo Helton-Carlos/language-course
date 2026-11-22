@@ -48,7 +48,7 @@ class DictionaryService:
             if int(payload.get("responseStatus", 0)) != 200:
                 return []
             matches = payload.get("matches") or []
-        except (httpx.HTTPError, ValueError, TypeError):
+        except httpx.HTTPError, ValueError, TypeError:
             return []
         scores: dict[str, float] = {}
         has_digit = bool(re.search(r"\d", term))
@@ -56,7 +56,7 @@ class DictionaryService:
             try:
                 text = " ".join(str(match["translation"]).split()).strip(" .,;")
                 score = float(match["match"])
-            except (KeyError, TypeError, ValueError):
+            except KeyError, TypeError, ValueError:
                 continue
             if score < MIN_MATCH_SCORE or not text or len(text) > 100:
                 continue
@@ -68,6 +68,7 @@ class DictionaryService:
             scores[key] = scores.get(key, 0.0) + score
         ranked = sorted(scores, key=lambda key: scores[key], reverse=True)
         return ranked[:MAX_SUGGESTIONS]
+
     @staticmethod
     async def _define(client: httpx.AsyncClient, term: str) -> tuple[str | None, str | None]:
         if " " in term:
@@ -90,6 +91,6 @@ class DictionaryService:
                 ),
                 None,
             )
-        except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError):
+        except httpx.HTTPError, ValueError, KeyError, IndexError, TypeError:
             return None, None
         return definition, phonetic
