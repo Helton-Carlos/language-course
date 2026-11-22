@@ -9,6 +9,7 @@
   --color-gray: #ebebeb;
 
   --color-primary-hover: color-mix(in oklab, #f9cf45, black 12%);
+  --color-primary-light: color-mix(in oklab, #f9cf45, white 70%);
   --color-secondary-hover: color-mix(in oklab, #991c1c, black 20%);
 }
 
@@ -35,6 +36,9 @@
 }
 
 @layer components {
+  .dashboard-content :is(h1, h2) {
+    @apply w-fit rounded-md bg-primary px-3 py-1;
+  }
   .btn {
     @apply px-8 py-2 rounded-md font-medium transition-colors uppercase cursor-pointer;
   }

@@ -42,7 +42,7 @@ const maxStatusCount = computed(() =>
           <ECCard width="100%">
             <template #body>
               <p class="flex items-center gap-2">
-                <Flame class="h-5 w-5 text-secondary" aria-hidden="true" />
+                <Flame class="h-5 w-5 text-primary" aria-hidden="true" />
                 Sequência
               </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">
@@ -55,7 +55,7 @@ const maxStatusCount = computed(() =>
           <ECCard width="100%">
             <template #body>
               <p class="flex items-center gap-2">
-                <CircleCheck class="h-5 w-5 text-secondary" aria-hidden="true" />
+                <CircleCheck class="h-5 w-5 text-primary" aria-hidden="true" />
                 Palavras conhecidas
               </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">
@@ -68,7 +68,7 @@ const maxStatusCount = computed(() =>
           <ECCard width="100%">
             <template #body>
               <p class="flex items-center gap-2">
-                <Bookmark class="h-5 w-5 text-secondary" aria-hidden="true" />
+                <Bookmark class="h-5 w-5 text-primary" aria-hidden="true" />
                 Palavras salvas
               </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">
@@ -81,7 +81,7 @@ const maxStatusCount = computed(() =>
           <ECCard width="100%">
             <template #body>
               <p class="flex items-center gap-2">
-                <BookOpen class="h-5 w-5 text-secondary" aria-hidden="true" />
+                <BookOpen class="h-5 w-5 text-primary" aria-hidden="true" />
                 Palavras lidas
               </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">

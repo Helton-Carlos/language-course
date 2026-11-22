@@ -50,7 +50,7 @@ watch(() => route.fullPath, close);
         </h2>
         <button
           type="button"
-          class="cursor-pointer rounded-md p-1 text-quaternary transition-colors hover:bg-gray lg:hidden"
+          class="cursor-pointer rounded-md p-1 text-quaternary transition-colors hover:bg-primary-light lg:hidden"
           aria-label="Fechar menu"
           @click="close"
         >

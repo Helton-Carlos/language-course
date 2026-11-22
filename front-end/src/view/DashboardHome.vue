@@ -67,7 +67,7 @@ const goalReached = computed<boolean>(() => goalPercent.value >= 100);
     <section v-if="stats" class="mt-4 rounded-2xl bg-white p-5 shadow-sm" aria-labelledby="daily-goal-title">
       <div class="flex items-center justify-between gap-4">
         <h2 id="daily-goal-title" class="flex items-center gap-2 text-xl font-bold">
-          <component :is="goalReached ? CircleCheck : Target" class="h-6 w-6 text-secondary" aria-hidden="true" />
+          <component :is="goalReached ? CircleCheck : Target" class="h-6 w-6 text-primary" aria-hidden="true" />
           Meta do dia
         </h2>
         <p class="text-quaternary">
@@ -92,7 +92,7 @@ const goalReached = computed<boolean>(() => goalPercent.value >= 100);
         <ECCard width="100%">
           <template #body>
             <p class="flex items-center gap-2">
-              <Flame class="h-5 w-5 text-secondary" aria-hidden="true" />
+              <Flame class="h-5 w-5 text-primary" aria-hidden="true" />
               Sequência
             </p>
             <p class="mt-1 text-2xl font-bold text-tertiary">
@@ -105,7 +105,7 @@ const goalReached = computed<boolean>(() => goalPercent.value >= 100);
         <ECCard width="100%">
           <template #body>
             <p class="flex items-center gap-2">
-              <CircleCheck class="h-5 w-5 text-secondary" aria-hidden="true" />
+              <CircleCheck class="h-5 w-5 text-primary" aria-hidden="true" />
               Palavras conhecidas
             </p>
             <p class="mt-1 text-2xl font-bold text-tertiary">
@@ -119,7 +119,7 @@ const goalReached = computed<boolean>(() => goalPercent.value >= 100);
           <ECCard width="100%">
             <template #body>
               <p class="flex items-center gap-2">
-                <Repeat class="h-5 w-5 text-secondary" aria-hidden="true" />
+                <Repeat class="h-5 w-5 text-primary" aria-hidden="true" />
                 Para revisar
               </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">

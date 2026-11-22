@@ -12,7 +12,7 @@ defineProps<ECFeatureCard>();
     <component
       :is="icon"
       v-if="icon"
-      class="h-8 w-8 text-secondary"
+      class="h-8 w-8 text-primary"
       aria-hidden="true"
     />
 

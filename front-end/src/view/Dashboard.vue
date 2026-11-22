@@ -14,7 +14,7 @@ const menu = useDashboardMenu();
       <div class="container my-8 grid gap-8 lg:my-16 lg:grid-cols-[16rem_1fr]">
         <ECSidebar title="Menu" :items="menu" />
 
-        <main class="min-w-0 self-start">
+        <main class="dashboard-content min-w-0 self-start">
           <RouterView v-slot="{ Component }">
             <Transition name="route">
               <component :is="Component" :key="route.path" />

@@ -24,17 +24,17 @@ const open = ref<boolean>(true);
           :href="href"
           :aria-current="(item.exact ? isExactActive : isActive) ? 'page' : undefined"
           :class="[
-            'flex flex-1 items-center gap-3 rounded-lg px-3 py-2 font-medium transition-colors',
+            'group flex flex-1 items-center gap-3 rounded-lg px-3 py-2 font-medium transition-colors',
             (item.exact ? isExactActive : isActive)
               ? 'bg-primary text-tertiary'
-              : 'text-quaternary hover:bg-gray',
+              : 'text-quaternary hover:bg-primary-light',
           ]"
           @click="navigate"
         >
           <component
             :is="item.icon"
             v-if="item.icon"
-            class="h-5 w-5 shrink-0"
+            class="h-5 w-5 shrink-0 text-primary group-hover:text-secondary group-aria-[current=page]:text-secondary"
             aria-hidden="true"
           />
           {{ item.label }}
@@ -44,7 +44,7 @@ const open = ref<boolean>(true);
       <button
         v-else
         type="button"
-        class="flex flex-1 cursor-pointer items-center justify-between rounded-lg px-3 py-2 font-bold text-tertiary hover:bg-gray"
+        class="group flex flex-1 cursor-pointer items-center justify-between rounded-lg px-3 py-2 font-bold text-tertiary hover:bg-primary-light"
         :aria-expanded="open"
         @click="open = !open"
       >
@@ -52,7 +52,7 @@ const open = ref<boolean>(true);
           <component
             :is="item.icon"
             v-if="item.icon"
-            class="h-5 w-5 shrink-0"
+            class="h-5 w-5 shrink-0 text-primary group-hover:text-secondary group-aria-[current=page]:text-secondary"
             aria-hidden="true"
           />
           {{ item.label }}
@@ -64,7 +64,7 @@ const open = ref<boolean>(true);
       <button
         v-if="item.to && item.children?.length"
         type="button"
-        class="cursor-pointer rounded-lg p-2 text-quaternary hover:bg-gray"
+        class="cursor-pointer rounded-lg p-2 text-quaternary hover:bg-primary-light"
         :aria-expanded="open"
         :aria-label="`${open ? 'Recolher' : 'Expandir'} ${item.label}`"
         @click="open = !open"

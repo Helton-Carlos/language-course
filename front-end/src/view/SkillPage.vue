@@ -16,7 +16,7 @@ const skill = computed(() => SKILLS.find((item) => item.key === route.meta.skill
     <ECBackButton :to="{ name: 'dashboard' }" />
 
     <div class="mt-4 flex items-center gap-4">
-      <component :is="skill.icon" class="h-10 w-10 text-secondary" aria-hidden="true" />
+      <component :is="skill.icon" class="h-10 w-10 text-primary" aria-hidden="true" />
 
       <h1 class="text-3xl font-bold">
         {{ skill.label }}
