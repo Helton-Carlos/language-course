@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { X } from 'lucide-vue-next';
-import { onBeforeUnmount, onMounted, watch } from 'vue';
+import { onKeyStroke, useScrollLock } from '@vueuse/core';
+import { onBeforeUnmount, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import ECSidebarItem from '@/components/ECSidebar/ECSidebarItem.vue';
 import type { ECSidebar } from '@/components/ECSidebar/Type';
@@ -11,20 +12,17 @@ const { items, title = 'Menu' } = defineProps<ECSidebar>();
 const route = useRoute();
 const { isOpen, close } = useMobileMenu();
 
-function closeOnEscape(event: KeyboardEvent): void {
-  if (event.key === 'Escape') close();
-}
+const scrollLocked = useScrollLock(document.body);
 
-onMounted(() => {
-  window.addEventListener('keydown', closeOnEscape);
-});
+onKeyStroke('Escape', close);
 
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', closeOnEscape);
-  close();
-});
+onBeforeUnmount(close);
 
 watch(() => route.fullPath, close);
+
+watch(isOpen, (value) => {
+  scrollLocked.value = value;
+});
 </script>
 
 <template>

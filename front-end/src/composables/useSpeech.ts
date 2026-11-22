@@ -1,16 +1,24 @@
+import { useSpeechSynthesis } from '@vueuse/core';
+import { ref } from 'vue';
+
 const SPEECH_LANGUAGE = 'en-US';
+const DEFAULT_RATE = 0.9;
 
 export function useSpeech() {
-  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  const text = ref<string>('');
+  const rate = ref<number>(DEFAULT_RATE);
+  const { isSupported, speak: play, stop } = useSpeechSynthesis(text, {
+    lang: SPEECH_LANGUAGE,
+    rate,
+  });
 
-  function speak(text: string, rate = 0.9) {
-    if (!supported || !text) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = SPEECH_LANGUAGE;
-    utterance.rate = rate;
-    window.speechSynthesis.speak(utterance);
+  function speak(value: string, speed: number = DEFAULT_RATE): void {
+    if (!value) return;
+    stop();
+    text.value = value;
+    rate.value = speed;
+    play();
   }
 
-  return { supported, speak };
+  return { supported: isSupported, speak, stop };
 }

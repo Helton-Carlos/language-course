@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { Plus, Trash2, Volume2 } from 'lucide-vue-next';
-import { computed, ref, watch } from 'vue';
+import { refDebounced } from '@vueuse/core';
+import { computed, ref } from 'vue';
 import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
 import ECInput from '@/components/ECInput/ECInput.vue';
@@ -26,7 +27,7 @@ const SEARCH_DELAY = 300;
 
 const statusFilter = ref<WordStatus | null>(null);
 const searchInput = ref<string>('');
-const search = ref<string>('');
+const search = refDebounced<string>(searchInput, SEARCH_DELAY);
 const filters = computed<VocabularyFilters>(() => ({
   status: statusFilter.value,
   search: search.value,
@@ -80,11 +81,6 @@ function confirmDelete(id: string, term: string) {
   toast.confirm(`Remover "${term}" do vocabulário?`, () => deleteItem(id), 'Remover');
 }
 
-let searchTimer: ReturnType<typeof setTimeout> | undefined;
-watch(searchInput, (value) => {
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(() => (search.value = value), SEARCH_DELAY);
-});
 </script>
 
 <template>
