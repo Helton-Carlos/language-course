@@ -56,6 +56,18 @@ uv run alembic downgrade -1
 uv run alembic revision -m "descricao"
 ```
 
+## Qualidade de código
+
+O projeto usa o [Ruff](https://docs.astral.sh/ruff/) para lint e formatação, configurado no pyproject.toml (linhas de até 100 caracteres e regras E, F, I, UP e B).
+
+```bash
+uv run ruff check .
+uv run ruff check . --fix
+uv run ruff format .
+```
+
+As migrations de dados em migrations/versions ficam fora do lint e da formatação.
+
 ## Estrutura
 
 ```
@@ -68,9 +80,11 @@ back-end/
     ├── schemas/       Schemas Pydantic de entrada e saída
     ├── repositories/  Acesso ao banco
     ├── services/      Regras de negócio
-    ├── routes/        Rotas FastAPI
+    ├── routes/        Rotas FastAPI, cookies de autenticação e dependências compartilhadas
     └── scripts/       Scripts utilitários
 ```
+
+As fábricas de serviços e os tipos Annotated usados nas rotas (AuthServiceDep, CurrentUserDep e semelhantes) ficam todos em outes/dependencies.py. A leitura e a gravação do cookie de login ficam em outes/cookies.py.
 
 Fluxo de uma requisição: `routes` valida e injeta dependências, `services` aplica as regras e `repositories` conversa com o banco. Erros de negócio herdam de `AppError` (`core/exceptions.py`) e são convertidos em resposta JSON com o campo `detail`.
 
