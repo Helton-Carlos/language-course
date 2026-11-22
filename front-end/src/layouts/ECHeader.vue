@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { Menu, X } from 'lucide-vue-next';
+import { Download, Menu, X } from 'lucide-vue-next';
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useLogout } from '@/composables/useAuth';
 import { useCurrentUser } from '@/composables/useCurrentUser';
 import { useMobileMenu } from '@/composables/useMobileMenu';
+import { usePwaInstall } from '@/composables/usePwaInstall';
 
 const route = useRoute();
 const router = useRouter();
 const { data: user, isPending } = useCurrentUser();
 const { mutate: logout, isPending: isLoggingOut } = useLogout();
 const { isOpen, toggle } = useMobileMenu();
+const { canInstall, install } = usePwaInstall();
 
 const hasMenu = computed<boolean>(() => !!user.value && route.path.startsWith('/dashboard'));
 
@@ -42,6 +44,16 @@ function signOut() {
         </router-link>
       </div>
       <div class="flex gap-4">
+        <button
+          v-if="canInstall"
+          type="button"
+          class="btn btn-border inline-flex items-center gap-2"
+          aria-label="Instalar aplicativo"
+          @click="install"
+        >
+          <Download class="h-5 w-5" aria-hidden="true" />
+          <span class="hidden sm:inline">Instalar app</span>
+        </button>
         <router-link v-if="!user" class="btn btn-border" to="/documentacao">
           Documentação
         </router-link>
