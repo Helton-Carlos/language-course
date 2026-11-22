@@ -32,7 +32,6 @@ npm run lint
 - Vue 3 com `<script setup>` e TypeScript
 - Vue Router 5, com guardas de login e de perfil completo
 - TanStack Query para dados do servidor e cache
-- Pinia
 - Tailwind CSS 4
 - VueUse (fala, debounce, atalhos de teclado e trava de rolagem)
 - Lucide (ícones)

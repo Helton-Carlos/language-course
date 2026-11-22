@@ -24,7 +24,7 @@ Os textos e as telas estão em português. O conteúdo de estudo é somente em i
 
 | Camada | Tecnologias |
 | --- | --- |
-| Front-end | Vue 3, TypeScript, Vite, Pinia, Vue Router, TanStack Query, Tailwind CSS 4, VueUse, Lucide |
+| Front-end | Vue 3, TypeScript, Vite, Vue Router, TanStack Query, Tailwind CSS 4, VueUse, Lucide |
 | Back-end | Python 3.14, FastAPI, SQLAlchemy (async), Alembic, PostgreSQL, JWT em cookie, Argon2 |
 
 ## Estrutura
