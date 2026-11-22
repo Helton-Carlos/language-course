@@ -48,6 +48,14 @@ class ReadingTextNotFoundError(NotFoundError):
     detail = "Texto de leitura não encontrado"
 
 
+class VocabularyItemNotFoundError(NotFoundError):
+    detail = "Palavra não encontrada no seu vocabulário"
+
+
+class LessonNotFoundError(NotFoundError):
+    detail = "Texto não encontrado"
+
+
 class LanguageNotFoundError(NotFoundError):
     detail = "Idioma não encontrado"
 
