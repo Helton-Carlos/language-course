@@ -2,13 +2,21 @@ import { readonly, ref } from 'vue';
 
 export type ToastType = 'error' | 'success' | 'warning' | 'info';
 
+export interface ToastAction {
+  label: string;
+  primary?: boolean;
+  onClick?: () => void;
+}
+
 export interface Toast {
   id: number;
   type: ToastType;
   message: string;
+  actions?: ToastAction[];
 }
 
 const DEFAULT_DURATION = 5000;
+const CONFIRM_DURATION = 10000;
 const MAX_TOASTS = 4;
 
 const toasts = ref<Toast[]>([]);
@@ -18,14 +26,19 @@ function dismiss(id: number) {
   toasts.value = toasts.value.filter((toast) => toast.id !== id);
 }
 
-function show(message: string, type: ToastType = 'info', duration = DEFAULT_DURATION): number {
+function show(
+  message: string,
+  type: ToastType = 'info',
+  duration = DEFAULT_DURATION,
+  actions?: ToastAction[],
+): number {
   const existing = toasts.value.find(
     (toast) => toast.type === type && toast.message === message,
   );
   if (existing) return existing.id;
 
   const id = nextId++;
-  toasts.value = [...toasts.value, { id, type, message }].slice(-MAX_TOASTS);
+  toasts.value = [...toasts.value, { id, type, message, actions }].slice(-MAX_TOASTS);
 
   if (duration > 0) {
     setTimeout(() => dismiss(id), duration);
@@ -41,6 +54,11 @@ export const toast = {
   success: (message: string, duration?: number) => show(message, 'success', duration),
   info: (message: string, duration?: number) => show(message, 'info', duration),
   pending: (message: string) => show(message, 'warning', 0),
+  confirm: (message: string, onConfirm: () => void, confirmLabel = 'Confirmar') =>
+    show(message, 'warning', CONFIRM_DURATION, [
+      { label: 'Cancelar' },
+      { label: confirmLabel, primary: true, onClick: onConfirm },
+    ]),
 };
 
 export function useToast() {
