@@ -9,6 +9,11 @@ export const MESSAGES = {
     readingLoad: 'Não foi possível carregar os textos.',
     podcastsLoad: 'Não foi possível carregar os podcasts.',
     phrasesLoad: 'Não foi possível carregar as frases.',
+    vocabularyLoad: 'Não foi possível carregar seu vocabulário.',
+    lessonsLoad: 'Não foi possível carregar seus textos.',
+    lessonLoad: 'Não foi possível carregar o texto.',
+    statsLoad: 'Não foi possível carregar suas estatísticas.',
+    reviewLoad: 'Não foi possível carregar a revisão.',
     request: (status: number, method: string, path: string) =>
       `Erro ${status} em ${method} ${path}`,
   },
@@ -26,6 +31,11 @@ export const MESSAGES = {
     profile: 'Idioma e nível salvos.',
     logout: 'Você saiu da conta.',
     accountDeleted: 'Sua conta foi cancelada.',
+    lingqSaved: 'Palavra salva no vocabulário.',
+    lingqDeleted: 'Palavra removida do vocabulário.',
+    lessonSaved: 'Texto adicionado à sua biblioteca.',
+    lessonDeleted: 'Texto removido.',
+    lessonCompleted: 'Lição concluída. As palavras azuis foram marcadas como conhecidas.',
   },
 
   pending: {
@@ -38,6 +48,12 @@ export const MESSAGES = {
     accountDelete: 'Cancelando conta...',
     podcastsLoad: 'Carregando podcasts...',
     phrasesLoad: 'Carregando frases...',
+    vocabularyLoad: 'Carregando vocabulário...',
+    lessonsLoad: 'Carregando textos...',
+    lessonLoad: 'Carregando texto...',
+    statsLoad: 'Carregando estatísticas...',
+    reviewLoad: 'Carregando revisão...',
+    lessonSave: 'Salvando texto...',
   },
 
   reminder: {
