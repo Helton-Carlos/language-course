@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { CircleCheck, Flame, Repeat, Target } from 'lucide-vue-next';
+import { computed } from 'vue';
 import ECCard from '@/components/ECCard/ECCard.vue';
 import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
 import { useCurrentUser } from '@/composables/useCurrentUser';
@@ -10,6 +11,13 @@ import { STUDY_AREAS } from '@/utils/study';
 
 const { data: user } = useCurrentUser();
 const { data: stats } = useStats();
+
+const goalPercent = computed<number>(() => {
+  if (!stats.value) return 0;
+  return Math.min(100, Math.round((stats.value.today_progress / stats.value.daily_goal) * 100));
+});
+
+const goalReached = computed<boolean>(() => goalPercent.value >= 100);
 </script>
 
 <template>
@@ -56,7 +64,30 @@ const { data: stats } = useStats();
       </li>
     </ul>
 
-    <ul v-if="stats" class="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <section v-if="stats" class="mt-4 rounded-2xl bg-white p-5 shadow-sm" aria-labelledby="daily-goal-title">
+      <div class="flex items-center justify-between gap-4">
+        <h2 id="daily-goal-title" class="flex items-center gap-2 text-xl font-bold">
+          <component :is="goalReached ? CircleCheck : Target" class="h-6 w-6 text-secondary" aria-hidden="true" />
+          Meta do dia
+        </h2>
+        <p class="text-quaternary">
+          {{ stats.today_progress }} de {{ stats.daily_goal }}
+        </p>
+      </div>
+      <div
+        class="mt-3 h-3 overflow-hidden rounded-full bg-gray"
+        role="progressbar"
+        aria-label="Progresso da meta do dia"
+        :aria-valuenow="goalPercent"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div class="h-full bg-quinary transition-all" :style="{ width: `${goalPercent}%` }" />
+      </div>
+      <p class="mt-2 text-quaternary">
+        {{ goalReached ? 'Meta concluída. Continue estudando para manter a sequência.' : 'Cada palavra salva e cada cartão revisado contam como um ponto.' }}
+      </p>
+    </section>    <ul v-if="stats" class="mt-4 grid gap-4 sm:grid-cols-3">
       <li>
         <ECCard width="100%">
           <template #body>
@@ -66,19 +97,6 @@ const { data: stats } = useStats();
             </p>
             <p class="mt-1 text-2xl font-bold text-tertiary">
               {{ stats.streak }} {{ stats.streak === 1 ? 'dia' : 'dias' }}
-            </p>
-          </template>
-        </ECCard>
-      </li>
-      <li>
-        <ECCard width="100%">
-          <template #body>
-            <p class="flex items-center gap-2">
-              <Target class="h-5 w-5 text-secondary" aria-hidden="true" />
-              Meta de hoje
-            </p>
-            <p class="mt-1 text-2xl font-bold text-tertiary">
-              {{ stats.today_progress }}/{{ stats.daily_goal }}
             </p>
           </template>
         </ECCard>

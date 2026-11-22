@@ -10,11 +10,6 @@ import { STATUS_BADGE_CLASSES, STATUS_LABELS } from '@/utils/words';
 
 const { data: stats, isPending, isError } = useStats();
 
-const goalPercent = computed(() => {
-  if (!stats.value) return 0;
-  return Math.min(100, Math.round((stats.value.today_progress / stats.value.daily_goal) * 100));
-});
-
 const maxDayTotal = computed(() =>
   Math.max(1, ...(stats.value?.last_days ?? []).map((day) => day.words_saved + day.reviews)),
 );
@@ -96,30 +91,6 @@ const maxStatusCount = computed(() =>
           </ECCard>
         </li>
       </ul>
-
-      <div class="mt-8 rounded-2xl bg-white p-5 shadow-sm">
-        <div class="flex items-center justify-between">
-          <h2 class="text-xl font-bold">
-            Meta de hoje
-          </h2>
-          <p class="text-quaternary">
-            {{ stats.today_progress }} de {{ stats.daily_goal }}
-          </p>
-        </div>
-        <div
-          class="mt-3 h-3 overflow-hidden rounded-full bg-gray"
-          role="progressbar"
-          aria-label="Progresso da meta diária"
-          :aria-valuenow="goalPercent"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        >
-          <div class="h-full bg-quinary transition-all" :style="{ width: `${goalPercent}%` }" />
-        </div>
-        <p class="mt-2 text-quaternary">
-          Cada palavra salva e cada cartão revisado contam como um ponto.
-        </p>
-      </div>
 
       <div class="mt-6 grid gap-6 lg:grid-cols-2">
         <div class="rounded-2xl bg-white p-5 shadow-sm">
