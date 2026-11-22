@@ -80,6 +80,7 @@ As rotas com `requiresProfile` redirecionam para `/dashboard/nivel` enquanto o a
 - Confirmações destrutivas usam `toast.confirm(...)`, não `window.confirm`.
 - Tamanho de texto padrão, sem `text-sm`.
 - Ícones vêm do `lucide-vue-next`, sem SVG inline.
+- Título, descrição e botão de voltar de cada página usam o `ECPageHeader`. Ações da página entram no slot `actions`.
 
 ## PWA
 
