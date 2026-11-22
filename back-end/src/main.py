@@ -9,10 +9,14 @@ from core.database import check_connection, dispose_engine
 from core.exceptions import register_exception_handlers
 from routes.auth_routes import auth_routes
 from routes.content_routes import content_routes
+from routes.dictionary_routes import dictionary_routes
 from routes.languages_routes import languages_routes
+from routes.lessons_routes import lessons_routes
 from routes.placement_routes import placement_routes
 from routes.reading_routes import reading_routes
+from routes.stats_routes import stats_routes
 from routes.users_routes import users_routes
+from routes.vocabulary_routes import vocabulary_routes
 
 settings = get_settings()
 
@@ -42,3 +46,7 @@ app.include_router(placement_routes, prefix=settings.api_prefix)
 app.include_router(content_routes, prefix=settings.api_prefix)
 app.include_router(reading_routes, prefix=settings.api_prefix)
 app.include_router(users_routes, prefix=settings.api_prefix)
+app.include_router(vocabulary_routes, prefix=settings.api_prefix)
+app.include_router(lessons_routes, prefix=settings.api_prefix)
+app.include_router(stats_routes, prefix=settings.api_prefix)
+app.include_router(dictionary_routes, prefix=settings.api_prefix)
