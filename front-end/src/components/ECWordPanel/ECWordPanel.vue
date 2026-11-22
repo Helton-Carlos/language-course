@@ -120,12 +120,12 @@ watch(
     </header>
 
     <p v-if="existing" class="mt-2">
-      <span :class="['rounded px-2 py-0.5 text-sm font-medium', STATUS_BADGE_CLASSES[existing.status]]">
+      <span :class="['rounded px-2 py-0.5 font-medium', STATUS_BADGE_CLASSES[existing.status]]">
         {{ STATUS_LABELS[existing.status] }}
       </span>
     </p>
 
-    <p v-if="entry?.definition" class="mt-3 text-sm text-quaternary">
+    <p v-if="entry?.definition" class="mt-3 text-quaternary">
       {{ entry.definition }}
     </p>
 
@@ -148,7 +148,7 @@ watch(
         <li v-for="suggestion in entry.suggestions" :key="suggestion">
           <button
             type="button"
-            class="cursor-pointer rounded-full bg-gray px-3 py-1 text-sm text-tertiary transition-colors hover:bg-primary"
+            class="cursor-pointer rounded-full bg-gray px-3 py-1 text-tertiary transition-colors hover:bg-primary"
             @click="pickSuggestion(suggestion)"
           >
             {{ suggestion }}
@@ -157,7 +157,7 @@ watch(
       </ul>
     </div>
 
-    <p v-if="context" class="mt-4 rounded-md bg-gray px-3 py-2 text-sm italic text-quaternary">
+    <p v-if="context" class="mt-4 rounded-md bg-gray px-3 py-2 italic text-quaternary">
       {{ context }}
     </p>
 
@@ -172,7 +172,7 @@ watch(
           type="button"
           :aria-pressed="status === option"
           :class="[
-            'cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition',
+            'cursor-pointer rounded-md px-3 py-1.5 font-medium transition',
             STATUS_BADGE_CLASSES[option],
             status === option ? 'ring-2 ring-secondary' : 'opacity-70 hover:opacity-100',
           ]"

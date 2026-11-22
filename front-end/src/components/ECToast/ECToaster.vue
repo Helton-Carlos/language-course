@@ -42,7 +42,7 @@ const typeClasses: Record<ToastType, string> = {
               :key="action.label"
               type="button"
               :class="[
-                'cursor-pointer rounded px-3 py-1 text-sm font-medium transition-colors',
+                'cursor-pointer rounded px-3 py-1 font-medium transition-colors',
                 action.primary ? 'bg-secondary text-white hover:bg-secondary-hover' : 'bg-black/10 hover:bg-black/20',
               ]"
               @click="runAction(item.id, action)"

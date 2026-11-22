@@ -106,7 +106,7 @@ watch(
     </div>
 
     <div v-else-if="current" class="mt-6">
-      <div class="flex items-center justify-between text-sm text-quaternary">
+      <div class="flex items-center justify-between text-quaternary">
         <span>Cartão {{ position + 1 }} de {{ queue.length }}</span>
         <span :class="['rounded px-2 py-0.5 font-medium', STATUS_BADGE_CLASSES[current.status]]">
           {{ STATUS_LABELS[current.status] }}
@@ -139,7 +139,7 @@ watch(
           <p class="text-2xl text-tertiary">
             {{ current.meaning }}
           </p>
-          <p v-if="current.context" class="mt-4 rounded-md bg-gray px-3 py-2 text-sm italic text-quaternary">
+          <p v-if="current.context" class="mt-4 rounded-md bg-gray px-3 py-2 italic text-quaternary">
             {{ current.context }}
           </p>
         </div>

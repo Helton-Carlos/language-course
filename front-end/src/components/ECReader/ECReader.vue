@@ -72,7 +72,7 @@ function readAloud() {
 <template>
   <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
     <div>
-      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-quaternary">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-quaternary">
         <span v-for="status in WORD_STATUSES.slice(0, 4)" :key="status" class="inline-flex items-center gap-1.5">
           <span :class="['inline-block h-3 w-5 rounded-sm', STATUS_WORD_CLASSES[status]]" />
           {{ STATUS_LABELS[status] }}
@@ -120,7 +120,7 @@ function readAloud() {
           </template>
         </p>
       </div>
-      <p class="mt-3 text-sm text-quaternary">
+      <p class="mt-3 text-quaternary">
         Clique em uma palavra ou selecione um trecho de até {{ MAX_PHRASE_WORDS }} palavras para salvar no vocabulário.
       </p>
     </div>

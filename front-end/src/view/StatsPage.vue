@@ -103,7 +103,7 @@ const maxStatusCount = computed(() =>
         >
           <div class="h-full bg-quinary transition-all" :style="{ width: `${goalPercent}%` }" />
         </div>
-        <p class="mt-2 text-sm text-quaternary">
+        <p class="mt-2 text-quaternary">
           Cada palavra salva e cada cartão revisado contam como um ponto.
         </p>
       </div>
@@ -115,13 +115,13 @@ const maxStatusCount = computed(() =>
           </h2>
           <ul class="mt-4 flex h-40 items-end gap-2">
             <li v-for="day in stats.last_days" :key="day.day" class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-              <span class="text-xs text-quaternary">{{ day.words_saved + day.reviews }}</span>
+              <span class="text-quaternary">{{ day.words_saved + day.reviews }}</span>
               <div
                 class="w-full rounded-t bg-primary"
                 :style="{ height: `${((day.words_saved + day.reviews) / maxDayTotal) * 100}%`, minHeight: '2px' }"
                 :title="`${day.words_saved} salvas, ${day.reviews} revisões, ${day.words_read} palavras lidas`"
               />
-              <span class="text-xs capitalize text-quaternary">{{ formatWeekday(day.day) }}</span>
+              <span class="capitalize text-quaternary">{{ formatWeekday(day.day) }}</span>
             </li>
           </ul>
         </div>
@@ -132,14 +132,14 @@ const maxStatusCount = computed(() =>
           </h2>
           <ul class="mt-4 flex flex-col gap-3">
             <li v-for="item in stats.by_status" :key="item.status" class="grid grid-cols-[6.5rem_1fr_2.5rem] items-center gap-3">
-              <span class="text-sm text-quaternary">{{ STATUS_LABELS[item.status] }}</span>
+              <span class="text-quaternary">{{ STATUS_LABELS[item.status] }}</span>
               <div class="h-3 overflow-hidden rounded-full bg-gray">
                 <div
                   :class="['h-full', STATUS_BADGE_CLASSES[item.status]]"
                   :style="{ width: `${(item.count / maxStatusCount) * 100}%` }"
                 />
               </div>
-              <span class="text-right text-sm font-medium text-tertiary">{{ item.count }}</span>
+              <span class="text-right font-medium text-tertiary">{{ item.count }}</span>
             </li>
           </ul>
         </div>

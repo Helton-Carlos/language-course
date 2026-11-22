@@ -66,7 +66,7 @@ function confirmRemove(id: string, title: string) {
         <p class="text-quaternary">
           {{ lesson.preview }}
         </p>
-        <div class="mt-auto flex items-center justify-between pt-2 text-sm text-quaternary">
+        <div class="mt-auto flex items-center justify-between pt-2 text-quaternary">
           <span>{{ lesson.word_count }} palavras · {{ formatDate(lesson.created_at) }}</span>
           <button
             type="button"

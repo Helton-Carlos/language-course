@@ -62,7 +62,7 @@ function submit() {
           placeholder="Cole aqui o texto em inglês..."
           class="w-full rounded-md border-2 border-secondary/30 bg-white px-4 py-2 text-tertiary outline-none transition-colors placeholder:text-quaternary/60 focus:border-secondary focus:ring-4 focus:ring-primary"
         />
-        <p class="text-sm text-quaternary">
+        <p class="text-quaternary">
           {{ wordCount }} palavras · {{ body.length }}/{{ MAX_BODY_LENGTH }} caracteres
         </p>
       </div>

@@ -119,7 +119,7 @@ watch(searchInput, (value) => {
         type="button"
         :aria-pressed="statusFilter === null"
         :class="[
-          'cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
+          'cursor-pointer rounded-md px-3 py-1.5 font-medium transition-colors',
           statusFilter === null ? 'bg-secondary text-white' : 'bg-white text-tertiary hover:bg-primary',
         ]"
         @click="statusFilter = null"
@@ -132,7 +132,7 @@ watch(searchInput, (value) => {
         type="button"
         :aria-pressed="statusFilter === status"
         :class="[
-          'cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition',
+          'cursor-pointer rounded-md px-3 py-1.5 font-medium transition',
           STATUS_BADGE_CLASSES[status],
           statusFilter === status ? 'ring-2 ring-secondary' : 'opacity-80 hover:opacity-100',
         ]"
@@ -223,7 +223,7 @@ watch(searchInput, (value) => {
           <select
             :value="item.status"
             :aria-label="`Nível de ${item.term}`"
-            :class="['cursor-pointer rounded-md px-2 py-1.5 text-sm font-medium', STATUS_BADGE_CLASSES[item.status]]"
+            :class="['cursor-pointer rounded-md px-2 py-1.5 font-medium', STATUS_BADGE_CLASSES[item.status]]"
             @change="changeStatus(item.id, $event)"
           >
             <option v-for="status in WORD_STATUSES" :key="status" :value="status">
