@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { Check, Eye, RotateCcw, Volume2, X } from 'lucide-vue-next';
+import { onKeyStroke } from '@vueuse/core';
 import { computed, ref, watch } from 'vue';
 import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
@@ -41,6 +42,24 @@ function submit(correct: boolean) {
   );
 }
 
+function isTypingTarget(event: KeyboardEvent): boolean {
+  return event.target instanceof HTMLElement && !!event.target.closest('button, a, input, textarea, select');
+}
+
+onKeyStroke([' ', 'Enter'], (event) => {
+  if (revealed.value || !current.value || isTypingTarget(event)) return;
+  event.preventDefault();
+  reveal();
+});
+
+onKeyStroke('ArrowLeft', () => {
+  if (revealed.value) submit(false);
+});
+
+onKeyStroke('ArrowRight', () => {
+  if (revealed.value) submit(true);
+});
+
 async function reload() {
   loaded.value = false;
   await refetch();
@@ -75,6 +94,7 @@ watch(
     </h1>
     <p class="mt-2 text-quaternary">
       Tente lembrar o significado antes de virar o cartão. Acertar sobe o nível da palavra, errar desce.
+      Atalhos: espaço mostra a resposta, seta para a esquerda marca erro e seta para a direita marca acerto.
     </p>
 
     <p v-if="isPending" class="mt-6">
