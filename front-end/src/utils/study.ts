@@ -10,7 +10,7 @@ export const STUDY_AREAS = [
   {
     key: 'vocabulario',
     label: 'Vocabulário',
-    description: 'Veja todos os seus LingQs, filtre por nível de conhecimento e edite os significados.',
+    description: 'Veja todas as palavras salvas, filtre por nível de conhecimento e edite os significados.',
     path: 'vocabulario',
     routeName: 'dashboard-vocabulario',
     icon: 'M3 5h18v2H3V5Zm0 6h18v2H3v-2Zm0 6h12v2H3v-2Z',

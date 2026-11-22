@@ -65,7 +65,7 @@ class VocabularyService:
                 "next_review_at": None if data.status == KNOWN_STATUS else moment,
             }
         )
-        await self._activity_repository.increment(user_id, today_local(), "lingqs_created")
+        await self._activity_repository.increment(user_id, today_local(), "words_saved")
         return VocabularyOut.model_validate(created), True
 
     async def update(self, user_id: UUID, item_id: UUID, data: VocabularyUpdate) -> VocabularyOut:

@@ -1,7 +1,7 @@
 import { computed, type Ref } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
 import { request } from '@/composables/useApi';
-import type { DictionaryEntry } from '@/types/lingq';
+import type { DictionaryEntry } from '@/types/study';
 
 export function useDictionary(term: Ref<string>) {
   return useQuery({

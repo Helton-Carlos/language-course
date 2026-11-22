@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from models.daily_activity import DailyActivity
 
-COUNTERS = ("lingqs_created", "reviews", "words_read")
+COUNTERS = ("words_saved", "reviews", "words_read")
 
 
 class ActivityRepository:

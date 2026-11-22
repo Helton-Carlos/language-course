@@ -108,7 +108,7 @@ const { data: stats } = useStats();
       </li>
     </ul>
     <h2 class="mt-10 text-xl font-bold">
-      Estude com LingQs
+      Estude seu vocabulário
     </h2>
     <ul class="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <li v-for="area in STUDY_AREAS" :key="area.key">

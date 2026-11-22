@@ -66,7 +66,7 @@ export interface LessonPayload {
 
 export interface DayActivity {
   day: string;
-  lingqs_created: number;
+  words_saved: number;
   reviews: number;
   words_read: number;
 }

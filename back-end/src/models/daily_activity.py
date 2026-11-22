@@ -16,6 +16,6 @@ class DailyActivity(Base):
         primary_key=True,
     )
     day: Mapped[date] = mapped_column(Date, primary_key=True)
-    lingqs_created: Mapped[int] = mapped_column(Integer, server_default="0")
+    words_saved: Mapped[int] = mapped_column(Integer, server_default="0")
     reviews: Mapped[int] = mapped_column(Integer, server_default="0")
     words_read: Mapped[int] = mapped_column(Integer, server_default="0")

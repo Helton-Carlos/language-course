@@ -12,7 +12,7 @@ class ReadingActivityIn(APIModel):
 
 class DayActivityOut(APIModel):
     day: date
-    lingqs_created: int
+    words_saved: int
     reviews: int
     words_read: int
 

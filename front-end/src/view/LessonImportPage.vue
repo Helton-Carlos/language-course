@@ -39,7 +39,7 @@ function submit() {
       Importar texto
     </h1>
     <p class="mt-2 text-quaternary">
-      Cole um texto em inglês. Depois de salvo, clique nas palavras para ver a tradução e criar LingQs.
+      Cole um texto em inglês. Depois de salvo, clique nas palavras para ver a tradução e salvar palavras.
     </p>
     <form class="mt-6 flex flex-col gap-4" @submit.prevent="submit">
       <ECInput

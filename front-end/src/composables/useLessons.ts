@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
 import { request } from '@/composables/useApi';
 import { useCurrentUser } from '@/composables/useCurrentUser';
 import { MESSAGES } from '@/utils/message';
-import type { Lesson, LessonPayload, LessonSummary } from '@/types/lingq';
+import type { Lesson, LessonPayload, LessonSummary } from '@/types/study';
 
 export function useLessons() {
   const { data: user } = useCurrentUser();

@@ -58,7 +58,7 @@ def upgrade() -> None:
         "daily_activities",
         sa.Column("user_id", sa.Uuid(), nullable=False),
         sa.Column("day", sa.Date(), nullable=False),
-        sa.Column("lingqs_created", sa.Integer(), server_default="0", nullable=False),
+        sa.Column("words_saved", sa.Integer(), server_default="0", nullable=False),
         sa.Column("reviews", sa.Integer(), server_default="0", nullable=False),
         sa.Column("words_read", sa.Integer(), server_default="0", nullable=False),
         sa.ForeignKeyConstraint(

@@ -121,7 +121,7 @@ function readAloud() {
         </p>
       </div>
       <p class="mt-3 text-sm text-quaternary">
-        Clique em uma palavra ou selecione um trecho de até {{ MAX_PHRASE_WORDS }} palavras para criar um LingQ.
+        Clique em uma palavra ou selecione um trecho de até {{ MAX_PHRASE_WORDS }} palavras para salvar no vocabulário.
       </p>
     </div>
 

@@ -1,4 +1,4 @@
-import type { WordStatus } from '@/types/lingq';
+import type { WordStatus } from '@/types/study';
 
 export const WORD_STATUSES: readonly WordStatus[] = [1, 2, 3, 4, 5];
 export const KNOWN_STATUS: WordStatus = 5;

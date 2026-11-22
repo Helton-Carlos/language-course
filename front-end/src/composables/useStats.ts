@@ -2,7 +2,7 @@ import { computed } from 'vue';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
 import { request } from '@/composables/useApi';
 import { useCurrentUser } from '@/composables/useCurrentUser';
-import type { Stats } from '@/types/lingq';
+import type { Stats } from '@/types/study';
 
 export function useStats() {
   const { data: user } = useCurrentUser();

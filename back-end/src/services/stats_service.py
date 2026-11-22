@@ -36,7 +36,7 @@ class StatsService:
         today_row = by_day.get(today)
         today_out = DayActivityOut(
             day=today,
-            lingqs_created=today_row.lingqs_created if today_row else 0,
+            words_saved=today_row.words_saved if today_row else 0,
             reviews=today_row.reviews if today_row else 0,
             words_read=today_row.words_read if today_row else 0,
         )
@@ -47,7 +47,7 @@ class StatsService:
         return StatsOut(
             daily_goal=DAILY_GOAL,
             today=today_out,
-            today_progress=today_out.lingqs_created + today_out.reviews,
+            today_progress=today_out.words_saved + today_out.reviews,
             streak=self._streak(by_day, today),
             known_words=counts.get(KNOWN_STATUS, 0),
             total_items=sum(counts.values()),
@@ -65,7 +65,7 @@ class StatsService:
         row = by_day.get(day)
         return DayActivityOut(
             day=day,
-            lingqs_created=row.lingqs_created if row else 0,
+            words_saved=row.words_saved if row else 0,
             reviews=row.reviews if row else 0,
             words_read=row.words_read if row else 0,
         )
@@ -74,7 +74,7 @@ class StatsService:
     def _streak(by_day: dict, today: date) -> int:
         def active(day: date) -> bool:
             row = by_day.get(day)
-            return row is not None and (row.lingqs_created + row.reviews + row.words_read) > 0
+            return row is not None and (row.words_saved + row.reviews + row.words_read) > 0
 
         cursor = today if active(today) else today - timedelta(days=1)
         streak = 0

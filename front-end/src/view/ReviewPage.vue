@@ -4,7 +4,7 @@ import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
 import { useSpeech } from '@/composables/useSpeech';
 import { useAnswerReview, useReviewQueue } from '@/composables/useVocabulary';
-import type { VocabularyItem } from '@/types/lingq';
+import type { VocabularyItem } from '@/types/study';
 import { MESSAGES } from '@/utils/message';
 import { STATUS_BADGE_CLASSES, STATUS_LABELS } from '@/utils/words';
 

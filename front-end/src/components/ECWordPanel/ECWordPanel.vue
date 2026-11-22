@@ -5,7 +5,7 @@ import type { ECWordPanel } from '@/components/ECWordPanel/Type';
 import { useDictionary } from '@/composables/useDictionary';
 import { useSpeech } from '@/composables/useSpeech';
 import { useSaveVocabulary, useVocabularyMap } from '@/composables/useVocabulary';
-import type { WordStatus } from '@/types/lingq';
+import type { WordStatus } from '@/types/study';
 import {
   KNOWN_STATUS,
   STATUS_BADGE_CLASSES,

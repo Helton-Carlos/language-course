@@ -15,7 +15,7 @@ const goalPercent = computed(() => {
 });
 
 const maxDayTotal = computed(() =>
-  Math.max(1, ...(stats.value?.last_days ?? []).map((day) => day.lingqs_created + day.reviews)),
+  Math.max(1, ...(stats.value?.last_days ?? []).map((day) => day.words_saved + day.reviews)),
 );
 
 const maxStatusCount = computed(() =>
@@ -65,7 +65,7 @@ const maxStatusCount = computed(() =>
         <li>
           <ECCard width="100%">
             <template #body>
-              <p>LingQs salvos</p>
+              <p>Palavras salvas</p>
               <p class="mt-1 text-2xl font-bold text-tertiary">
                 {{ stats.total_items }}
               </p>
@@ -104,7 +104,7 @@ const maxStatusCount = computed(() =>
           <div class="h-full bg-quinary transition-all" :style="{ width: `${goalPercent}%` }" />
         </div>
         <p class="mt-2 text-sm text-quaternary">
-          Cada LingQ criado e cada cartão revisado contam como um ponto.
+          Cada palavra salva e cada cartão revisado contam como um ponto.
         </p>
       </div>
 
@@ -115,11 +115,11 @@ const maxStatusCount = computed(() =>
           </h2>
           <ul class="mt-4 flex h-40 items-end gap-2">
             <li v-for="day in stats.last_days" :key="day.day" class="flex h-full flex-1 flex-col items-center justify-end gap-1">
-              <span class="text-xs text-quaternary">{{ day.lingqs_created + day.reviews }}</span>
+              <span class="text-xs text-quaternary">{{ day.words_saved + day.reviews }}</span>
               <div
                 class="w-full rounded-t bg-primary"
-                :style="{ height: `${((day.lingqs_created + day.reviews) / maxDayTotal) * 100}%`, minHeight: '2px' }"
-                :title="`${day.lingqs_created} LingQs, ${day.reviews} revisões, ${day.words_read} palavras lidas`"
+                :style="{ height: `${((day.words_saved + day.reviews) / maxDayTotal) * 100}%`, minHeight: '2px' }"
+                :title="`${day.words_saved} salvas, ${day.reviews} revisões, ${day.words_read} palavras lidas`"
               />
               <span class="text-xs capitalize text-quaternary">{{ formatWeekday(day.day) }}</span>
             </li>

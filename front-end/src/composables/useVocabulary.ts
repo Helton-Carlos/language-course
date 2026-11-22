@@ -9,7 +9,7 @@ import type {
   VocabularyMapItem,
   VocabularyPayload,
   VocabularyUpdatePayload,
-} from '@/types/lingq';
+} from '@/types/study';
 
 const VOCABULARY_PAGE_SIZE = 200;
 
@@ -69,7 +69,7 @@ export function useSaveVocabulary() {
   return useMutation({
     mutationFn: (payload: VocabularyPayload) =>
       request<VocabularyItem>('POST', '/vocabulary', payload),
-    meta: { success: MESSAGES.success.lingqSaved },
+    meta: { success: MESSAGES.success.wordSaved },
     onSuccess: invalidate,
   });
 }
@@ -87,7 +87,7 @@ export function useDeleteVocabulary() {
   const invalidate = useVocabularyInvalidation();
   return useMutation({
     mutationFn: (id: string) => request<void>('DELETE', `/vocabulary/${id}`),
-    meta: { success: MESSAGES.success.lingqDeleted },
+    meta: { success: MESSAGES.success.wordDeleted },
     onSuccess: invalidate,
   });
 }

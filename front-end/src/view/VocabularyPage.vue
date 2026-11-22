@@ -11,7 +11,7 @@ import {
   useUpdateVocabulary,
   useVocabularyList,
 } from '@/composables/useVocabulary';
-import type { VocabularyFilters, WordStatus } from '@/types/lingq';
+import type { VocabularyFilters, WordStatus } from '@/types/study';
 import { MESSAGES } from '@/utils/message';
 import {
   STATUS_BADGE_CLASSES,
@@ -93,7 +93,7 @@ watch(searchInput, (value) => {
       Vocabulário
     </h1>
     <p class="mt-2 text-quaternary">
-      Todas as palavras e frases que você salvou como LingQs.
+      Todas as palavras e frases que você salvou.
     </p>
 
     <form class="mt-6 grid gap-4 rounded-2xl bg-white p-5 shadow-sm md:grid-cols-[1fr_1fr_auto] md:items-end" @submit.prevent="addItem">
@@ -166,7 +166,7 @@ watch(searchInput, (value) => {
         <router-link :to="{ name: 'dashboard-biblioteca' }" class="font-medium text-secondary underline">
           biblioteca
         </router-link>
-        e clique nas palavras para criar LingQs.
+        e clique nas palavras para salvá-las.
       </p>
     </div>
     <ul v-else class="mt-6 flex flex-col gap-3">
