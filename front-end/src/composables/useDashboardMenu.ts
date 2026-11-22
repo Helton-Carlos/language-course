@@ -2,6 +2,7 @@ import { computed } from 'vue';
 import { hasCompleteProfile, useCurrentUser } from '@/composables/useCurrentUser';
 import { CONTENTS } from '@/utils/contents';
 import { SKILLS } from '@/utils/skills';
+import { STUDY_AREAS } from '@/utils/study';
 import type { ECSidebarItem } from '@/components/ECSidebar/Type';
 
 const cancelAccountItem: ECSidebarItem = {
@@ -27,6 +28,15 @@ export function useDashboardMenu() {
         label: 'Visão geral',
         to: { name: 'dashboard' },
         exact: true,
+      },
+      {
+        key: 'study',
+        label: 'Estudo',
+        children: STUDY_AREAS.map((area) => ({
+          key: `study-${area.key}`,
+          label: area.label,
+          to: { name: area.routeName },
+        })),
       },
       {
         key: 'practice',

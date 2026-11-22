@@ -62,6 +62,42 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/view/Documentacao.vue'),
         meta: PROFILE_REQUIRED,
       },
+      {
+        path: 'biblioteca',
+        name: 'dashboard-biblioteca',
+        component: () => import('@/view/LibraryPage.vue'),
+        meta: PROFILE_REQUIRED,
+      },
+      {
+        path: 'biblioteca/importar',
+        name: 'dashboard-biblioteca-importar',
+        component: () => import('@/view/LessonImportPage.vue'),
+        meta: PROFILE_REQUIRED,
+      },
+      {
+        path: 'biblioteca/texto/:id',
+        name: 'dashboard-biblioteca-texto',
+        component: () => import('@/view/LessonReaderPage.vue'),
+        meta: PROFILE_REQUIRED,
+      },
+      {
+        path: 'vocabulario',
+        name: 'dashboard-vocabulario',
+        component: () => import('@/view/VocabularyPage.vue'),
+        meta: PROFILE_REQUIRED,
+      },
+      {
+        path: 'revisar',
+        name: 'dashboard-revisar',
+        component: () => import('@/view/ReviewPage.vue'),
+        meta: PROFILE_REQUIRED,
+      },
+      {
+        path: 'estatisticas',
+        name: 'dashboard-estatisticas',
+        component: () => import('@/view/StatsPage.vue'),
+        meta: PROFILE_REQUIRED,
+      },
       ...SKILLS.filter((skill) => skill.key !== 'ler').map((skill): RouteRecordRaw => ({
         path: skill.path,
         name: skill.routeName,
