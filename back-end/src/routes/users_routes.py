@@ -1,30 +1,11 @@
-from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Response, status
+from fastapi import APIRouter, Response, status
 
-from core.database import SessionDep
-from repositories.user_repository import UserRepository
-from routes.dependencies import CurrentUserDep
+from routes.dependencies import CurrentUserDep, ProfileServiceDep, UserServiceDep
 from schemas.user import ProfileUpdate, UserCreate, UserOut, UserUpdate
-from services.profile_service import ProfileService
-from services.user_service import UserService
 
 users_routes = APIRouter(tags=["Users"])
-
-
-def get_user_service(session: SessionDep) -> UserService:
-    return UserService(UserRepository(session))
-
-
-UserServiceDep = Annotated[UserService, Depends(get_user_service)]
-
-
-def get_profile_service(session: SessionDep) -> ProfileService:
-    return ProfileService(UserRepository(session))
-
-
-ProfileServiceDep = Annotated[ProfileService, Depends(get_profile_service)]
 
 
 @users_routes.get("/users", response_model=list[UserOut])

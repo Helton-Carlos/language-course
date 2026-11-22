@@ -1,26 +1,17 @@
-from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, status
 
-from core.database import SessionDep
-from repositories.lesson_repository import LessonRepository
-from routes.dependencies import CurrentUserDep
+from routes.dependencies import CurrentUserDep, LessonServiceDep
 from schemas.lesson import LessonCreate, LessonOut, LessonSummaryOut
-from services.lesson_service import LessonService
 
 lessons_routes = APIRouter(prefix="/lessons", tags=["Lessons"])
 
 
-def get_lesson_service(session: SessionDep) -> LessonService:
-    return LessonService(LessonRepository(session))
-
-
-LessonServiceDep = Annotated[LessonService, Depends(get_lesson_service)]
-
-
 @lessons_routes.get("", response_model=list[LessonSummaryOut])
-async def list_lessons(current_user: CurrentUserDep, service: LessonServiceDep) -> list[LessonSummaryOut]:
+async def list_lessons(
+    current_user: CurrentUserDep, service: LessonServiceDep
+) -> list[LessonSummaryOut]:
     return await service.list_lessons(current_user.id)
 
 

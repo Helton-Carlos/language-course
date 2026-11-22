@@ -1,21 +1,9 @@
-from typing import Annotated
+from fastapi import APIRouter
 
-from fastapi import APIRouter, Depends
-
-from core.database import SessionDep
-from repositories.reading_repository import ReadingRepository
-from routes.dependencies import CurrentUserDep
+from routes.dependencies import CurrentUserDep, ReadingServiceDep
 from schemas.reading import ReadingSituationOut, ReadingTextOut, ReadingThemeOut
-from services.reading_service import ReadingService
 
 reading_routes = APIRouter(prefix="/reading", tags=["Reading"])
-
-
-def get_reading_service(session: SessionDep) -> ReadingService:
-    return ReadingService(ReadingRepository(session))
-
-
-ReadingServiceDep = Annotated[ReadingService, Depends(get_reading_service)]
 
 
 @reading_routes.get("/themes", response_model=list[ReadingThemeOut])

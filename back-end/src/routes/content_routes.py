@@ -1,22 +1,11 @@
-from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 
-from core.database import SessionDep
-from repositories.content_repository import ContentRepository
-from routes.dependencies import CurrentUserDep
+from routes.dependencies import ContentServiceDep, CurrentUserDep
 from schemas.content import PhraseOut, PodcastEpisodeOut
-from services.content_service import ContentService
 
 content_routes = APIRouter(tags=["Content"])
-
-
-def get_content_service(session: SessionDep) -> ContentService:
-    return ContentService(ContentRepository(session))
-
-
-ContentServiceDep = Annotated[ContentService, Depends(get_content_service)]
 
 
 @content_routes.get("/languages/{language_id}/podcasts", response_model=list[PodcastEpisodeOut])

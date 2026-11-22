@@ -1,12 +1,9 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Query, Response, status
+from fastapi import APIRouter, Query, Response, status
 
-from core.database import SessionDep
-from repositories.activity_repository import ActivityRepository
-from repositories.vocabulary_repository import VocabularyRepository
-from routes.dependencies import CurrentUserDep
+from routes.dependencies import CurrentUserDep, VocabularyServiceDep
 from schemas.vocabulary import (
     VocabularyCreate,
     VocabularyKnownBulk,
@@ -16,16 +13,8 @@ from schemas.vocabulary import (
     VocabularyReviewAnswer,
     VocabularyUpdate,
 )
-from services.vocabulary_service import VocabularyService
 
 vocabulary_routes = APIRouter(prefix="/vocabulary", tags=["Vocabulary"])
-
-
-def get_vocabulary_service(session: SessionDep) -> VocabularyService:
-    return VocabularyService(VocabularyRepository(session), ActivityRepository(session))
-
-
-VocabularyServiceDep = Annotated[VocabularyService, Depends(get_vocabulary_service)]
 
 
 @vocabulary_routes.get("", response_model=list[VocabularyOut])
@@ -41,12 +30,16 @@ async def list_items(
 
 
 @vocabulary_routes.get("/map", response_model=list[VocabularyMapOut])
-async def list_map(current_user: CurrentUserDep, service: VocabularyServiceDep) -> list[VocabularyMapOut]:
+async def list_map(
+    current_user: CurrentUserDep, service: VocabularyServiceDep
+) -> list[VocabularyMapOut]:
     return await service.list_map(current_user.id)
 
 
 @vocabulary_routes.get("/review", response_model=list[VocabularyOut])
-async def list_due(current_user: CurrentUserDep, service: VocabularyServiceDep) -> list[VocabularyOut]:
+async def list_due(
+    current_user: CurrentUserDep, service: VocabularyServiceDep
+) -> list[VocabularyOut]:
     return await service.list_due(current_user.id)
 
 

@@ -1,22 +1,9 @@
-from typing import Annotated
+from fastapi import APIRouter, status
 
-from fastapi import APIRouter, Depends, status
-
-from core.database import SessionDep
-from repositories.activity_repository import ActivityRepository
-from repositories.vocabulary_repository import VocabularyRepository
-from routes.dependencies import CurrentUserDep
+from routes.dependencies import CurrentUserDep, StatsServiceDep
 from schemas.stats import ReadingActivityIn, StatsOut
-from services.stats_service import StatsService
 
 stats_routes = APIRouter(prefix="/stats", tags=["Stats"])
-
-
-def get_stats_service(session: SessionDep) -> StatsService:
-    return StatsService(VocabularyRepository(session), ActivityRepository(session))
-
-
-StatsServiceDep = Annotated[StatsService, Depends(get_stats_service)]
 
 
 @stats_routes.get("", response_model=StatsOut)

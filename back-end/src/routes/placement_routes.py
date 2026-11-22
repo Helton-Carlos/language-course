@@ -1,23 +1,12 @@
-from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 
-from core.database import SessionDep
-from repositories.placement_repository import PlacementRepository
-from routes.dependencies import CurrentUserDep
+from routes.dependencies import CurrentUserDep, PlacementServiceDep
 from schemas.level import Level
 from schemas.placement import PlacementResultOut, PlacementSubmission, PlacementTestOut
-from services.placement_service import PlacementService
 
 placement_routes = APIRouter(tags=["Placement"])
-
-
-def get_placement_service(session: SessionDep) -> PlacementService:
-    return PlacementService(PlacementRepository(session))
-
-
-PlacementServiceDep = Annotated[PlacementService, Depends(get_placement_service)]
 
 
 @placement_routes.get(
