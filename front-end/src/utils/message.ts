@@ -35,6 +35,7 @@ export const MESSAGES = {
     wordDeleted: 'Palavra removida do vocabulário.',
     lessonSaved: 'Texto adicionado à sua biblioteca.',
     lessonDeleted: 'Texto removido.',
+    pwaOfflineReady: 'O aplicativo já pode ser aberto sem conexão. Os estudos ainda precisam de internet.',
     lessonCompleted: 'Lição concluída. As palavras azuis foram marcadas como conhecidas.',
   },
 
