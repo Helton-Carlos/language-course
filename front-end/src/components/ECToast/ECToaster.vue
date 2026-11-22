@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { X } from 'lucide-vue-next';
 import { useToast, type ToastAction, type ToastType } from '@/composables/useToast';
 
 const { toasts, dismiss } = useToast();
@@ -58,14 +59,7 @@ const typeClasses: Record<ToastType, string> = {
           aria-label="Fechar notificação"
           @click="dismiss(item.id)"
         >
-          <svg
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            class="h-4 w-4"
-            aria-hidden="true"
-          >
-            <path d="M5.3 5.3a1 1 0 0 1 1.4 0L10 8.6l3.3-3.3a1 1 0 1 1 1.4 1.4L11.4 10l3.3 3.3a1 1 0 0 1-1.4 1.4L10 11.4l-3.3 3.3a1 1 0 0 1-1.4-1.4L8.6 10 5.3 6.7a1 1 0 0 1 0-1.4Z" />
-          </svg>
+          <X class="h-4 w-4" aria-hidden="true" />
         </button>
       </div>
     </TransitionGroup>

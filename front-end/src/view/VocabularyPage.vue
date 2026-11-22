@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Plus, Trash2, Volume2 } from 'lucide-vue-next';
 import { computed, ref, watch } from 'vue';
 import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
@@ -110,6 +111,7 @@ watch(searchInput, (value) => {
         placeholder="Ex.: ansiar por"
       />
       <ECButton type="submit" color="secondary" :disabled="!canAdd">
+        <Plus class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
         Adicionar
       </ECButton>
     </form>
@@ -186,14 +188,7 @@ watch(searchInput, (value) => {
             :aria-label="`Ouvir ${item.term}`"
             @click="speak(item.term)"
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="h-4 w-4"
-              aria-hidden="true"
-            >
-              <path d="M3 9v6h4l5 5V4L7 9H3Zm11-5.8v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6Z" />
-            </svg>
+            <Volume2 class="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
         <div class="min-w-0">
@@ -236,14 +231,7 @@ watch(searchInput, (value) => {
             :aria-label="`Remover ${item.term}`"
             @click="confirmDelete(item.id, item.term)"
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="h-5 w-5"
-              aria-hidden="true"
-            >
-              <path d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12ZM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4Z" />
-            </svg>
+            <Trash2 class="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
       </li>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Volume2, X } from 'lucide-vue-next';
 import { computed, ref, watch } from 'vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
 import type { ECWordPanel } from '@/components/ECWordPanel/Type';
@@ -92,14 +93,7 @@ watch(
           aria-label="Ouvir pronúncia"
           @click="speak(term)"
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="h-5 w-5"
-            aria-hidden="true"
-          >
-            <path d="M3 9v6h4l5 5V4L7 9H3Zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4ZM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6Z" />
-          </svg>
+          <Volume2 class="h-5 w-5" aria-hidden="true" />
         </button>
         <button
           type="button"
@@ -107,14 +101,7 @@ watch(
           aria-label="Fechar painel"
           @click="emit('close')"
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="h-5 w-5"
-            aria-hidden="true"
-          >
-            <path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4Z" />
-          </svg>
+          <X class="h-5 w-5" aria-hidden="true" />
         </button>
       </div>
     </header>
