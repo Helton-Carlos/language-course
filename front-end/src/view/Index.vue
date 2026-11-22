@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ENGLISH_FIRST_LANGUAGE_COUNTRIES } from '@/utils/englishFirstLanguage'
-
 import ECFooter from '@/layouts/ECFooter.vue'
+import { ENGLISH_FIRST_LANGUAGE_COUNTRIES } from '@/utils/englishFirstLanguage'
+import { FREE_BENEFITS } from '@/utils/free'
 </script>
 
 <template>
@@ -44,6 +44,39 @@ import ECFooter from '@/layouts/ECFooter.vue'
     <img src="/main-image.svg" alt="imagens de pessoas com livro" class="w-full max-w-md mx-auto lg:w-auto lg:max-w-none lg:mx-0" />
   </main>
 
+  <section class="container my-8 lg:my-16" aria-labelledby="free-title">
+    <div class="rounded-2xl bg-primary p-6 lg:p-12">
+      <h3 id="free-title" class="text-3xl font-bold uppercase">
+        Curso 100% gratuito
+      </h3>
+      <p class="mt-4 text-xl lg:text-2xl">
+        O Language Course é gratuito. Crie sua conta e comece a estudar inglês hoje, sem pagar mensalidade.
+      </p>
+      <ul class="mt-8 grid gap-4 md:grid-cols-3">
+        <li
+          v-for="benefit in FREE_BENEFITS"
+          :key="benefit.key"
+          class="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm"
+        >
+          <component :is="benefit.icon" class="h-8 w-8 text-primary" aria-hidden="true" />
+          <span class="text-xl font-bold text-tertiary">
+            {{ benefit.title }}
+          </span>
+          <span class="text-quaternary">
+            {{ benefit.description }}
+          </span>
+        </li>
+      </ul>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <router-link class="btn btn-secondary" to="/criar-conta">
+          Criar conta grátis
+        </router-link>
+        <router-link class="btn btn-border" to="/login">
+          Já tenho conta
+        </router-link>
+      </div>
+    </div>
+  </section>
   <section class="container">
     <h3 class="text-3xl font-bold">
       PAÍSES QUE USAM INGLÊS
