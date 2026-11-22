@@ -89,7 +89,7 @@ export async function request<T>(
 }
 
 export function useApi() {
-  const pending = ref(0);
+  const pending = ref<number>(0);
   const error = ref<string | null>(null);
   const loading = computed(() => pending.value > 0);
 

@@ -10,8 +10,8 @@ import { MESSAGES } from '@/utils/message';
 
 const router = useRouter();
 
-const password = ref('');
-const confirmed = ref(false);
+const password = ref<string>('');
+const confirmed = ref<boolean>(false);
 
 const { mutate: deleteAccount, isPending } = useDeleteAccount();
 const { errors, clear, setFromApi } = useFormErrors();
