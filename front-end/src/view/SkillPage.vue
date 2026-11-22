@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCurrentUser } from '@/composables/useCurrentUser';
@@ -13,19 +13,12 @@ const skill = computed(() => SKILLS.find((item) => item.key === route.meta.skill
 
 <template>
   <section v-if="skill">
-    <ECBackButton :to="{ name: 'dashboard' }" />
-
-    <div class="mt-4 flex items-center gap-4">
-      <component :is="skill.icon" class="h-10 w-10 text-primary" aria-hidden="true" />
-
-      <h1 class="text-3xl font-bold">
-        {{ skill.label }}
-      </h1>
-    </div>
-
-    <p class="mt-2 text-quaternary">
-      {{ skill.description }}
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard' }"
+      :title="skill.label"
+      :description="skill.description"
+      :icon="skill.icon"
+    />
 
     <p v-if="user?.language && user.level" class="mt-6">
       Praticando

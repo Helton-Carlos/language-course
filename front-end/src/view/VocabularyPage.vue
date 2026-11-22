@@ -2,7 +2,7 @@
 import { Plus, Trash2, Volume2 } from 'lucide-vue-next';
 import { refDebounced } from '@vueuse/core';
 import { computed, ref } from 'vue';
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
 import ECInput from '@/components/ECInput/ECInput.vue';
 import { useSpeech } from '@/composables/useSpeech';
@@ -85,13 +85,11 @@ function confirmDelete(id: string, term: string) {
 
 <template>
   <section>
-    <ECBackButton :to="{ name: 'dashboard' }" />
-    <h1 class="mt-4 text-3xl font-bold">
-      Vocabulário
-    </h1>
-    <p class="mt-2 text-quaternary">
-      Todas as palavras e frases que você salvou.
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard' }"
+      title="Vocabulário"
+      description="Todas as palavras e frases que você salvou."
+    />
 
     <form class="mt-6 grid gap-4 rounded-2xl bg-white p-5 shadow-sm md:grid-cols-[1fr_1fr_auto] md:items-end" @submit.prevent="addItem">
       <ECInput

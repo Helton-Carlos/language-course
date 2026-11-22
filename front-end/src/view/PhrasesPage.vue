@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import { computed } from 'vue';
 import { useCurrentUser } from '@/composables/useCurrentUser';
 import { usePhrases } from '@/composables/useContent';
@@ -22,17 +22,16 @@ function byKind(kind: PhraseKind) {
 
 <template>
   <section>
-    <ECBackButton :to="{ name: 'dashboard' }" />
-
-    <h1 class="mt-4 text-3xl font-bold">
-      Frases e gírias
-    </h1>
-
-    <p class="mt-2 text-quaternary">
-      Expressões em
-      <span class="capitalize">{{ user?.language?.name_pt }}</span>
-      com a tradução logo abaixo.
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard' }"
+      title="Frases e gírias"
+    >
+      <template #description>
+        Expressões em
+        <span class="capitalize">{{ user?.language?.name_pt }}</span>
+        com a tradução logo abaixo.
+      </template>
+    </ECPageHeader>
 
     <p v-if="isPending" class="mt-6">
       {{ MESSAGES.pending.phrasesLoad }}

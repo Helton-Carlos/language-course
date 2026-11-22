@@ -74,6 +74,10 @@ export function countWords(body: string): number {
   return body.match(WORD_PATTERN)?.length ?? 0;
 }
 
+export function wordCountLabel(body: string): string {
+  return `${countWords(body)} palavras`;
+}
+
 export function isValidTerm(term: string): boolean {
   return term.length > 0 && term.length <= 100 && /[a-z]/.test(term);
 }

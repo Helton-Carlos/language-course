@@ -2,7 +2,7 @@
 import { Save } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
 import ECInput from '@/components/ECInput/ECInput.vue';
 import { useCreateLesson } from '@/composables/useLessons';
@@ -35,13 +35,11 @@ function submit() {
 
 <template>
   <section class="max-w-3xl">
-    <ECBackButton :to="{ name: 'dashboard-biblioteca' }" />
-    <h1 class="mt-4 text-3xl font-bold">
-      Importar texto
-    </h1>
-    <p class="mt-2 text-quaternary">
-      Cole um texto em inglês. Depois de salvo, clique nas palavras para ver a tradução e salvar palavras.
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard-biblioteca' }"
+      title="Importar texto"
+      description="Cole um texto em inglês. Depois de salvo, clique nas palavras para ver a tradução e salvar palavras."
+    />
     <form class="mt-6 flex flex-col gap-4" @submit.prevent="submit">
       <ECInput
         id="lesson-title"

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import { computed } from 'vue';
 import { useCurrentUser } from '@/composables/useCurrentUser';
 import { usePodcasts } from '@/composables/useContent';
@@ -12,17 +12,16 @@ const { data: episodes, isPending, isError } = usePodcasts(languageId);
 
 <template>
   <section>
-    <ECBackButton :to="{ name: 'dashboard' }" />
-
-    <h1 class="mt-4 text-3xl font-bold">
-      Podcast
-    </h1>
-
-    <p class="mt-2 text-quaternary">
-      Conversas reais em
-      <span class="capitalize">{{ user?.language?.name_pt }}</span>
-      para treinar a escuta.
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard' }"
+      title="Podcast"
+    >
+      <template #description>
+        Conversas reais em
+        <span class="capitalize">{{ user?.language?.name_pt }}</span>
+        para treinar a escuta.
+      </template>
+    </ECPageHeader>
 
     <p v-if="isPending" class="mt-6">
       {{ MESSAGES.pending.podcastsLoad }}

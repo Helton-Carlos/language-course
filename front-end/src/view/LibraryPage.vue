@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Trash2, Upload } from 'lucide-vue-next';
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
 import { useDeleteLesson, useLessons } from '@/composables/useLessons';
 import { useReadingThemes } from '@/composables/useReading';
@@ -20,21 +20,18 @@ function confirmRemove(id: string, title: string) {
 
 <template>
   <section>
-    <ECBackButton :to="{ name: 'dashboard' }" />
-    <div class="mt-4 flex flex-wrap items-center justify-between gap-4">
-      <div>
-        <h1 class="text-3xl font-bold">
-          Biblioteca
-        </h1>
-        <p class="mt-2 text-quaternary">
-          Seus textos, leituras por tema e outros conteúdos em inglês.
-        </p>
-      </div>
-      <router-link :to="{ name: 'dashboard-biblioteca-importar' }" class="btn btn-secondary">
-        <Upload class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
-        Importar texto
-      </router-link>
-    </div>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard' }"
+      title="Biblioteca"
+      description="Seus textos, leituras por tema e outros conteúdos em inglês."
+    >
+      <template #actions>
+        <router-link :to="{ name: 'dashboard-biblioteca-importar' }" class="btn btn-secondary">
+          <Upload class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
+          Importar texto
+        </router-link>
+      </template>
+    </ECPageHeader>
 
     <h2 class="mt-10 text-xl font-bold">
       Meus textos

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
 import { useReadingThemes } from '@/composables/useReading';
 import { MESSAGES } from '@/utils/message';
@@ -9,15 +9,11 @@ const { data: themes, isPending, isError } = useReadingThemes();
 
 <template>
   <section>
-    <ECBackButton :to="{ name: 'dashboard' }" />
-
-    <h1 class="mt-4 text-3xl font-bold">
-      Ler
-    </h1>
-
-    <p class="mt-2 text-quaternary">
-      Escolha um tema para começar.
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard' }"
+      title="Ler"
+      description="Escolha um tema para começar."
+    />
 
     <p v-if="isPending" class="mt-6">
       {{ MESSAGES.pending.readingLoad }}

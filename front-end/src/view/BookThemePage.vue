@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCurrentUser } from '@/composables/useCurrentUser';
@@ -13,15 +13,11 @@ const theme = computed(() => BOOK_THEMES.find((item) => item.key === route.param
 
 <template>
   <section v-if="theme">
-    <ECBackButton :to="{ name: 'dashboard-livros' }" />
-
-    <h1 class="mt-4 text-3xl font-bold">
-      Livros: {{ theme.label }}
-    </h1>
-
-    <p class="mt-2 text-quaternary">
-      {{ theme.description }}
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard-livros' }"
+      :title="`Livros: ${theme.label}`"
+      :description="theme.description"
+    />
 
     <p v-if="user?.language && user.level" class="mt-6">
       Lendo em

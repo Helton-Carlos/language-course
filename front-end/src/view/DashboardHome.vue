@@ -3,6 +3,7 @@ import { CircleCheck, Flame, Repeat, Target } from 'lucide-vue-next';
 import { computed } from 'vue';
 import ECCard from '@/components/ECCard/ECCard.vue';
 import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import { useCurrentUser } from '@/composables/useCurrentUser';
 import { useStats } from '@/composables/useStats';
 import { CONTENTS } from '@/utils/contents';
@@ -22,13 +23,11 @@ const goalReached = computed<boolean>(() => goalPercent.value >= 100);
 
 <template>
   <section>
-    <h1 class="text-3xl font-bold">
-      Dashboard
-    </h1>
-
-    <p v-if="user" class="mt-2 text-quaternary">
-      Bem-vindo de volta, <strong>{{ user.name }}</strong>.
-    </p>
+    <ECPageHeader title="Dashboard">
+      <template v-if="user" #description>
+        Bem-vindo de volta, <strong>{{ user.name }}</strong>.
+      </template>
+    </ECPageHeader>
 
     <ul v-if="user" class="mt-6 grid gap-4 sm:grid-cols-2">
       <li>

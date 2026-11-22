@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
 import ECInput from '@/components/ECInput/ECInput.vue';
 import { useDeleteAccount } from '@/composables/useAccount';
@@ -31,15 +31,11 @@ function onSubmit() {
 
 <template>
   <section class="max-w-2xl">
-    <ECBackButton :to="{ name: 'dashboard' }" />
-
-    <h1 class="mt-4 text-3xl font-bold">
-      Cancelar conta
-    </h1>
-
-    <p class="mt-2 text-quaternary">
-      Sua conta será apagada, junto com seu nome, e-mail, idioma e nível. Essa ação não pode ser desfeita.
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard' }"
+      title="Cancelar conta"
+      description="Sua conta será apagada, junto com seu nome, e-mail, idioma e nível. Essa ação não pode ser desfeita."
+    />
 
     <form
       class="mt-6 flex flex-col gap-4 rounded-2xl bg-white p-6 shadow-sm"

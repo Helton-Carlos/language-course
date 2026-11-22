@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import { computed, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ECButton from '@/components/ECButton/ECButton.vue';
@@ -85,11 +85,11 @@ function restart() {
 
 <template>
   <div class="max-w-3xl">
-    <ECBackButton :to="{ name: 'dashboard-nivel' }" />
-
-    <h1 class="mt-4 text-3xl font-bold lg:text-4xl">
-      Teste de nível<template v-if="english">: <span class="capitalize">{{ english.name_pt }}</span></template>
-    </h1>
+    <ECPageHeader :back-to="{ name: 'dashboard-nivel' }">
+      <template #title>
+        Teste de nível<template v-if="english">: <span class="capitalize">{{ english.name_pt }}</span></template>
+      </template>
+    </ECPageHeader>
 
     <section v-if="finalLevel" class="mt-8 rounded-2xl bg-white p-6 shadow-sm lg:p-8" aria-live="polite">
       <p class="text-lg">

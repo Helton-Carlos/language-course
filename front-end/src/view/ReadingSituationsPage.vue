@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
 import { useReadingSituations, useReadingThemes } from '@/composables/useReading';
 import { MESSAGES } from '@/utils/message';
@@ -17,15 +17,11 @@ const themeLabel = computed(() => themes.value?.find((item) => item.key === them
 
 <template>
   <section>
-    <ECBackButton :to="{ name: 'dashboard-ler' }" />
-
-    <h1 class="mt-4 text-3xl font-bold">
-      {{ themeLabel }}
-    </h1>
-
-    <p class="mt-2 text-quaternary">
-      Escolha uma situação para ler.
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard-ler' }"
+      :title="themeLabel"
+      description="Escolha uma situação para ler."
+    />
 
     <p v-if="isPending" class="mt-6">
       {{ MESSAGES.pending.readingLoad }}

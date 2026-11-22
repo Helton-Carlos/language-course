@@ -2,7 +2,7 @@
 import { Check, Eye, RotateCcw, Volume2, X } from 'lucide-vue-next';
 import { onKeyStroke } from '@vueuse/core';
 import { computed, ref, watch } from 'vue';
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
 import { useSpeech } from '@/composables/useSpeech';
 import { useAnswerReview, useReviewQueue } from '@/composables/useVocabulary';
@@ -88,14 +88,15 @@ watch(
 
 <template>
   <section class="max-w-2xl">
-    <ECBackButton :to="{ name: 'dashboard' }" />
-    <h1 class="mt-4 text-3xl font-bold">
-      Revisar
-    </h1>
-    <p class="mt-2 text-quaternary">
-      Tente lembrar o significado antes de virar o cartão. Acertar sobe o nível da palavra, errar desce.
-      Atalhos: espaço mostra a resposta, seta para a esquerda marca erro e seta para a direita marca acerto.
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard' }"
+      title="Revisar"
+    >
+      <template #description>
+        Tente lembrar o significado antes de virar o cartão. Acertar sobe o nível da palavra, errar desce.
+        Atalhos: espaço mostra a resposta, seta para a esquerda marca erro e seta para a direita marca acerto.
+      </template>
+    </ECPageHeader>
 
     <p v-if="isPending" class="mt-6">
       {{ MESSAGES.pending.reviewLoad }}

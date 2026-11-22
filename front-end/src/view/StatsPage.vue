@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Bookmark, BookOpen, CircleCheck, Flame, Repeat } from 'lucide-vue-next';
 import { computed } from 'vue';
-import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
+import ECPageHeader from '@/components/ECPageHeader/ECPageHeader.vue';
 import ECCard from '@/components/ECCard/ECCard.vue';
 import { useStats } from '@/composables/useStats';
 import { formatWeekday } from '@/utils/dates';
@@ -21,13 +21,11 @@ const maxStatusCount = computed(() =>
 
 <template>
   <section>
-    <ECBackButton :to="{ name: 'dashboard' }" />
-    <h1 class="mt-4 text-3xl font-bold">
-      Estatísticas
-    </h1>
-    <p class="mt-2 text-quaternary">
-      Seu progresso de estudo em inglês.
-    </p>
+    <ECPageHeader
+      :back-to="{ name: 'dashboard' }"
+      title="Estatísticas"
+      description="Seu progresso de estudo em inglês."
+    />
 
     <p v-if="isPending" class="mt-6">
       {{ MESSAGES.pending.statsLoad }}
