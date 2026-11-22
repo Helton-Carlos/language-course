@@ -8,6 +8,7 @@ from core.vocabulary import (
     now_utc,
     today_local,
 )
+from models.daily_activity import DailyActivity
 from repositories.activity_repository import ActivityRepository
 from repositories.vocabulary_repository import VocabularyRepository
 from schemas.stats import DayActivityOut, StatsOut, StatusCountOut
@@ -53,7 +54,9 @@ class StatsService:
             total_items=sum(counts.values()),
             due_count=due_count,
             words_read_total=words_read_total,
-            by_status=[StatusCountOut(status=status, count=counts.get(status, 0)) for status in range(1, 6)],
+            by_status=[
+                StatusCountOut(status=status, count=counts.get(status, 0)) for status in range(1, 6)
+            ],
             last_days=last_days,
         )
 
@@ -61,7 +64,7 @@ class StatsService:
         await self._activity_repository.increment(user_id, today_local(), "words_read", words)
 
     @staticmethod
-    def _day_out(by_day: dict, day: date) -> DayActivityOut:
+    def _day_out(by_day: dict[date, DailyActivity], day: date) -> DayActivityOut:
         row = by_day.get(day)
         return DayActivityOut(
             day=day,
@@ -71,7 +74,7 @@ class StatsService:
         )
 
     @staticmethod
-    def _streak(by_day: dict, today: date) -> int:
+    def _streak(by_day: dict[date, DailyActivity], today: date) -> int:
         def active(day: date) -> bool:
             row = by_day.get(day)
             return row is not None and (row.words_saved + row.reviews + row.words_read) > 0

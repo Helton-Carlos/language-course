@@ -1,5 +1,5 @@
 import re
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta, timezone
 
 KNOWN_STATUS = 5
 MIN_STATUS = 1
@@ -15,7 +15,7 @@ REVIEW_INTERVALS = {
     4: timedelta(days=8),
 }
 
-_EDGE_PUNCTUATION = " \t\r\n.,;:!?\"()[]{}<>«»“”‘…—–-"
+_EDGE_PUNCTUATION = ' \t\r\n.,;:!?"()[]{}<>«»“”‘…—–-'
 _WORD_PATTERN = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)*")
 
 
@@ -29,7 +29,7 @@ def count_words(text: str) -> int:
 
 
 def now_utc() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 def today_local() -> date:

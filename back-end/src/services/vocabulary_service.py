@@ -1,3 +1,5 @@
+from datetime import datetime
+from typing import Any
 from uuid import UUID
 
 from core.exceptions import VocabularyItemNotFoundError
@@ -48,10 +50,12 @@ class VocabularyService:
     async def save(self, user_id: UUID, data: VocabularyCreate) -> tuple[VocabularyOut, bool]:
         existing = await self._repository.get_by_term(user_id, data.term)
         if existing is not None:
-            values = {"meaning": data.meaning, "status": data.status}
+            values: dict[str, Any] = {"meaning": data.meaning, "status": data.status}
             if data.context is not None:
                 values["context"] = data.context
-            values["next_review_at"] = self._schedule_after_edit(existing.next_review_at, data.status)
+            values["next_review_at"] = self._schedule_after_edit(
+                existing.next_review_at, data.status
+            )
             updated = await self._repository.update(existing, values)
             return VocabularyOut.model_validate(updated), False
         moment = now_utc()
@@ -74,7 +78,9 @@ class VocabularyService:
             raise VocabularyItemNotFoundError()
         values = data.model_dump(exclude_unset=True, exclude_none=True)
         if "status" in values:
-            values["next_review_at"] = self._schedule_after_edit(item.next_review_at, values["status"])
+            values["next_review_at"] = self._schedule_after_edit(
+                item.next_review_at, values["status"]
+            )
         updated = await self._repository.update(item, values)
         return VocabularyOut.model_validate(updated)
 
@@ -110,7 +116,7 @@ class VocabularyService:
         return VocabularyKnownBulkOut(created=created)
 
     @staticmethod
-    def _schedule_after_edit(current, status: int):
+    def _schedule_after_edit(current: datetime | None, status: int) -> datetime | None:
         if status == KNOWN_STATUS:
             return None
         return current or now_utc()

@@ -2,6 +2,7 @@ from uuid import UUID
 
 from core.exceptions import LessonNotFoundError
 from core.vocabulary import count_words
+from models.lesson import Lesson
 from repositories.lesson_repository import LessonRepository
 from schemas.lesson import LessonCreate, LessonOut, LessonSummaryOut
 
@@ -44,7 +45,7 @@ class LessonService:
         await self._repository.delete(lesson)
 
     @staticmethod
-    def _to_out(lesson) -> LessonOut:
+    def _to_out(lesson: Lesson) -> LessonOut:
         return LessonOut(
             id=lesson.id,
             title=lesson.title,
