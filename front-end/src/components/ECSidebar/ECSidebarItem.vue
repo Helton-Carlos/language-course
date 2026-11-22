@@ -24,7 +24,7 @@ const open = ref<boolean>(true);
           :href="href"
           :aria-current="(item.exact ? isExactActive : isActive) ? 'page' : undefined"
           :class="[
-            'group flex flex-1 items-center gap-3 rounded-lg px-3 py-2 font-medium transition-colors',
+            'flex flex-1 items-center gap-3 rounded-lg px-3 py-2 font-medium transition-colors',
             (item.exact ? isExactActive : isActive)
               ? 'bg-primary text-tertiary'
               : 'text-quaternary hover:bg-primary-light',
@@ -34,7 +34,7 @@ const open = ref<boolean>(true);
           <component
             :is="item.icon"
             v-if="item.icon"
-            class="h-5 w-5 shrink-0 text-primary group-hover:text-secondary group-aria-[current=page]:text-secondary"
+            class="h-5 w-5 shrink-0 text-tertiary"
             aria-hidden="true"
           />
           {{ item.label }}
@@ -44,7 +44,7 @@ const open = ref<boolean>(true);
       <button
         v-else
         type="button"
-        class="group flex flex-1 cursor-pointer items-center justify-between rounded-lg px-3 py-2 font-bold text-tertiary hover:bg-primary-light"
+        class="flex flex-1 cursor-pointer items-center justify-between rounded-lg px-3 py-2 font-bold text-tertiary hover:bg-primary-light"
         :aria-expanded="open"
         @click="open = !open"
       >
@@ -52,7 +52,7 @@ const open = ref<boolean>(true);
           <component
             :is="item.icon"
             v-if="item.icon"
-            class="h-5 w-5 shrink-0 text-primary group-hover:text-secondary group-aria-[current=page]:text-secondary"
+            class="h-5 w-5 shrink-0 text-tertiary"
             aria-hidden="true"
           />
           {{ item.label }}
