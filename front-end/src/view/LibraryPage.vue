@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Trash2, Upload } from 'lucide-vue-next';
 import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
 import { useDeleteLesson, useLessons } from '@/composables/useLessons';
@@ -30,6 +31,7 @@ function confirmRemove(id: string, title: string) {
         </p>
       </div>
       <router-link :to="{ name: 'dashboard-biblioteca-importar' }" class="btn btn-secondary">
+        <Upload class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
         Importar texto
       </router-link>
     </div>
@@ -74,6 +76,7 @@ function confirmRemove(id: string, title: string) {
             :disabled="isRemoving"
             @click="confirmRemove(lesson.id, lesson.title)"
           >
+            <Trash2 class="mr-1 inline h-4 w-4 align-text-bottom" aria-hidden="true" />
             Remover
           </button>
         </div>

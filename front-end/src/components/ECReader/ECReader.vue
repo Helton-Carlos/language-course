@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Volume2 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import ECWordPanel from '@/components/ECWordPanel/ECWordPanel.vue';
 import type { ECReader } from '@/components/ECReader/Type';
@@ -87,6 +88,7 @@ function readAloud() {
           class="ml-auto cursor-pointer font-medium text-secondary hover:underline"
           @click="readAloud"
         >
+          <Volume2 class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
           Ouvir texto
         </button>
       </div>

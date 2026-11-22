@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Save } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
@@ -68,6 +69,7 @@ function submit() {
       </div>
       <div>
         <ECButton type="submit" color="secondary" :disabled="!canSubmit">
+          <Save class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
           Salvar texto
         </ECButton>
       </div>

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Bookmark, BookOpen, CircleCheck, Flame, Repeat } from 'lucide-vue-next';
 import { computed } from 'vue';
 import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import ECCard from '@/components/ECCard/ECCard.vue';
@@ -45,7 +46,10 @@ const maxStatusCount = computed(() =>
         <li>
           <ECCard width="100%">
             <template #body>
-              <p>Sequência</p>
+              <p class="flex items-center gap-2">
+                <Flame class="h-5 w-5 text-secondary" aria-hidden="true" />
+                Sequência
+              </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">
                 {{ stats.streak }} {{ stats.streak === 1 ? 'dia' : 'dias' }}
               </p>
@@ -55,7 +59,10 @@ const maxStatusCount = computed(() =>
         <li>
           <ECCard width="100%">
             <template #body>
-              <p>Palavras conhecidas</p>
+              <p class="flex items-center gap-2">
+                <CircleCheck class="h-5 w-5 text-secondary" aria-hidden="true" />
+                Palavras conhecidas
+              </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">
                 {{ stats.known_words }}
               </p>
@@ -65,7 +72,10 @@ const maxStatusCount = computed(() =>
         <li>
           <ECCard width="100%">
             <template #body>
-              <p>Palavras salvas</p>
+              <p class="flex items-center gap-2">
+                <Bookmark class="h-5 w-5 text-secondary" aria-hidden="true" />
+                Palavras salvas
+              </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">
                 {{ stats.total_items }}
               </p>
@@ -75,7 +85,10 @@ const maxStatusCount = computed(() =>
         <li>
           <ECCard width="100%">
             <template #body>
-              <p>Palavras lidas</p>
+              <p class="flex items-center gap-2">
+                <BookOpen class="h-5 w-5 text-secondary" aria-hidden="true" />
+                Palavras lidas
+              </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">
                 {{ stats.words_read_total }}
               </p>
@@ -150,6 +163,7 @@ const maxStatusCount = computed(() =>
           Você tem {{ stats.due_count }} {{ stats.due_count === 1 ? 'cartão' : 'cartões' }} para revisar.
         </p>
         <router-link :to="{ name: 'dashboard-revisar' }" class="btn btn-secondary mt-3 inline-block">
+          <Repeat class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
           Revisar agora
         </router-link>
       </div>

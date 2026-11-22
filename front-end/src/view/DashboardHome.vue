@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { CircleCheck, Flame, Repeat, Target } from 'lucide-vue-next';
 import ECCard from '@/components/ECCard/ECCard.vue';
 import ECFeatureCard from '@/components/ECFeatureCard/ECFeatureCard.vue';
 import { useCurrentUser } from '@/composables/useCurrentUser';
@@ -59,7 +60,8 @@ const { data: stats } = useStats();
       <li>
         <ECCard width="100%">
           <template #body>
-            <p>
+            <p class="flex items-center gap-2">
+              <Flame class="h-5 w-5 text-secondary" aria-hidden="true" />
               Sequência
             </p>
             <p class="mt-1 text-2xl font-bold text-tertiary">
@@ -71,7 +73,8 @@ const { data: stats } = useStats();
       <li>
         <ECCard width="100%">
           <template #body>
-            <p>
+            <p class="flex items-center gap-2">
+              <Target class="h-5 w-5 text-secondary" aria-hidden="true" />
               Meta de hoje
             </p>
             <p class="mt-1 text-2xl font-bold text-tertiary">
@@ -83,7 +86,8 @@ const { data: stats } = useStats();
       <li>
         <ECCard width="100%">
           <template #body>
-            <p>
+            <p class="flex items-center gap-2">
+              <CircleCheck class="h-5 w-5 text-secondary" aria-hidden="true" />
               Palavras conhecidas
             </p>
             <p class="mt-1 text-2xl font-bold text-tertiary">
@@ -96,7 +100,8 @@ const { data: stats } = useStats();
         <router-link :to="{ name: 'dashboard-revisar' }" class="block">
           <ECCard width="100%">
             <template #body>
-              <p>
+              <p class="flex items-center gap-2">
+                <Repeat class="h-5 w-5 text-secondary" aria-hidden="true" />
                 Para revisar
               </p>
               <p class="mt-1 text-2xl font-bold text-tertiary">

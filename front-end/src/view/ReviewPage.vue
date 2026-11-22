@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Check, Eye, RotateCcw, Volume2, X } from 'lucide-vue-next';
 import { computed, ref, watch } from 'vue';
 import ECBackButton from '@/components/ECBackButton/ECBackButton.vue';
 import ECButton from '@/components/ECButton/ECButton.vue';
@@ -97,6 +98,7 @@ watch(
       </p>
       <div class="mt-5 flex flex-wrap gap-3">
         <ECButton color="secondary" :disabled="isRefetching" @on-click="reload">
+          <RotateCcw class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
           Buscar mais cartões
         </ECButton>
         <router-link :to="{ name: 'dashboard-biblioteca' }" class="btn btn-border">
@@ -132,6 +134,7 @@ watch(
           class="mt-3 cursor-pointer font-medium text-secondary hover:underline"
           @click="speak(current.term)"
         >
+          <Volume2 class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
           Ouvir pronúncia
         </button>
 
@@ -147,13 +150,16 @@ watch(
 
       <div class="mt-6 flex flex-wrap justify-center gap-3">
         <ECButton v-if="!revealed" color="secondary" @on-click="reveal">
+          <Eye class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
           Mostrar resposta
         </ECButton>
         <template v-else>
           <ECButton color="border" :disabled="isAnswering" @on-click="submit(false)">
+            <X class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
             Errei
           </ECButton>
           <ECButton color="primary" :disabled="isAnswering" @on-click="submit(true)">
+            <Check class="mr-1 inline h-5 w-5 align-text-bottom" aria-hidden="true" />
             Acertei
           </ECButton>
         </template>
