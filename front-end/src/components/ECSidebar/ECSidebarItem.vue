@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ChevronDown } from 'lucide-vue-next';
 import { ref } from 'vue';
 import type { ECSidebarItem } from '@/components/ECSidebar/Type';
 
@@ -30,12 +31,12 @@ const open = ref<boolean>(true);
           ]"
           @click="navigate"
         >
-          <img
+          <component
+            :is="item.icon"
             v-if="item.icon"
-            :src="item.icon"
-            alt=""
-            class="h-4 w-6 rounded-sm object-cover"
-          >
+            class="h-5 w-5 shrink-0"
+            aria-hidden="true"
+          />
           {{ item.label }}
         </a>
       </router-link>
@@ -47,17 +48,17 @@ const open = ref<boolean>(true);
         :aria-expanded="open"
         @click="open = !open"
       >
-        {{ item.label }}
+        <span class="flex items-center gap-3">
+          <component
+            :is="item.icon"
+            v-if="item.icon"
+            class="h-5 w-5 shrink-0"
+            aria-hidden="true"
+          />
+          {{ item.label }}
+        </span>
 
-        <svg
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          class="h-4 w-4 transition-transform"
-          :class="{ '-rotate-90': !open }"
-          aria-hidden="true"
-        >
-          <path d="M5.5 7.5 10 12l4.5-4.5-1.4-1.4L10 9.2 6.9 6.1 5.5 7.5Z" />
-        </svg>
+        <ChevronDown class="h-4 w-4 transition-transform" :class="{ '-rotate-90': !open }" aria-hidden="true" />
       </button>
 
       <button
@@ -68,15 +69,7 @@ const open = ref<boolean>(true);
         :aria-label="`${open ? 'Recolher' : 'Expandir'} ${item.label}`"
         @click="open = !open"
       >
-        <svg
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          class="h-4 w-4 transition-transform"
-          :class="{ '-rotate-90': !open }"
-          aria-hidden="true"
-        >
-          <path d="M5.5 7.5 10 12l4.5-4.5-1.4-1.4L10 9.2 6.9 6.1 5.5 7.5Z" />
-        </svg>
+        <ChevronDown class="h-4 w-4 transition-transform" :class="{ '-rotate-90': !open }" aria-hidden="true" />
       </button>
     </div>
 

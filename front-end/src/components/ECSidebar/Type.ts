@@ -1,10 +1,11 @@
+import type { LucideIcon } from 'lucide-vue-next';
 import type { RouteLocationRaw } from 'vue-router';
 
 export interface ECSidebarItem {
   key: string;
   label: string;
   to?: RouteLocationRaw;
-  icon?: string;
+  icon?: LucideIcon;
   exact?: boolean;
   children?: ECSidebarItem[];
 }
