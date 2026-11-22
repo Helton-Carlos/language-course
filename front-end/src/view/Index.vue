@@ -44,6 +44,30 @@ import { FREE_BENEFITS } from '@/utils/free'
     <img src="/main-image.svg" alt="imagens de pessoas com livro" class="w-full max-w-md mx-auto lg:w-auto lg:max-w-none lg:mx-0" />
   </main>
 
+  <section class="container">
+    <h3 class="text-3xl font-bold">
+      PAÍSES QUE USAM INGLÊS
+    </h3>
+
+    <div class="grid grid-cols-2 my-8 lg:grid-cols-3">
+      <div
+        v-for="country in ENGLISH_FIRST_LANGUAGE_COUNTRIES"
+        :key="country.code"
+        class="group relative overflow-hidden"
+      >
+        <img
+          :src="`https://flagcdn.com/w640/${country.code.toLowerCase()}.png`"
+          :alt="`Bandeira: ${country.name}`"
+          class="aspect-3/2 w-full object-cover"
+        />
+
+        <div class="absolute inset-0 flex items-center justify-center bg-primary p-4 text-center text-tertiary text-2x uppercase font-bold opacity-0 transition-opacity group-hover:opacity-100 lg:text-4xl">
+          {{ country.name }}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="container my-8 lg:my-16" aria-labelledby="free-title">
     <div class="rounded-2xl bg-primary p-6 lg:p-12">
       <h3 id="free-title" class="text-3xl font-bold uppercase">
@@ -77,30 +101,6 @@ import { FREE_BENEFITS } from '@/utils/free'
       </div>
     </div>
   </section>
-  <section class="container">
-    <h3 class="text-3xl font-bold">
-      PAÍSES QUE USAM INGLÊS
-    </h3>
-
-    <div class="grid grid-cols-2 my-8 lg:grid-cols-3">
-      <div
-        v-for="country in ENGLISH_FIRST_LANGUAGE_COUNTRIES"
-        :key="country.code"
-        class="group relative overflow-hidden"
-      >
-        <img
-          :src="`https://flagcdn.com/w640/${country.code.toLowerCase()}.png`"
-          :alt="`Bandeira: ${country.name}`"
-          class="aspect-3/2 w-full object-cover"
-        />
-
-        <div class="absolute inset-0 flex items-center justify-center bg-primary p-4 text-center text-tertiary text-2x uppercase font-bold opacity-0 transition-opacity group-hover:opacity-100 lg:text-4xl">
-          {{ country.name }}
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="container my-8 lg:my-16">
     <h3 class="text-3xl font-bold">
       SOBRE
