@@ -19,7 +19,7 @@ export default defineConfig({
       manifest: {
         name: 'Language Course',
         short_name: 'Language',
-        description: 'Aprenda inglês com leitura interativa, vocabulário e revisão.',
+        description: 'Aprenda inglês de graça com textos interativos, tradução ao clicar nas palavras, vocabulário pessoal e revisão com repetição espaçada.',
         lang: 'pt-BR',
         start_url: '/',
         scope: '/',
