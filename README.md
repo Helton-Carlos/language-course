@@ -17,6 +17,7 @@ Depois do login, o aluno define o nível (A1 a C2), manualmente ou pelo teste de
 - **Estatísticas:** sequência de dias, palavras conhecidas, palavras lidas e atividade dos últimos 7 dias.
 - **Meta do dia:** progresso diário exibido na visão geral do dashboard.
 - **Conteúdos extras:** livros por tema, podcasts em vídeo e frases e gírias com tradução.
+- **PWA:** o app pode ser instalado no celular ou no computador.
 
 Os textos e as telas estão em português. O conteúdo de estudo é somente em inglês.
 
@@ -24,7 +25,7 @@ Os textos e as telas estão em português. O conteúdo de estudo é somente em i
 
 | Camada | Tecnologias |
 | --- | --- |
-| Front-end | Vue 3, TypeScript, Vite, Vue Router, TanStack Query, Tailwind CSS 4, VueUse, Lucide |
+| Front-end | Vue 3, TypeScript, Vite, Vue Router, TanStack Query, Tailwind CSS 4, VueUse, Lucide, PWA |
 | Back-end | Python 3.14, FastAPI, SQLAlchemy (async), Alembic, PostgreSQL, JWT em cookie, Argon2 |
 
 ## Estrutura

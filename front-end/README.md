@@ -23,6 +23,7 @@ npm run dev
 npm run build
 npm run preview
 npm run lint
+npm run generate-pwa-assets
 ```
 
 `npm run dev` abre o app em `http://localhost:3001`. O `build` roda `vue-tsc` antes do `vite build`.
@@ -35,6 +36,7 @@ npm run lint
 - Tailwind CSS 4
 - VueUse (fala, debounce, atalhos de teclado e trava de rolagem)
 - Lucide (ícones)
+- vite-plugin-pwa (PWA)
 
 ## Estrutura
 
@@ -79,6 +81,15 @@ As rotas com `requiresProfile` redirecionam para `/dashboard/nivel` enquanto o a
 - Tamanho de texto padrão, sem `text-sm`.
 - Ícones vêm do `lucide-vue-next`, sem SVG inline.
 
+## PWA
+
+O app pode ser instalado no celular ou no computador. O `vite-plugin-pwa` gera o manifest e o service worker no `npm run build`, e o service worker se atualiza sozinho.
+
+- **Manifest e cache:** configurados em `vite.config.ts`. Os arquivos do app ficam em cache e as bandeiras do `flagcdn.com` usam `CacheFirst`. Chamadas à API nunca são guardadas em cache.
+- **Offline:** o app abre sem conexão, mas biblioteca, vocabulário e revisão precisam da API.
+- **Ícones:** gerados a partir de `public/pwa-icon-source.svg` com `npm run generate-pwa-assets`, que grava os PNGs e o `favicon.ico` em `public/`. Edite o SVG e rode o comando para atualizar os ícones.
+- **Botão "Instalar app":** aparece no header quando o navegador permite a instalação (`composables/usePwaInstall.ts`).
+- **Testar:** rode `npm run build` e `npm run preview`. O service worker só funciona no build, não no `npm run dev`. Em `localhost` não precisa de HTTPS, mas em produção precisa.
 ## Leitor interativo
 
 O componente `ECReader` quebra o texto em palavras e pinta cada uma conforme o status no vocabulário. Palavras desconhecidas ficam em azul. Ao clicar em uma palavra, ou selecionar uma frase de até 8 palavras, o `ECWordPanel` mostra tradução, definição, pronúncia e o formulário para salvar. O botão "Concluir lição" marca as palavras azuis como conhecidas e registra as palavras lidas.
